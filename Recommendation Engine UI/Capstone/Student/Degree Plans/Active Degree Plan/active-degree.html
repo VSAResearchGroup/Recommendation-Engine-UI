@@ -159,14 +159,15 @@ var statusObject = {
 var activeplanObj, courseListObjects;
 var apiURL = '';
     $(document).ready(function(){
-	    apiURL = 'http://localhost:5000/api/Vsa/';
 	    $('#searchbutton').click(function() {
+		    apiURL = 'http://localhost:5000/api/Vsa/';
 		    apiURL += $('#searchinput').val();
 		    $.ajax({
 		        url: apiURL,
 			    type: 'GET',
 			    dataType: 'json',
 			    success: function(jsonText) {
+				    initial = '';
 				    constructTable(jsonText, courseListObjects, 5);
 				    initial = displayTable(table, initial, 5);
 				    document.getElementById('tableholder').innerHTML = initial;
@@ -176,11 +177,6 @@ var apiURL = '';
 			    }
 		    })
 		});
-	});
-	
-    $(document).ready(function(){
-		
-        
 	});
     
 	//courseListObjects = JSON.parse(text3);
