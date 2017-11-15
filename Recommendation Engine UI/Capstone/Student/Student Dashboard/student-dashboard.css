@@ -1,0 +1,71 @@
+#yourplan { 
+  font-size: 2em;
+  font-weight: bold;
+  margin-left: 6.75em; 
+  margin-top: 3em;
+}
+
+#degreeplanblock {
+  display: inline-block;
+  margin-left: 13.5em;
+  margin-bottom: 10em;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb(150, 150, 150);
+  border-radius: 10px;
+  padding: 1em 1em;
+}
+
+#major {
+  font-size: 2em;
+  margin-top: 0;
+  display: inline;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-color: rgb(200, 200, 200);
+  
+}
+
+#activedegreelink {
+  text-decoration: none;
+  color: rgb(184, 0, 0);
+}
+
+#activedegreelink:hover {
+  color: rgb(140, 0, 0);
+}
+
+#transferringcollege {
+  font-size: 1em;
+}
+
+#transcollegelink {
+  font-size: 1em;
+  color: rgb(184, 0, 0);
+}
+
+#transcollegelink:hover {
+  color: rgb(140, 0, 0);
+}
+
+#intendedmajor {
+  font-size: 1em;
+}
+
+#intendmajorlink {
+  font-size: 1em;
+  color: rgb(184, 0, 0);
+}
+
+#intendmajorlink:hover {
+  color: rgb(140, 0, 0);
+}
+
+#degree {
+  font-size: 1em;
+}
+
+#degreelink {
+  font-size: 1em;
+  color: rgb(184, 0, 0);
+}
