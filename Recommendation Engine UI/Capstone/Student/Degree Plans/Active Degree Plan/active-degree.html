@@ -158,11 +158,28 @@ text3 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "cour
         '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 092",\n    "courseID": 902,\n    "quarter": "Summer",\n    "year": 2019\n  },' +
         '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH& 146",\n    "courseID": 919,\n    "quarter": "Summer",\n    "year": 2020\n  }]';
 
-    activePlanObj = JSON.parse(text2);
-	courseListObjects = JSON.parse(text3);
-	constructTable(activePlanObj, courseListObjects, 5);
-	initial = displayTable(table, initial, 5);
-    document.getElementById('tableholder').innerHTML = initial;
+    $(document).ready(function(){
+        $.ajax({
+		    url: 'http://localhost:5000/api/Vsa/69',
+			type: 'GET',
+			dataType: 'json',
+			success: function(jsonText) {
+			    activePlanObj = JSON.parse(jsonText);
+				constructTable(activePlanObj, courseListObjects, 5);
+				initial = displayTable(table, initial, 5);
+				document.getElementById('tableholder').innerHTML = initial;
+			},
+			error: function() {
+			    alert('AJAX FAILED');
+			}
+		})
+	});
+	  
+    
+	//courseListObjects = JSON.parse(text3);
+	//constructTable(activePlanObj, courseListObjects, 5);
+	//initial = displayTable(table, initial, 5);
+    //document.getElementById('tableholder').innerHTML = initial;
 	//document.getElementById('table').childNodes[0].nodeValue = null;
 </script>
 </body>
