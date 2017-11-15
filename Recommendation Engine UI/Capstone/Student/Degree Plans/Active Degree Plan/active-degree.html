@@ -92,6 +92,11 @@
 	  <i class='check fa fa-check-circle'></i>
     </div>	
 	
+	<div class='inputbox'>
+	  <input id='searchinput' type='text' value='5'>
+	  <button id='searchbutton' value='Search'></button>
+	</div>
+	
   </div>
 
   <div class='footer'>
@@ -116,56 +121,20 @@ var statusObject = {
 	removed: 4
 };
 var activeplanObj, courseListObjects;
-
-text2 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ESL 097",\n    "courseID": 550,\n    "quarter": "Fall",\n    "year": 2016\n  },' + 
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ACCT 110",\n    "courseID": 25,\n    "quarter": "Fall",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ENGL& 101",\n    "courseID": 490,\n    "quarter": "Fall",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ECON& 202",\n    "courseID": 401,\n    "quarter": "Winter",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ENGL 097",\n    "courseID": 451,\n    "quarter": "Winter",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "AEP 098",\n    "courseID": 42,\n    "quarter": "Spring",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ECON& 201",\n    "courseID": 400,\n    "quarter": "Spring",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ENGL 098",\n    "courseID": 452,\n    "quarter": "Summer",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH& 148",\n    "courseID": 920,\n    "quarter": "Fall",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ACCT& 201",\n    "courseID": 31,\n    "quarter": "Winter",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ENGL& 102",\n    "courseID": 492,\n    "quarter": "Spring",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 201",\n    "courseID": 254,\n    "quarter": "Spring",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 138",\n    "courseID": 1401,\n    "quarter": "Summer",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ACCT& 203",\n    "courseID": 33,\n    "quarter": "Fall",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 080",\n    "courseID": 897,\n    "quarter": "Winter",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ACCT& 202",\n    "courseID": 32,\n    "quarter": "Spring",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 091",\n    "courseID": 901,\n    "quarter": "Spring",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 092",\n    "courseID": 902,\n    "quarter": "Summer",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH& 146",\n    "courseID": 919,\n    "quarter": "Summer",\n    "year": 2020\n  }]';
-text3 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ESL 097",\n    "courseID": 550,\n    "quarter": "Fall",\n    "year": 2016\n  },' + 
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ACCT 110",\n    "courseID": 25,\n    "quarter": "Fall",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ENGL& 101",\n    "courseID": 490,\n    "quarter": "Fall",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ECON& 202",\n    "courseID": 401,\n    "quarter": "Winter",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ENGL 097",\n    "courseID": 451,\n    "quarter": "Winter",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "AEP 098",\n    "courseID": 42,\n    "quarter": "Spring",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ECON& 201",\n    "courseID": 400,\n    "quarter": "Spring",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ENGL 098",\n    "courseID": 452,\n    "quarter": "Summer",\n    "year": 2017\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH& 148",\n    "courseID": 920,\n    "quarter": "Fall",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ACCT& 201",\n    "courseID": 31,\n    "quarter": "Winter",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ENGL& 102",\n    "courseID": 492,\n    "quarter": "Spring",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 201",\n    "courseID": 254,\n    "quarter": "Spring",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 138",\n    "courseID": 1401,\n    "quarter": "Summer",\n    "year": 2018\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ACCT& 203",\n    "courseID": 33,\n    "quarter": "Fall",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 080",\n    "courseID": 897,\n    "quarter": "Winter",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "ACCT& 202",\n    "courseID": 32,\n    "quarter": "Spring",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 091",\n    "courseID": 901,\n    "quarter": "Spring",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH 092",\n    "courseID": 902,\n    "quarter": "Summer",\n    "year": 2019\n  },' +
-        '\n  {\n    "planId": 2482,\n    "courseNumber": "MATH& 146",\n    "courseID": 919,\n    "quarter": "Summer",\n    "year": 2020\n  }]';
-
+var apiURL = 'http://localhost:5000/api/Vsa/';
+    $(document).ready(function(){
+	    $('#searchbutton').click(function() {
+		    url += $('$searchinput').value;
+		});
+	});
+	
     $(document).ready(function(){
         $.ajax({
-		    url: 'http://localhost:5000/api/Vsa/69',
+		    url: apiURL,
 			type: 'GET',
 			dataType: 'json',
 			success: function(jsonText) {
-			    activePlanObj = JSON.parse(jsonText);
-				constructTable(activePlanObj, courseListObjects, 5);
+				constructTable(jsonText, courseListObjects, 5);
 				initial = displayTable(table, initial, 5);
 				document.getElementById('tableholder').innerHTML = initial;
 			},
@@ -174,7 +143,6 @@ text3 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "cour
 			}
 		})
 	});
-	  
     
 	//courseListObjects = JSON.parse(text3);
 	//constructTable(activePlanObj, courseListObjects, 5);
