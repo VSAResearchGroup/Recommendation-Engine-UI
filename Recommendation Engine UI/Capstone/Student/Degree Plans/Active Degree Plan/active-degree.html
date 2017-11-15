@@ -16,6 +16,42 @@
 <script src="../../jquery-3.2.1.js"></script>
 <script src="active-degree.js"></script>
 <style>
+
+button {
+  font-size: 1em;
+  border: none;
+  padding: 0.5em 1em;
+  text-align: center;
+  display: inline-block;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  outline: none;
+}
+
+#searchbutton {
+  border-style: outset solid;
+  border-color: rgb(184, 0, 0);
+  border-width: 0.2em;
+  border-radius: 0.5em;
+  margin-left: 1em;
+  margin-top: 1em;
+  background-color: white;
+  box-shadow: 0 0.5em 1em 0 rgba(0,0,0,0.21),0 0.7em 3em 0 rgba(0,0,0,0.19);
+}
+
+#searchbutton:hover {
+  background-color: rgb(184, 0, 0);
+  color: white;
+}
+
+#searchbutton:active {
+  transform: translateY(0.2em);
+  box-shadow: 0 0.1em 1em 0 rgba(0,0,0,0.21),0 0.3em 3em 0 rgba(0,0,0,0.19);
+}
+
+#searchinput {
+ 
+}
 </style>
 </head>
 <body>
@@ -94,7 +130,7 @@
 	
 	<div class='inputbox'>
 	  <input id='searchinput' type='text' value='69'>
-	  <button id='searchbutton' value='Search'></button>
+	  <button id='searchbutton'>Search</button>
 	</div>
 	
   </div>
@@ -122,18 +158,10 @@ var statusObject = {
 };
 var activeplanObj, courseListObjects;
 var apiURL = '';
-var valueReady = false;
     $(document).ready(function(){
 	    apiURL = 'http://localhost:5000/api/Vsa/';
-		valueReady = false;
 	    $('#searchbutton').click(function() {
-		    apiURL += $('#searchinput').value;
-			valueReady = true;
-		});
-	});
-	
-    $(document).ready(function(){
-		if (valueReady == true) {
+		    apiURL += $('#searchinput').val();
 		    $.ajax({
 		        url: apiURL,
 			    type: 'GET',
@@ -147,7 +175,11 @@ var valueReady = false;
 			        alert('AJAX FAILED');
 			    }
 		    })
-		}
+		});
+	});
+	
+    $(document).ready(function(){
+		
         
 	});
     
