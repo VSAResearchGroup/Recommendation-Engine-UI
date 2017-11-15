@@ -93,7 +93,7 @@
     </div>	
 	
 	<div class='inputbox'>
-	  <input id='searchinput' type='text' value='5'>
+	  <input id='searchinput' type='text' value='69'>
 	  <button id='searchbutton' value='Search'></button>
 	</div>
 	
@@ -121,27 +121,34 @@ var statusObject = {
 	removed: 4
 };
 var activeplanObj, courseListObjects;
-var apiURL = 'http://localhost:5000/api/Vsa/';
+var apiURL = '';
+var valueReady = false;
     $(document).ready(function(){
+	    apiURL = 'http://localhost:5000/api/Vsa/';
+		valueReady = false;
 	    $('#searchbutton').click(function() {
-		    url += $('$searchinput').value;
+		    apiURL += $('#searchinput').value;
+			valueReady = true;
 		});
 	});
 	
     $(document).ready(function(){
-        $.ajax({
-		    url: apiURL,
-			type: 'GET',
-			dataType: 'json',
-			success: function(jsonText) {
-				constructTable(jsonText, courseListObjects, 5);
-				initial = displayTable(table, initial, 5);
-				document.getElementById('tableholder').innerHTML = initial;
-			},
-			error: function() {
-			    alert('AJAX FAILED');
-			}
-		})
+		if (valueReady == true) {
+		    $.ajax({
+		        url: apiURL,
+			    type: 'GET',
+			    dataType: 'json',
+			    success: function(jsonText) {
+				    constructTable(jsonText, courseListObjects, 5);
+				    initial = displayTable(table, initial, 5);
+				    document.getElementById('tableholder').innerHTML = initial;
+			    },
+			    error: function() {
+			        alert('AJAX FAILED');
+			    }
+		    })
+		}
+        
 	});
     
 	//courseListObjects = JSON.parse(text3);
