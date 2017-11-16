@@ -17,6 +17,13 @@
 <script src="active-degree.js"></script>
 <style>
 
+.inputbox {
+  float: left;
+  position: absolute;
+  left: 45em;
+  top: 26em;
+}
+
 button {
   font-size: 1em;
   border: none;
@@ -55,9 +62,9 @@ button {
 </style>
 </head>
 <body>
-<div class='container clearfix'>
+<div class='container'>
 
-  <div class='header'>
+  <div class='header clearfix'>
     <div class='toplink'>
       <ul>
         <li><a href='logout.html'>Log Out</a></li>
@@ -69,7 +76,7 @@ button {
     <h3>COMMUNITY COLLEGE</h3>
   </div>
   
-  <div class='nav'>
+  <div class='nav clearfix'>
     <ul>
       <li><a href='../../Student%20Dashboard/student-dashboard.html'>Student Dashboard</a></li>
 	  <li><a href='../degree-plans.html'>Degree Plans</a></li>
@@ -77,7 +84,7 @@ button {
     </ul>
   </div>
   
-  <div class='main'>
+  <div class='main clearfix'>
     <h1 id='mainheader'>Active Degree Plan</h1>
     <h5 id='path'>Degree Plans >> Active Degree Plan</h5>
 	<h2 id="major">University of Washington Bothell - Computer Science</h2>
@@ -89,7 +96,7 @@ button {
 	  </ul>
     </div>
     
-    <div class="legend">
+    <div class="legend clearfix">
       <h4 id="legendhead">Legend:</h4>
       <ul>
 	    <li style='color: rgb(0, 129, 228);'>M: Morning</li><br>
@@ -107,11 +114,11 @@ button {
 	  </ul>
     </div>
 	
-	<div class='table'>
+	<div class='table clearfix'>
 	  <p id='tableholder'></p>
 	</div>
 	
-    <div class="creditsmet">
+    <div class="creditsmet clearfix">
       <h4>Credit Requirement Met Status</h4>
 	  <i class='refresh fa fa-refresh fa-spin'></i>
       <ul>
