@@ -77,7 +77,7 @@ $('#activedegreelink').click(function(eventObject) {
 	    dataType: 'json',
 	    success: function(jsonText) {
 		    alert(jsonText);
-			localStorage.setItem('activePlanArray', jsonText);
+			localStorage.setItem('activePlanArray', JSON.stringify(jsonText));
 			location.href = '../Degree%20Plans/Active%20Degree%20Plan/active-degree-table.html';
 	    },
 	    error: function() {

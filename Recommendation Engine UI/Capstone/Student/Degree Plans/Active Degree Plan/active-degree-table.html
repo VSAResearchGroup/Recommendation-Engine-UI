@@ -81,7 +81,8 @@ var activeplanObj, courseListObjects;
 var apiURL = '';
 $(document).ready(function(){
     text = '';
-	constructTable(localStorage.getItem('activePlanArray'), localStorage.getItem('activePlanArray'), 5);
+	var activePlanObj = JSON.parse(localStorage.getItem('activePlanArray'));
+	constructTable(activePlanObj, activePlanObj, 5);
 	text = displayLegend(text);
 	text = displayCreditMets(text);
 	text = displayTable(text, 4, 5);
