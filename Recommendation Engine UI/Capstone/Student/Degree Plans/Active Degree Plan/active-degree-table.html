@@ -13,8 +13,11 @@
 <link rel="stylesheet" href="../../styles.css" >
 <link rel="stylesheet" href="active-degree-table.css" >
 
-<script src="../../jquery-3.2.1.js"></script>
-<script src="active-degree-table.js"></script>
+    <script src="../../jquery-3.2.1.js"></script>
+    <script src="./node_modules/sortablejs/Sortable.js"></script>
+
+    <script src="active-degree-table.js"></script>
+
 <style>
 </style>
 </head>
@@ -88,7 +91,8 @@ $(document).ready(function(){
     text = displayTable(text, 4, 5);
 
 
-	document.getElementById('contentHolder').innerHTML = text;	
+    document.getElementById('contentHolder').innerHTML = text;
+    dragAndDrop();
 	$('#active').click(function() {
 	    if ($('#active').css('color') == 'rgb(0, 0, 0)') {
 		    $('#active').css('color', 'white');

@@ -69,14 +69,14 @@ function displayValidation(text) {
     // testPlan(int planId,int majorId, int schoolId)
     apiURL = 'http://localhost:5000/api/test/testPlan';
     apiURL += "/" + planId
-    alert(apiURL)
+    //alert(apiURL)
             $.ajax({
                 url: apiURL,
                 type: 'GET',
               
 
                 success: function (jsonText) {
-                    alert(jsonText)
+                    //alert(jsonText)
                     innertext = "<table class='validation'>"
                     for (var i = 0; i < jsonText.length; i++) {
                         innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
@@ -91,7 +91,7 @@ function displayValidation(text) {
                 }
             })
 
-    alert(text);
+   // alert(text);
     return text;
 }
 	    /*<li style='color: rgb(0, 129, 228);'>M: Morning</li>
@@ -170,7 +170,7 @@ function displayTable(text, numOfColumn, numOfRow) {
 	    // each row in table
         // num of row is constant set to 5
 		for (;rowIndex < numOfRow; rowIndex++) {
-			text+= '<ul class="table1 ' +  + '">';
+		    text+= '<ul class="table1" id="' +(columnIndex +"" +rowIndex)  + '">';
 			cellIndex = 0;
 			if (rowIndex + 1 == numOfRow) {  //if last row
 				setClassText = ' class="last"';
@@ -217,12 +217,76 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text += '</div>';
 	}
 
+    localStorage.setItem('numberOfTables', columnIndex);
+    localStorage.setItem('rowsPerTable', cellIndex);
+   
 	return text;
 }
 
-function dragAndDrop(text) {
-    
+
+var dragToNewList = false;
+
+function dragAndDrop() {
+   table = localStorage.getItem('numberOfTables');
+   row = localStorage.getItem('rowsPerTable');
+    var elem;
+   groupArray = createDragAndDropGroupArray(table, row)
+   for (var i = 0; i < groupArray.length; i++) {
+       elem= document.getElementById(groupArray[i]);
+       Sortable.create(elem,
+           {
+               group: {
+                   name: groupArray[i],
+                   put: groupArray,
+
+               },
+               //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
+               onAdd: function(/**Event*/evt) {
+                   // same properties as onEnd
+                   for (var member in evt) {
+
+                       if (evt.hasOwnProperty(member)) {
+                           alert(member + " " + evt[member]);
+
+                           for (var m in evt[member])
+                               if (evt[member].hasOwnProperty(m)) {
+                                   alert(member + " " + evt[member][m]);
+                                   
+                               }
+                       }
+                   }
+
+
+               
+           },
+               animation: 100,
+             
+           });
+   }
 }
+
+//*[@id="10"]/li[1]/div/p
+
+
+function canBeDragged(elem) {
+    return elem.length < 4
+}
+function createDragAndDropGroupArray(table, row) {
+    var test = [];
+    for (var i = 0; i <= table; i++) {
+        for (var j = 0; j <= row; j++) {
+            if (i == 0) {
+                test[test.length] = ("0" + j) + ""
+
+            }
+            else
+                test[test.length] = (i * 10 + j) + ""
+        }
+
+    }
+    return test;
+}
+
 function tableObject() {
     this.columnArray = [];
     this.pushColumnObject = function (columnObj) {
