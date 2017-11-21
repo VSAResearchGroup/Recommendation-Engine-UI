@@ -67,6 +67,24 @@ var text = '';
 text = displayActivePlan(text, 1);
 //$('#activeplanHolder').text(text);
 document.getElementById('activeplanHolder').innerHTML = text;
+$('#activedegreelink').click(function(eventObject) {
+    eventObject.preventDefault();
+	apiURL = 'http://localhost:5000/api/Vsa/';
+	apiURL += localStorage.getItem('jsonActivePlanID');
+	$.ajax({
+	    url: apiURL,
+	    type: 'GET',
+	    dataType: 'json',
+	    success: function(jsonText) {
+		    alert(jsonText);
+			localStorage.setItem('activePlanArray', jsonText);
+			location.href = '../active-degree-table.html';
+	    },
+	    error: function() {
+	        alert('AJAX FAILED');
+	    }
+	})
+});
 </script>
 </body>
 </html>

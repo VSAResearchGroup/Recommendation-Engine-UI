@@ -79,28 +79,16 @@ var statusObject = {
 };
 var activeplanObj, courseListObjects;
 var apiURL = '';
-    /*$(document).ready(function(){
-	    $('#searchbutton').click(function() {
-		    apiURL = 'http://localhost:5000/api/Vsa/';
-		    apiURL += $('#searchinput').val();
-		    $.ajax({
-		        url: apiURL,
-			    type: 'GET',
-			    dataType: 'json',
-			    success: function(jsonText) {
-				    text = '';
-				    constructTable(jsonText, courseListObjects, 5);
-				    text = displayTable(text, 4, 5);
-				    document.getElementById('content').innerHTML = initial;
-			    },
-			    error: function() {
-			        alert('AJAX FAILED');
-			    }
-		    })
-		});
-	});*/
+$(document).ready(function(){
+    text = '';
+	constructTable(localStorage.getItem('activePlanArray'), localStorage.getItem('activePlanArray'), 5);
+	text = displayLegend(text);
+	text = displayCreditMets(text);
+	text = displayTable(text, 4, 5);
+	document.getElementById('contentHolder').innerHTML = text;	
+});
     
-	var text1 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
+	/*var text1 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
   {\n    "planId": 2482,\n    "courseNumber": "ESL 097",\n    "courseID": 550,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
   {\n    "planId": 2482,\n    "courseNumber": "ACCT 110",\n    "courseID": 25,\n    "quarter": "Fall",\n    "year": 2017\n  }, \
   {\n    "planId": 2482,\n    "courseNumber": "ENGL& 101",\n    "courseID": 490,\n    "quarter": "Fall",\n    "year": 2017\n  }, \
@@ -119,15 +107,15 @@ var apiURL = '';
   {\n    "planId": 2482,\n    "courseNumber": "ACCT& 202",\n    "courseID": 32,\n    "quarter": "Spring",\n    "year": 2019\n  }, \
   {\n    "planId": 2482,\n    "courseNumber": "MATH 091",\n    "courseID": 901,\n    "quarter": "Spring",\n    "year": 2019\n  }, \
   {\n    "planId": 2482,\n    "courseNumber": "MATH 092",\n    "courseID": 902,\n    "quarter": "Summer",\n    "year": 2019\n  }, \
-  {\n    "planId": 2482,\n    "courseNumber": "MATH& 146",\n    "courseID": 919,\n    "quarter": "Summer",\n    "year": 2020\n  }\n]'
+  {\n    "planId": 2482,\n    "courseNumber": "MATH& 146",\n    "courseID": 919,\n    "quarter": "Summer",\n    "year": 2020\n  }\n]'*/
   
-	activePlanObj = JSON.parse(text1);
+	/*activePlanObj = JSON.parse(text1);
 	courseListObjects = JSON.parse(text1);
 	constructTable(activePlanObj, courseListObjects, 5);
 	text = displayLegend(text);
 	text = displayCreditMets(text);
 	text = displayTable(text, 4, 5);
-	document.getElementById('contentHolder').innerHTML = text;
+	document.getElementById('contentHolder').innerHTML = text;*/
 </script>
 </body>
 </html>
