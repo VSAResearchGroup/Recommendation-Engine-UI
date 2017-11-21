@@ -151,6 +151,9 @@ function displayTable(text, numOfColumn, numOfRow) {
 	var tagIndex;
 	var setClassText = '';
 	var indent = '';
+    
+
+    // each table
 	for (;columnIndex < activeDegreeTable.columnArray.length / 4; columnIndex++) {
 		if (columnIndex != 0) {
 			indent = ' style="margin-left: 20.5em;"';
@@ -163,8 +166,11 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text+= '<li>' + activeDegreeTable.columnArray[columnIndex*4+3].year + ' Summer</li>';
 		text+= '</ul>';
 		rowIndex = 0;
+
+	    // each row in table
+        // num of row is constant set to 5
 		for (;rowIndex < numOfRow; rowIndex++) {
-			text+= '<ul class="table1">';
+			text+= '<ul class="table1 ' +  + '">';
 			cellIndex = 0;
 			if (rowIndex + 1 == numOfRow) {  //if last row
 				setClassText = ' class="last"';
@@ -210,9 +216,13 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text += '</ul>';
 		text += '</div>';
 	}
+
 	return text;
 }
 
+function dragAndDrop(text) {
+    
+}
 function tableObject() {
     this.columnArray = [];
     this.pushColumnObject = function (columnObj) {
