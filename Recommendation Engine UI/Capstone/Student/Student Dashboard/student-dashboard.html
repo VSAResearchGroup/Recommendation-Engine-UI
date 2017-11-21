@@ -49,12 +49,12 @@
 	</div>
 	<h2 id='yourplan'>Your Degree Plan</h2>
 	<p id='activeplanHolder'></p>
-	<div id='degreeplanblock'>
+	<!--<div id='degreeplanblock'>
 	  <h2 id="major"><a id='activedegreelink' href='../active-degree.html'>University of Washington Bothell - Computer Science</a></h2>
-	  <h4 id='transferringcollege'>Transferring College: <a id='transcollegelink' href='https://www.uwb.edu/'>University of Washington Bothell</a></h3>
-	  <h4 id='intendedmajor'>Intended Major: <a id='intendmajorlink' href='https://www.uwb.edu/bscsse'>Computer Science</a></h3>
-	  <h4 id='degree'>Degree: <span>Associate in Arts and Sciences</span></h3>
-	</div>
+	  <h4 id='transferringcollege'>Transferring College: <a id='transcollegelink' href='https://www.uwb.edu/'>University of Washington Bothell</a></h4>
+	  <h4 id='intendedmajor'>Intended Major: <a id='intendmajorlink' href='https://www.uwb.edu/bscsse'>Computer Science</a></h4>
+	  <h4 id='degree'>Degree: <span>Associate in Arts and Sciences</span></h4>
+	</div>-->
   </div>
 
   <div class='footer'>
@@ -63,7 +63,9 @@
 
 </div>
 <script>
-
+var text = '';
+text = displayActivePlan(text, 1);
+$('#activeplanHolder').text(text);
 </script>
-</body>
+</body>displayActivePlan
 </html>

@@ -1,30 +1,38 @@
-function displayActivePlan(text, status, activePlanObj) {
+function displayActivePlan(text, status) {
 	if (status == 1) {
 		text+= '<div id="degreeplanblock">';
 		
 	    text+= '<h2 id="major">';
 	    text+= '<span id="activedegreelink">';
-	    text+= activePlanObj. + activePlanObj.;
+	    text+= localStorage.getItem('jsonCollege') + ' - ' + localStorage.getItem('jsonMajor') + ;
 	    text+= '</span>';
 	    text+= '</h2>';
 		
 		text+= '<h4 id="transferringcollege">Transferring College: ';
 		text+= '<span id="transcollegelink">';
-		text+= activePlanObj.;
+		text+= localStorage.getItem('jsonCollege');
 		text+= '</span>';
-		text+= '</h3>';
+		text+= '</h4>';
 		
 		text+= '<h4 id="intendedmajor">Intended Major: ';
 		text+= '<span id="intendmajorlink">';
-		text+= activePlanObj.;
+		text+= localStorage.getItem('jsonMajor');
+		text+= '</span>';
+		text+= '</h4>';
+		
+		
+		text+= '</div>';
 	} else if (status == 0) {
-	    text+= 
+	    //display nothing
 	}
+	return text;
 }
 
 
-	  <h2 id="major"><span id='activedegreelink'>University of Washington Bothell - Computer Science</span></h2>
+	  /*<h2 id="major"><span id='activedegreelink'>University of Washington Bothell - Computer Science</span></h2>
 	  <h4 id='transferringcollege'>Transferring College: <span id='transcollegelink'>University of Washington Bothell</span></h3>
 	  <h4 id='intendedmajor'>Intended Major: <span id='intendmajorlink' href='https://www.uwb.edu/bscsse'>Computer Science</span></h3>
 	  <h4 id='degree'>Degree: <span>Associate in Arts and Sciences</span></h3>
 	</div>
+	localStorage.getItem('jsonMajor')
+localStorage.getItem('jsonCollege')*/

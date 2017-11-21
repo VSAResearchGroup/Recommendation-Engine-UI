@@ -47,7 +47,7 @@ body {
   <input id='studentID' type='text' placeholder='enter student id'>
   <label style='display: block;'>PIN:</label>
   <input id='pin' type='text' placeholder='enter pin'><br>
-  <button id='loginbutton'>Log In</button>
+  <button id='loginbutton'><a href='Student%20Dashboard/student-dashboard.html'>Log In</a></button>
 </div>
 
 <script>
@@ -61,6 +61,9 @@ $(document).ready(function() {
 		    dataType: 'json',
 		    success: function(jsonText) {
 			    alert(jsonText);
+				localStorage.setItem('jsonMajor', jsonText[0]);
+				localStorage.setItem('jsonCollege', jsonText[1]);
+				localStorage.setItem('jsonActivePlanID', jsonText[2]);
 		    },
 		    error: function() {
 		        alert('AJAX FAILED');
