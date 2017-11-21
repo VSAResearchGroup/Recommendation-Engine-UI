@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-US">
 <head>
 <title>Virtual Academic Advisor Active Degree Page</title>
@@ -79,12 +79,16 @@ var activeplanObj, courseListObjects;
 var apiURL = '';
 $(document).ready(function(){
     text = '';
-	//var activePlanObj = JSON.parse(localStorage.getItem('activePlanArray'));
-	//constructTable(activePlanObj, activePlanObj, 5);
-	//text = displayLegend(text);
-	//text = displayCreditMets(text);
-	//text = displayTable(text, 4, 5);
-	//document.getElementById('contentHolder').innerHTML = text;
+	var activePlanObj = JSON.parse(localStorage.getItem('activePlanArray'));
+	constructTable(activePlanObj, activePlanObj, 5);
+	text = displayLegend(text);
+	text = displayCreditMets(text);
+    text = displayValidation(text);
+
+    text = displayTable(text, 4, 5);
+
+
+	document.getElementById('contentHolder').innerHTML = text;	
 	$('#active').click(function() {
 	    if ($('#active').css('color') == 'rgb(0, 0, 0)') {
 		    $('#active').css('color', 'white');

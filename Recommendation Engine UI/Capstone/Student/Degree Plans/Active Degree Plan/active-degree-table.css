@@ -37,6 +37,13 @@
   background-color: white;
 }
 
+#validationtable {
+    display: table-cell;
+    float: right;
+    font-size: 1em;
+    margin-right: 6em;
+    margin-left: 1em;
+}
 .legend {
   display: table-cell;
   float: left;
@@ -44,6 +51,7 @@
   margin-left: 6em;
   margin-right: 1em;
 }
+
 
 .legend h4 {
   background-color: rgb(184, 0, 0);

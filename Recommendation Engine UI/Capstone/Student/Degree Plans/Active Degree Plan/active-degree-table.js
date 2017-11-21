@@ -58,6 +58,42 @@ function displayLegend(text) {
 	text += '</div>';
 	return text;
 }
+
+function displayValidation(text) {
+   
+   
+    text += '<div  id="validationtable"><h4 >Validation:</h4></div>'
+    planId = localStorage.getItem('jsonActivePlanID')
+   
+
+    // testPlan(int planId,int majorId, int schoolId)
+    apiURL = 'http://localhost:5000/api/test/testPlan';
+    apiURL += "/" + planId
+    alert(apiURL)
+            $.ajax({
+                url: apiURL,
+                type: 'GET',
+              
+
+                success: function (jsonText) {
+                    alert(jsonText)
+                    innertext = "<table class='validation'>"
+                    for (var i = 0; i < jsonText.length; i++) {
+                        innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
+                    }
+
+                    innertext += "</table></div>"
+                    document.getElementById("validationtable").innerHTML += innertext ;
+
+                },
+                error: function () {
+                    alert('AJAX FAILED');
+                }
+            })
+
+    alert(text);
+    return text;
+}
 	    /*<li style='color: rgb(0, 129, 228);'>M: Morning</li>
 	    <li style='color: rgb(235, 105, 0);'>A: Afternoon</li>
 	    <li style='color: rgb(131, 0, 222);'>E: Evening</li>
@@ -175,6 +211,57 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text += '</div>';
 	}
 	return text;
+}
+
+function tableObject() {
+    this.columnArray = [];
+    this.pushColumnObject = function (columnObj) {
+        this.columnArray.push(columnObj);
+    }
+}
+function columnObject(quarter, year) {
+    this.cellArray = [];
+    this.quarter = quarter;
+    this.year = year;
+    /*this.update = function (?) {
+    	???
+    }
+    this.addInputBox = function (?) {
+    	???
+    }
+    this.columnSort = function (?) {
+	    ???
+    }*/
+    this.pushCellObject = function (cellObj) {
+        this.cellArray.push(cellObj);
+    }
+    this.addCellObject = function (cellObj) {
+        this.cellArray[cellObj.course.courseid] = cellObj;
+    }
+    this.popCellObject = function () {
+        return this.cellArray.pop();
+    }
+    this.removeCellObject = function () {
+    }
+}
+
+function cellObject(courseObj) {
+    this.course = courseObj;
+    //this.xIcon = removeObject;
+    //this.undoIcon = undoObject;
+    //this.inputBox = inputObject;
+    this.addCourse = function (newCourse) {
+        this.course = newCourse;
+    }
+    /*this.removeCourse = function (?) {
+		???
+	}
+	this.showObject = function (?) {
+		???
+	}
+	this.hideObject = function (?) {
+		???
+	}*/
 }
 
 function constructTable(courseObjects, courseListObjects, row) {
