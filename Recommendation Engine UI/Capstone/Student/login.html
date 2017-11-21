@@ -53,7 +53,7 @@ body {
 <script>
 $(document).ready(function() {
     $('#loginbutton').click(function() {
-	    apiURL = 'http://localhost:5000/Vsa/getPlanInfo/';
+	    apiURL = 'http://localhost:5000/api/Vsa/getPlanInfo/';
 		apiURL += $('#studentID').val();
 		$.ajax({
 		    url: apiURL,
