@@ -4,7 +4,7 @@ function displayActivePlan(text, status) {
 		
 	    text+= '<h2 id="major">';
 	    text+= '<span id="activedegreelink">';
-	    text+= localStorage.getItem('jsonCollege') + ' - ' + localStorage.getItem('jsonMajor') + ;
+	    text+= localStorage.getItem('jsonCollege') + ' - ' + localStorage.getItem('jsonMajor');
 	    text+= '</span>';
 	    text+= '</h2>';
 		
@@ -26,6 +26,10 @@ function displayActivePlan(text, status) {
 	    //display nothing
 	}
 	return text;
+}
+
+function setActivePlan(status) {
+	
 }
 
 
