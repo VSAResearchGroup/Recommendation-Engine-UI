@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-US">
 <head>
 <title>Virtual Academic Advisor Active Degree Page</title>
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="active-degree-table.css" >
 
 <script src="../../jquery-3.2.1.js"></script>
-<script src="../Inactive%20Degree%20Plans/inactive-degrees-table.js"></script>
+<script src="active-degree-table.js"></script>
 <style>
 </style>
 </head>
@@ -85,6 +85,8 @@ $(document).ready(function(){
 	text = displayLegend(text);
 	text = displayCreditMets(text);
 	text = displayTable(text, 4, 5);
+    text = displayValidation(text);
+
 	document.getElementById('contentHolder').innerHTML = text;	
 });
     
