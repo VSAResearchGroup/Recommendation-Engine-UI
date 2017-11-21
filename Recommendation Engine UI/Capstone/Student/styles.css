@@ -1,19 +1,23 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
 }
 
 body {
-    margin: 0;
-	padding: 0;
-	font-size: 100%;
-	font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
 }
 
 .container {
   width: 100%;
   height: 100%;
-  max-width: 1680px;
-  position: relative;
+  display: table;
 }
 
 .clearfix::after {
@@ -23,10 +27,10 @@ body {
 }
 
 .header {
-    width: 100%;
-	height: 100px;
-	background-color: rgb(190, 0, 0);
-	color: white;
+  display: table-row;
+  height: 100px;
+  background-color: rgb(190, 0, 0);
+  color: white;
 }
 
 .header h1 {
@@ -48,41 +52,35 @@ body {
 }
 
 .footer {
-    width: 100%;
-	height: 3em;
-	background-color: rgb(80, 80, 80);
-	color: rgb(180, 180, 180);
-	position: relative;
-	bottom: 0;
+  display: table-row;
+  height: 3em;
+  background-color: rgb(80, 80, 80);
+  color: rgb(180, 180, 180);
 }
 
 .footer p {
   font-size: 0.75em;
   padding: 1.3em 0;
+  margin: 0;
   margin-left: 13em;
-  margin-bottom: 0;
 }
 
 .toplink {
-  width: 50%;
-  margin-left: 1em;
-  position: absolute;
-  right: 1em;
+  float: right;
 }
 
 .toplink ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 .toplink li {
-  float: right;
+  float: left;
 }
 
 .toplink li a {
-  display: inline-block;
+  display: block;
   color: white;
   text-align: center;
   padding: 0.8em 1em;
@@ -93,8 +91,9 @@ body {
 }
 
 .nav {
-  width: 100%;
   background-color: rgb(141, 0, 0);
+  display: table-row;
+  height: 1em;
 }
 
 .nav ul {
@@ -102,11 +101,9 @@ body {
   margin: 0;
   padding: 0;
   margin-left: 14em;
-  overflow: hidden;
 }
 
 .nav li {
-  margin: 0;
   float: left;
   border-right: 1px solid black;
 }
@@ -116,11 +113,11 @@ body {
 }
 
 .nav li a {
-  display: inline-block;
+  display: block;
   text-decoration: none;
   color: white;
   text-align: center;
-  padding: 15px 40px;
+  padding: 1em 2.5em;
 }
 
 .nav li a:hover:not(.navactive) {
@@ -132,7 +129,13 @@ body {
 }
 
 .main {
+  height: 100%;
+  display: table;
   width: 100%;
+}
+
+#heading {
+  display: table-row;
 }
 
 #mainheader {

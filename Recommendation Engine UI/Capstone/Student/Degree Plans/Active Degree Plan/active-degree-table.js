@@ -100,7 +100,7 @@ function displayCreditMets(text) {
 		}
 		firstLetter = objectIndex.substring(0,1);
 		text+= '<li style="color: ' + requirementTypesColor[objectIndex] + ';">' + requirementTypesAbbrev[objectIndex] +
-		' (' + firstLetter.toUpperCase() + objectIndex.substring(1) + '): <span>0/15</span></li>';
+		'(' + firstLetter.toUpperCase() + objectIndex.substring(1) + '): <span>0/15</span> Credits</li>';
 	}
 	text += '</ul>';
 	text += '<i class="check fa fa-check-circle"></i>';

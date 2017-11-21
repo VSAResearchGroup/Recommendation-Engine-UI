@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Virtual Academic Advisor Active Degree Page</title>
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+
+<link rel="stylesheet" href="styles.css" >
+
+<script src="jquery-3.2.1.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+}
+
+.loginbox {
+  border: 1px solid rgb(150, 150, 150);
+  position: relative;
+  width: 25%;
+  top: 40%;
+  left: 35%;
+  padding: 1em 1em;
+}
+</style>
+</head>
+<body>
+
+<div class='loginbox'>
+  <label style='display: block;'>Student ID:</label>
+  <input id='studentID' type='text' placeholder='enter student id'>
+  <label style='display: block;'>PIN:</label>
+  <input id='pin' type='text' placeholder='enter pin'><br>
+  <button id='loginbutton'>Log In</button>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#loginbutton').click(function() {
+	    apiURL = 'http://localhost:5000/Vsa/getPlanInfo/';
+		apiURL += $('#studentID').val();
+		$.ajax({
+		    url: apiURL,
+		    type: 'GET',
+		    dataType: 'json',
+		    success: function(jsonText) {
+			    alert(jsonText);
+		    },
+		    error: function() {
+		        alert('AJAX FAILED');
+		    }
+		})
+	    
+	});
+});
+</script>
+</body>
+</html>

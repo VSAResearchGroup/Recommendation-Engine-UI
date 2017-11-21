@@ -10,6 +10,203 @@
 	</style>
   </head>
   <body>
+    <style>
+	* {
+	  font-family: 'Open Sans', sans-serif;
+	}
+	#tagM {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(0, 129, 228);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to top right, rgb(0, 129, 228), rgb(0, 198, 228));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagA {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(220, 81, 0);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom right, rgb(255, 155, 45), rgb(220, 81, 0));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagE {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(101, 0, 192);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom, rgb(172, 0, 248), rgb(101, 0, 192));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagSS {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(0, 135, 172);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom, rgb(0, 217, 231), rgb(0, 135, 172));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}	    
+	#tagH {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(234, 146, 0);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom, rgb(255, 202, 60), rgb(234, 146, 0));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagR {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(217, 109, 0);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to top, rgb(146, 62, 0), rgb(217, 109, 0));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagC {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(194, 60, 168);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom, rgb(255, 113, 255), rgb(194, 60, 168));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagQ {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(75, 51, 200);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom, rgb(0, 161, 255), rgb(75, 51, 200));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagNS {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(0, 164, 21);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom, rgb(17, 239, 77), rgb(0, 164, 21));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	} 
+	#tagTE {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(79, 79, 79);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to top, rgb(79, 79, 79), rgb(159, 159, 159));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagNSL {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(118, 139, 0);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom, rgb(181, 207, 25), rgb(118, 139, 0));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	#tagD {
+      font-size: 0.7em;
+      border: none;
+      padding: 0.5em 1em;
+      text-align: center;
+      display: inline-block;
+      outline: none;
+	  border-style: solid;
+	  border-color: rgb(178, 0, 127);
+	  border-width: 0.1em;
+	  border-radius: 1em;
+	  background: linear-gradient(to bottom, rgb(255, 0, 202), rgb(178, 0, 127));
+	  color: white;
+	  margin-left: 1em;
+	  margin-top: 1em;
+	}
+	</style>
     <h1>This is a html page for showing processed JSON file output.</h1>
 	
 	<form>
@@ -26,6 +223,18 @@
 	<p id="table"></p>
 	<p id='text'></p>
 	<p id='tabletext'></p>
+	<p id='tagM'>M</p>
+	<p id='tagA'>A</p>
+	<p id='tagE'>E</p>
+	<p id='tagSS'>SS</p>
+	<p id='tagH'>H</p>
+	<p id='tagR'>R</p>
+	<p id='tagC'>C</p>
+	<p id='tagQ'>Q</p>
+	<p id='tagNS'>NS</p>
+	<p id='tagTE'>TE</p>
+	<p id='tagNSL'>NS-L</p>
+	<p id='tagD'>D</p>
 	<script>
 	  var sID, requestMethod, filePath, asyncStatus, planTable, activePlanObject;
 	  requestMethod = 'POST';
@@ -48,14 +257,6 @@
       <!-- xmlhttp = new XMLHttpRequest();
       <!-- xmlhttp.onreadystatechange = displayTable(this, activePlanObject, planTable);
 	  <!--sendActivePlanParam(this, activePlanParam, requestMethod, filePath, asyncStatus)
-	  $(document).ready(function(){
-	      $('#JSONbutton').click(function(){
-		      alert('hello');
-		      $.get('BusinessAtWWU', function(data, status){
-	              alert('Data: ' + data + '\nStatus: ' + status); 
-	          });
-		  });
-	  });
 	  
 	  function displayBusinessTable() {
 	    text2 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  },' +
