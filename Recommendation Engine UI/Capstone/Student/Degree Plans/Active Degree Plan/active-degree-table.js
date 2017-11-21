@@ -60,9 +60,9 @@ function displayLegend(text) {
 }
 
 function displayValidation(text) {
-    text += '<div class="validation">';
-    text += '<h4 id="legendhead">Validation:</h4>';
-    text += '<div id="validationtable"></div>'
+   
+   
+    text += '<div  id="validationtable"><h4 >Validation:</h4></div>'
     planId = localStorage.getItem('jsonActivePlanID')
    
 
@@ -77,14 +77,13 @@ function displayValidation(text) {
 
                 success: function (jsonText) {
                     alert(jsonText)
-                    innertext = "<table>"
+                    innertext = "<table class='validation'>"
                     for (var i = 0; i < jsonText.length; i++) {
-                        alert(jsonText[i])
                         innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
                     }
 
-                    innertext += "</table>"
-                    document.getElementById("validationtable").innerHTML = innertext;
+                    innertext += "</table></div>"
+                    document.getElementById("validationtable").innerHTML += innertext ;
 
                 },
                 error: function () {

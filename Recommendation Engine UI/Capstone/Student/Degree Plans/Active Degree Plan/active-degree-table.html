@@ -85,8 +85,10 @@ $(document).ready(function(){
 	constructTable(activePlanObj, activePlanObj, 5);
 	text = displayLegend(text);
 	text = displayCreditMets(text);
-	text = displayTable(text, 4, 5);
     text = displayValidation(text);
+
+    text = displayTable(text, 4, 5);
+
 
 	document.getElementById('contentHolder').innerHTML = text;	
 });
