@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="active-degree-table.css" >
 
 <script src="../../jquery-3.2.1.js"></script>
-<script src="../Inactive%20Degree%20Plans/inactive-degrees-table.js"></script>
+<script src="active-degree-table.js"></script>
 <style>
 </style>
 </head>
@@ -48,10 +48,8 @@
 	  <h2 id="major">University of Washington Bothell - Computer Science</h2>
       <div class="activestatus">
 	    <h4 id="activestatustext">Plan Status:</h4>
-        <ul>
-		  <li><a id="active" href="active-degree.html">Active</a></li>
-	      <li><a id="inactive" href="inactive-degree-plan.html">Inactive</a></li>
-	    </ul>
+		<button id='active'>Active</button>
+		<button id='inactive'>Inactive</button> 
       </div>
 	</div>  
     <p id='contentHolder'></p>
@@ -81,12 +79,28 @@ var activeplanObj, courseListObjects;
 var apiURL = '';
 $(document).ready(function(){
     text = '';
-	var activePlanObj = JSON.parse(localStorage.getItem('activePlanArray'));
-	constructTable(activePlanObj, activePlanObj, 5);
-	text = displayLegend(text);
-	text = displayCreditMets(text);
-	text = displayTable(text, 4, 5);
-	document.getElementById('contentHolder').innerHTML = text;	
+	//var activePlanObj = JSON.parse(localStorage.getItem('activePlanArray'));
+	//constructTable(activePlanObj, activePlanObj, 5);
+	//text = displayLegend(text);
+	//text = displayCreditMets(text);
+	//text = displayTable(text, 4, 5);
+	//document.getElementById('contentHolder').innerHTML = text;
+	$('#active').click(function() {
+	    if ($('#active').css('color') == 'rgb(0, 0, 0)') {
+		    $('#active').css('color', 'white');
+			$('#active').css('background-color', 'rgb(141, 0, 0)');
+			$('#inactive').css('color', 'black');
+			$('#inactive').css('background-color', 'white');
+		}
+	});
+	$('#inactive').click(function() {
+	    if ($('#inactive').css('color') == 'rgb(0, 0, 0)') {
+		    $('#inactive').css('color', 'white');
+			$('#inactive').css('background-color', 'rgb(141, 0, 0)');
+			$('#active').css('color', 'black');
+			$('#active').css('background-color', 'white');
+		}
+	});
 });
     
 	/*var text1 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
