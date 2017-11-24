@@ -166,19 +166,24 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text+= '<li>' + activeDegreeTable.columnArray[columnIndex*4+3].year + ' Summer</li>';
 		text+= '</ul>';
 		rowIndex = 0;
+	    cellIndex = 0;
 
-	    // each row in table
-        // num of row is constant set to 5
-		for (;rowIndex < numOfRow; rowIndex++) {
-		    text+= '<ul class="table1" id="' +(columnIndex +"" +rowIndex)  + '">';
-			cellIndex = 0;
+	    // each column in table
+	    for (var j = 0; j < activeDegreeTable.columnArray.length; j++) {
+		    text+= '<ul class="table1" id="' +(columnIndex +"" +cellIndex)  + '">';
 			if (rowIndex + 1 == numOfRow) {  //if last row
 				setClassText = ' class="last"';
 			}
-			for (;cellIndex < numOfColumn; cellIndex++) {
+			var currentColumn = activeDegreeTable.columnArray[j].cellArray
+            console.log(currentColumn)
+            // each row in column
+	        for (var i = 0; i< currentColumn.length; i++) {
+	            console.log(currentColumn[i].course.courseNumber)
 				text+= '<li' + setClassText + '>';
-				text+= '<div class="cell">';
-				text+= '<p class="tabletext">' + activeDegreeTable.columnArray[columnIndex*numOfColumn+cellIndex].cellArray[rowIndex].course.courseNumber + '</p>';
+				text += '<div class="cell">';
+				
+
+				text += '<p class="tabletext">' + activeDegreeTable.columnArray[columnIndex * numOfRow * 4 + cellIndex + rowIndex].cellArray[rowIndex].course.courseNumber + '</p>';
 				tagIndex = 0;
 				for (;tagIndex < 1; tagIndex++) {
 					//objectname[].length
@@ -187,9 +192,10 @@ function displayTable(text, numOfColumn, numOfRow) {
 				}
 				text+= '</div>';
 				text+= '</li>';
-			}
-			text+= '</ul>';
-		}
+	        }
+	    }
+	    text += '</ul>';
+
 		text += '</div>';
 		
 		text+= '<table class="tableborder">';
@@ -240,21 +246,59 @@ function dragAndDrop() {
                    put: groupArray,
 
                },
+              
+               
                //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
-               onAdd: function(/**Event*/evt) {
-                   // same properties as onEnd
-                   for (var member in evt) {
+               onEnd: function (/**Event*/evt) {
 
-                       if (evt.hasOwnProperty(member)) {
-                           alert(member + " " + evt[member]);
+                   var index = groupArray[i].split("")[1];
+                   var index1 = groupArray[i].split("")[0];
+                   console.log(evt)
+                   
 
-                           for (var m in evt[member])
-                               if (evt[member].hasOwnProperty(m)) {
-                                   alert(member + " " + evt[member][m]);
-                                   
-                               }
-                       }
-                   }
+                  //dragGhost.parentNode.removeChild(dragGhost)
+                  // same properties as onEnd
+                   var el = evt.item;
+
+                   var newElemVal = evt.to.children[evt.newIndex].getElementsByTagName("p")[0].innerText
+                   var oldElemVal = evt.from.children[evt.oldIndex].getElementsByTagName("p")[0].innerText
+                   console.log(oldElemVal)
+                   console.log(newElemVal)
+                   
+                   console.log(evt.oldIndex)
+                   console.log(evt.newIndex)
+
+
+                 evt.to.parentNode.children[evt.newIndex].removeChild(evt.to.parentNode.children[evt.newIndex])
+                   //*[@id="00"]/li[2]/div/p
+                 //  evt.to.parentNode.childNodes[evt.newIndex].textContent = el.textContent
+                  // evt.from.parentNode.childNodes[evt.oldIndex].textContent = ""
+
+
+                 //  var xpath = '*[@id="' + groupArray[i] + '"]/li/div/p/text()'
+
+                //   var xpathResult = document.evaluate(xpath, el, null, XPathResult.STRING_TYPE, null);
+                 //  alert(el.textContent)
+                   //el.parentNode.removeChild(el);
+
+                   //*[@id="01"]/li[2]/div/p
+                  
+
+                   //evt.from.parentNode.appendChild(//)
+                   //alert(el.parentNode.childNodes.length)
+                  // if (el.parentNode.childNodes.length >= 4) {
+                       // alert("to long")
+                      // for (var i = 0; i < el.parent.chileNodes.length; i++) {
+                         //  if (el.parentNode.childNodes[i].text == "") {
+                      // el.parentNode.removeChild(el.parentNode.childNodes[evt.newIndex + 1])
+                         //      return;
+
+                          // }
+                     //  }
+                   
+                 //  el.parentNode.removeChild(el.parentNode.childNodes[0])
+                 
+               
 
 
                
@@ -267,7 +311,9 @@ function dragAndDrop() {
 
 //*[@id="10"]/li[1]/div/p
 
-
+function printElem(item, index) {
+    console.log(item.value)
+}
 function canBeDragged(elem) {
     return elem.length < 4
 }
