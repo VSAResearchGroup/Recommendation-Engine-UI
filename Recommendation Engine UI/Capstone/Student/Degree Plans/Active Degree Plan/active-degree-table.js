@@ -166,24 +166,30 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text+= '<li>' + activeDegreeTable.columnArray[columnIndex*4+3].year + ' Summer</li>';
 		text+= '</ul>';
 		rowIndex = 0;
-	    cellIndex = 0;
+	    cellIndex = 0
 
-	    // each column in table
-	    for (var j = 0; j < activeDegreeTable.columnArray.length; j++) {
-		    text+= '<ul class="table1" id="' +(columnIndex +"" +cellIndex)  + '">';
-			if (rowIndex + 1 == numOfRow) {  //if last row
-				setClassText = ' class="last"';
-			}
-			var currentColumn = activeDegreeTable.columnArray[j].cellArray
+	    // each column in table's set of columns
+	    for (var j = 0; j < 4; j++) {
+	        var currentColumn = activeDegreeTable.columnArray[columnIndex * 4 + j].cellArray
+            
+            
+	        text += '<ul class="table1'  + ' item"' +'id="' + columnIndex + "" + j + '">'
+			//if (j + 1 == numOfRow) {  //if last row
+			//	setClassText = ' class="last"';
+			//}
             console.log(currentColumn)
             // each row in column
-	        for (var i = 0; i< currentColumn.length; i++) {
+            for (var i = 0; i < currentColumn.length; i++) {
+                if (currentColumn[i].course.courseNumber === "") {
+                    text+= "<li class='item placeholder'></li></ul>"
+                    break;
+                }
 	            console.log(currentColumn[i].course.courseNumber)
-				text+= '<li' + setClassText + '>';
+				text+= '<li class="' + 'item"' + setClassText + '>';
 				text += '<div class="cell">';
 				
 
-				text += '<p class="tabletext">' + activeDegreeTable.columnArray[columnIndex * numOfRow * 4 + cellIndex + rowIndex].cellArray[rowIndex].course.courseNumber + '</p>';
+				text += '<p class="tabletext">' + currentColumn[i].course.courseNumber + '</p>';
 				tagIndex = 0;
 				for (;tagIndex < 1; tagIndex++) {
 					//objectname[].length
@@ -191,10 +197,12 @@ function displayTable(text, numOfColumn, numOfRow) {
 					text+= '<span id="' + 'tagM' + '">' + 'M' + '</span>';
 				}
 				text+= '</div>';
-				text+= '</li>';
+				text += '</li>';
+
 	        }
+	        text += '</ul>';
+
 	    }
-	    text += '</ul>';
 
 		text += '</div>';
 		
@@ -224,7 +232,6 @@ function displayTable(text, numOfColumn, numOfRow) {
 	}
 
     localStorage.setItem('numberOfTables', columnIndex);
-    localStorage.setItem('rowsPerTable', cellIndex);
    
 	return text;
 }
@@ -234,11 +241,12 @@ var dragToNewList = false;
 
 function dragAndDrop() {
    table = localStorage.getItem('numberOfTables');
-   row = localStorage.getItem('rowsPerTable');
     var elem;
-   groupArray = createDragAndDropGroupArray(table, row)
+    groupArray = createDragAndDropGroupArray(table, 4)
    for (var i = 0; i < groupArray.length; i++) {
-       elem= document.getElementById(groupArray[i]);
+       elem = document.getElementById(groupArray[i]);
+       console.log(elem.children.length)
+
        Sortable.create(elem,
            {
                group: {
@@ -246,63 +254,65 @@ function dragAndDrop() {
                    put: groupArray,
 
                },
+
+               draggable: ".item",
               
                
-               //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
-               onEnd: function (/**Event*/evt) {
+           //    //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
+           //    onEnd: function (/**Event*/evt) {
 
-                   var index = groupArray[i].split("")[1];
-                   var index1 = groupArray[i].split("")[0];
-                   console.log(evt)
+           //        var index = groupArray[i].split("")[1];
+           //        var index1 = groupArray[i].split("")[0];
+           //        console.log(evt)
                    
 
-                  //dragGhost.parentNode.removeChild(dragGhost)
-                  // same properties as onEnd
-                   var el = evt.item;
+           //       //dragGhost.parentNode.removeChild(dragGhost)
+           //       // same properties as onEnd
+           //        var el = evt.item;
 
-                   var newElemVal = evt.to.children[evt.newIndex].getElementsByTagName("p")[0].innerText
-                   var oldElemVal = evt.from.children[evt.oldIndex].getElementsByTagName("p")[0].innerText
-                   console.log(oldElemVal)
-                   console.log(newElemVal)
+           //        var newElemVal = evt.to.children[evt.newIndex].getElementsByTagName("p")[0].innerText
+           //        var oldElemVal = evt.from.children[evt.oldIndex].getElementsByTagName("p")[0].innerText
+           //        console.log(oldElemVal)
+           //        console.log(newElemVal)
                    
-                   console.log(evt.oldIndex)
-                   console.log(evt.newIndex)
+           //        console.log(evt.oldIndex)
+           //        console.log(evt.newIndex)
 
 
-                 evt.to.parentNode.children[evt.newIndex].removeChild(evt.to.parentNode.children[evt.newIndex])
-                   //*[@id="00"]/li[2]/div/p
-                 //  evt.to.parentNode.childNodes[evt.newIndex].textContent = el.textContent
-                  // evt.from.parentNode.childNodes[evt.oldIndex].textContent = ""
+           //      evt.to.parentNode.children[evt.newIndex].removeChild(evt.to.parentNode.children[evt.newIndex])
+           //        //*[@id="00"]/li[2]/div/p
+           //      //  evt.to.parentNode.childNodes[evt.newIndex].textContent = el.textContent
+           //       // evt.from.parentNode.childNodes[evt.oldIndex].textContent = ""
 
 
-                 //  var xpath = '*[@id="' + groupArray[i] + '"]/li/div/p/text()'
+           //      //  var xpath = '*[@id="' + groupArray[i] + '"]/li/div/p/text()'
 
-                //   var xpathResult = document.evaluate(xpath, el, null, XPathResult.STRING_TYPE, null);
-                 //  alert(el.textContent)
-                   //el.parentNode.removeChild(el);
+           //     //   var xpathResult = document.evaluate(xpath, el, null, XPathResult.STRING_TYPE, null);
+           //      //  alert(el.textContent)
+           //        //el.parentNode.removeChild(el);
 
-                   //*[@id="01"]/li[2]/div/p
+           //        //*[@id="01"]/li[2]/div/p
                   
 
-                   //evt.from.parentNode.appendChild(//)
-                   //alert(el.parentNode.childNodes.length)
-                  // if (el.parentNode.childNodes.length >= 4) {
-                       // alert("to long")
-                      // for (var i = 0; i < el.parent.chileNodes.length; i++) {
-                         //  if (el.parentNode.childNodes[i].text == "") {
-                      // el.parentNode.removeChild(el.parentNode.childNodes[evt.newIndex + 1])
-                         //      return;
+           //        //evt.from.parentNode.appendChild(//)
+           //        //alert(el.parentNode.childNodes.length)
+           //       // if (el.parentNode.childNodes.length >= 4) {
+           //            // alert("to long")
+           //           // for (var i = 0; i < el.parent.chileNodes.length; i++) {
+           //              //  if (el.parentNode.childNodes[i].text == "") {
+           //           // el.parentNode.removeChild(el.parentNode.childNodes[evt.newIndex + 1])
+           //              //      return;
 
-                          // }
-                     //  }
+           //               // }
+           //          //  }
                    
-                 //  el.parentNode.removeChild(el.parentNode.childNodes[0])
+           //      //  el.parentNode.removeChild(el.parentNode.childNodes[0])
                  
                
 
 
                
-           },
+           //},
                animation: 100,
              
            });
@@ -319,8 +329,8 @@ function canBeDragged(elem) {
 }
 function createDragAndDropGroupArray(table, row) {
     var test = [];
-    for (var i = 0; i <= table; i++) {
-        for (var j = 0; j <= row; j++) {
+    for (var i = 0; i < table; i++) {
+        for (var j = 0; j < row; j++) {
             if (i == 0) {
                 test[test.length] = ("0" + j) + ""
 
