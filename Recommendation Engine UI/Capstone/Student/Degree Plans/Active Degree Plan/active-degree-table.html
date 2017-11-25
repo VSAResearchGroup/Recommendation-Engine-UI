@@ -52,7 +52,8 @@
       <div class="activestatus">
 	    <h4 id="activestatustext">Plan Status:</h4>
 		<button id='active'>Active</button>
-		<button id='inactive'>Inactive</button> 
+        <button id='inactive'>Inactive</button>
+          <button id="savePlan">Save Plan</button>
       </div>
 	</div>  
     <p id='contentHolder'></p>
@@ -109,6 +110,35 @@ $(document).ready(function(){
 			$('#active').css('background-color', 'white');
 		}
 	});
+
+
+    $('#savePlan').click(function () {
+        var listElements = document.getElementsByClassName("tabletext");
+        console.log(listElements)
+        var result = [];
+
+        for (var i = 0; i < listElements.length; i++) {
+
+          
+            var course = listElements[i].innerHTML;
+            var qtrYr = listElements[i].parentNode.parentNode.parentNode.querySelector('#qtr').innerText;
+
+            var qyA = qtrYr.split(" ");
+            var quarter = qyA[0];
+            var year = qyA[1];
+
+            console.log("Course: " + course);
+            console.log("Quarter: " + quarter);
+            console.log("Year: " + year);
+
+            result[result.length] = { "CourseNumber": course.replace("&amp;", "&"), "Quarter": quarter, "Year": year }
+
+
+        }
+
+        console.log(result);
+
+    });
 });
     
 	/*var text1 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  }, \

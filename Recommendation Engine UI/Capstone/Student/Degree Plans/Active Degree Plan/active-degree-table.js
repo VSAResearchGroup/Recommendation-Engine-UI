@@ -151,7 +151,7 @@ function displayTable(text, numOfColumn, numOfRow) {
 	var tagIndex;
 	var setClassText = '';
 	var indent = '';
-    
+    var quarters = ["Fall", "Winter", "Spring", "Summer" ];
 
     // each table
 	for (;columnIndex < activeDegreeTable.columnArray.length / 4; columnIndex++) {
@@ -172,8 +172,8 @@ function displayTable(text, numOfColumn, numOfRow) {
 	    for (var j = 0; j < 4; j++) {
 	        var currentColumn = activeDegreeTable.columnArray[columnIndex * 4 + j].cellArray
             
-            
 	        text += '<ul class="table1'  + ' item"' +'id="' + columnIndex + "" + j + '">'
+	        text += "<p id = 'qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</p>"
 
             //console.log(currentColumn)
             // each row in column
