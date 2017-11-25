@@ -174,17 +174,18 @@ function displayTable(text, numOfColumn, numOfRow) {
             
             
 	        text += '<ul class="table1'  + ' item"' +'id="' + columnIndex + "" + j + '">'
-			//if (j + 1 == numOfRow) {  //if last row
-			//	setClassText = ' class="last"';
-			//}
-            console.log(currentColumn)
+
+            //console.log(currentColumn)
             // each row in column
             for (var i = 0; i < currentColumn.length; i++) {
+
                 if (currentColumn[i].course.courseNumber === "") {
-                    text+= "<li class='item placeholder'></li></ul>"
                     break;
                 }
-	            console.log(currentColumn[i].course.courseNumber)
+              //  if (i == currentColumn.length -1 || currentColumn[i+1].course.courseNumber == "") {  //if last row
+              //      setClassText = ' class="last"';
+              //  }
+	            //console.log(currentColumn[i].course.courseNumber)
 				text+= '<li class="' + 'item"' + setClassText + '>';
 				text += '<div class="cell">';
 				
@@ -199,7 +200,9 @@ function displayTable(text, numOfColumn, numOfRow) {
 				text+= '</div>';
 				text += '</li>';
 
-	        }
+            }
+	        text += "<li class='item placeholder'></li>"
+
 	        text += '</ul>';
 
 	    }
@@ -245,7 +248,7 @@ function dragAndDrop() {
     groupArray = createDragAndDropGroupArray(table, 4)
    for (var i = 0; i < groupArray.length; i++) {
        elem = document.getElementById(groupArray[i]);
-       console.log(elem.children.length)
+       //console.log(elem.children.length)
 
        Sortable.create(elem,
            {
@@ -259,61 +262,20 @@ function dragAndDrop() {
               
                
            //    //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
-           //    onEnd: function (/**Event*/evt) {
+               onEnd: function (/**Event*/evt) {
+                   if (evt.to.children.length == 2) {
+                       var placeholder = evt.to.children[evt.newIndex - 1];
+                       console.log(placeholder)
+                       placeholder.parentNode.removeChild(placeholder);
 
-           //        var index = groupArray[i].split("")[1];
-           //        var index1 = groupArray[i].split("")[0];
-           //        console.log(evt)
-                   
-
-           //       //dragGhost.parentNode.removeChild(dragGhost)
-           //       // same properties as onEnd
-           //        var el = evt.item;
-
-           //        var newElemVal = evt.to.children[evt.newIndex].getElementsByTagName("p")[0].innerText
-           //        var oldElemVal = evt.from.children[evt.oldIndex].getElementsByTagName("p")[0].innerText
-           //        console.log(oldElemVal)
-           //        console.log(newElemVal)
-                   
-           //        console.log(evt.oldIndex)
-           //        console.log(evt.newIndex)
-
-
-           //      evt.to.parentNode.children[evt.newIndex].removeChild(evt.to.parentNode.children[evt.newIndex])
-           //        //*[@id="00"]/li[2]/div/p
-           //      //  evt.to.parentNode.childNodes[evt.newIndex].textContent = el.textContent
-           //       // evt.from.parentNode.childNodes[evt.oldIndex].textContent = ""
-
-
-           //      //  var xpath = '*[@id="' + groupArray[i] + '"]/li/div/p/text()'
-
-           //     //   var xpathResult = document.evaluate(xpath, el, null, XPathResult.STRING_TYPE, null);
-           //      //  alert(el.textContent)
-           //        //el.parentNode.removeChild(el);
-
-           //        //*[@id="01"]/li[2]/div/p
-                  
-
-           //        //evt.from.parentNode.appendChild(//)
-           //        //alert(el.parentNode.childNodes.length)
-           //       // if (el.parentNode.childNodes.length >= 4) {
-           //            // alert("to long")
-           //           // for (var i = 0; i < el.parent.chileNodes.length; i++) {
-           //              //  if (el.parentNode.childNodes[i].text == "") {
-           //           // el.parentNode.removeChild(el.parentNode.childNodes[evt.newIndex + 1])
-           //              //      return;
-
-           //               // }
-           //          //  }
-                   
-           //      //  el.parentNode.removeChild(el.parentNode.childNodes[0])
-                 
-               
+                       evt.to.appendChild(placeholder);
+                   }
+          
 
 
                
-           //},
-               animation: 100,
+           },
+               animation: 150,
              
            });
    }
@@ -322,7 +284,7 @@ function dragAndDrop() {
 //*[@id="10"]/li[1]/div/p
 
 function printElem(item, index) {
-    console.log(item.value)
+   // console.log(item.value)
 }
 function canBeDragged(elem) {
     return elem.length < 4
