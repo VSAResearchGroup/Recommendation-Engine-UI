@@ -78,7 +78,7 @@ function savePlan() {
         console.log("Quarter: " + quarter);
         console.log("Year: " + year);
 
-        result[result.length] = { "CourseNumber": course.replace("&amp;", "&"), "Quarter": quarter, "Year": parseInt(year) }
+        result[result.length] = { "CourseNumber": course.replace("&amp;", "&"), "Quarter": quarter, "Year": parseInt(year) , "PlanId":-1}
 
 
     }
@@ -89,14 +89,14 @@ function savePlan() {
 
     // testPlan(int planId,int majorId, int schoolId)
     apiURL = 'http://localhost:5000/api/Vsa/savePlan';
-    
+    alert(JSON.stringify(result));
     //alert(apiURL)
     $.ajax({
         url: apiURL,
         type: 'POST',
         contentType:"application/json",
 
-        data: { "studyPlan": result },
+        data: JSON.stringify(result),
         success: function (jsonText) {
             alert("Success")
         },
