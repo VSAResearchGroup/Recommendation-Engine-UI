@@ -113,31 +113,8 @@ $(document).ready(function(){
 
 
     $('#savePlan').click(function () {
-        var listElements = document.getElementsByClassName("tabletext");
-        console.log(listElements)
-        var result = [];
+        savePlan();
 
-        for (var i = 0; i < listElements.length; i++) {
-
-          
-            var course = listElements[i].innerHTML;
-            console.log(listElements[i].parentNode.parentNode.parentNode.querySelector('.placeholder').innerText)
-            var qtrYr = listElements[i].parentNode.parentNode.parentNode.querySelector('.placeholder').innerText;
-
-            var qyA = qtrYr.split(" ");
-            var quarter = qyA[0];
-            var year = qyA[1];
-
-            console.log("Course: " + course);
-            console.log("Quarter: " + quarter);
-            console.log("Year: " + year);
-
-            result[result.length] = { "CourseNumber": course.replace("&amp;", "&"), "Quarter": quarter, "Year": year }
-
-
-        }
-
-        console.log(result);
 
     });
 });

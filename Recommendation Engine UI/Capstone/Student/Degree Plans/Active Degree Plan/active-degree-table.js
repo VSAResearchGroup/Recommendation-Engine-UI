@@ -58,7 +58,56 @@ function displayLegend(text) {
 	text += '</div>';
 	return text;
 }
+function savePlan() {
+    var listElements = document.getElementsByClassName("tabletext");
+    console.log(listElements)
+    var result = [];
 
+    for (var i = 0; i < listElements.length; i++) {
+
+
+        var course = listElements[i].innerHTML;
+        console.log(listElements[i].parentNode.parentNode.parentNode.querySelector('.placeholder').innerText)
+        var qtrYr = listElements[i].parentNode.parentNode.parentNode.querySelector('.placeholder').innerText;
+
+        var qyA = qtrYr.split(" ");
+        var quarter = qyA[1];
+        var year = qyA[0];
+
+        console.log("Course: " + course);
+        console.log("Quarter: " + quarter);
+        console.log("Year: " + year);
+
+        result[result.length] = { "CourseNumber": course.replace("&amp;", "&"), "Quarter": quarter, "Year": parseInt(year) }
+
+
+    }
+
+
+  
+    console.log(result);
+
+    // testPlan(int planId,int majorId, int schoolId)
+    apiURL = 'http://localhost:5000/api/Vsa/savePlan';
+    
+    //alert(apiURL)
+    $.ajax({
+        url: apiURL,
+        type: 'POST',
+        contentType:"application/json",
+
+        data: { "studyPlan": result },
+        success: function (jsonText) {
+            alert("Success")
+        },
+        error: function () {
+            alert('AJAX FAILED');
+        }
+    })
+
+    // alert(text);
+
+}
 function displayValidation(text) {
    
    
