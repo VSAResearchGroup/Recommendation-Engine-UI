@@ -121,7 +121,8 @@ $(document).ready(function(){
 
           
             var course = listElements[i].innerHTML;
-            var qtrYr = listElements[i].parentNode.parentNode.parentNode.querySelector('#qtr').innerText;
+            console.log(listElements[i].parentNode.parentNode.parentNode.querySelector('.placeholder').innerText)
+            var qtrYr = listElements[i].parentNode.parentNode.parentNode.querySelector('.placeholder').innerText;
 
             var qyA = qtrYr.split(" ");
             var quarter = qyA[0];

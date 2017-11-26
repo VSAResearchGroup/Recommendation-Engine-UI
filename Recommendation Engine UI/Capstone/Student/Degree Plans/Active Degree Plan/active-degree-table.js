@@ -173,7 +173,6 @@ function displayTable(text, numOfColumn, numOfRow) {
 	        var currentColumn = activeDegreeTable.columnArray[columnIndex * 4 + j].cellArray
             
 	        text += '<ul class="table1'  + ' item"' +'id="' + columnIndex + "" + j + '">'
-	        text += "<p id = 'qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</p>"
 
             //console.log(currentColumn)
             // each row in column
@@ -201,7 +200,8 @@ function displayTable(text, numOfColumn, numOfRow) {
 				text += '</li>';
 
             }
-	        text += "<li class='item placeholder'></li>"
+            text += "<li class='item placeholder' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</li>"
+	     //   text += "<p id = 'qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</p>"
 
 	        text += '</ul>';
 

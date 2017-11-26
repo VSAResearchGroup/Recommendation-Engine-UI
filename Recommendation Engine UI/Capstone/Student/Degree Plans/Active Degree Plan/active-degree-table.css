@@ -126,10 +126,15 @@
 }
   
 .table1 li {
-  float: left;
+  float: right;
   border-top: 0.1em solid rgb(184, 0, 0);
-  border-left: 0.2em solid rgb(184, 0, 0);
+  border-left: 0.1em solid rgb(184, 0, 0);
   border-right:  0.1em solid rgb(184, 0, 0);
+    border-bottom: 0.1em solid rgb(184, 0, 0);
+    margin: .25em 0;
+
+
+
 }
 
 .table1 li:hover {
@@ -137,7 +142,7 @@
 }
 
 .table1 li:last-child {
-  border-right: 0.2em solid rgb(184, 0, 0);
+  border-right: 0.1em solid rgb(184, 0, 0);
 }
 
 .last {
@@ -354,6 +359,7 @@
   position: relative;
 
   padding: 0em 0em;
+
   height: 5em;
 }
 
@@ -361,6 +367,7 @@
  
     line-height: 75px;
   text-align: center;
+
 }
 
 .table2 {
