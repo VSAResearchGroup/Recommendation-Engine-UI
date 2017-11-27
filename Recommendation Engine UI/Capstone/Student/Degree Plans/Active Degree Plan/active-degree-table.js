@@ -100,7 +100,7 @@ function savePlan() {
         data: JSON.stringify(result),
         success: function (p) {
             localStorage.setItem("newPlanId", p)
-           // setValidation(p);
+           setValidation(p);
         },
         error: function () {
             alert('AJAX FAILED');
