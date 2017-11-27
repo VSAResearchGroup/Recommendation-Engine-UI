@@ -83,13 +83,14 @@ function savePlan() {
 
     }
 
-
-  
+    var studentId = localStorage.getItem('studentId')
+    var planId = localStorage.getItem('jsonActivePlanID')
+    var planName = document.getElementById("planName").value
+    alert(planName)
     console.log(result);
 
-    // testPlan(int planId,int majorId, int schoolId)
     apiURL = 'http://localhost:5000/api/Vsa/savePlan';
-    alert(JSON.stringify(result));
+    apiURL = buildUrl(apiURL, [studentId, planId,planName])
     //alert(apiURL)
     $.ajax({
         url: apiURL,
@@ -97,16 +98,65 @@ function savePlan() {
         contentType:"application/json",
 
         data: JSON.stringify(result),
-        success: function (jsonText) {
-            alert("Success")
+        success: function (p) {
+            localStorage.setItem("newPlanId", p)
+           // setValidation(p);
         },
         error: function () {
             alert('AJAX FAILED');
         }
     })
 
+   
+
     // alert(text);
 
+}
+
+
+// base is base url call as a string
+// arguments is an array of arguments to append to url
+function buildUrl(base, arguments) {
+    
+    if (base.charAt(base[base.length-1]) != "/") {
+        base += "/"
+    }
+
+    
+
+    for (var i = 0; i < arguments.length; i++) {
+        base += arguments[i] + "/";
+    }
+   
+    return base;
+}
+
+function setValidation(planId) {
+    // testPlan(int planId,int majorId, int schoolId)
+    apiURL = 'http://localhost:5000/api/test/testPlan';
+    apiURL += "/" + planId
+    //alert(apiURL)
+    $.ajax({
+        url: apiURL,
+        type: 'GET',
+
+
+        success: function (jsonText) {
+            //alert(jsonText)
+            innertext = "<table class='validation'>"
+            for (var i = 0; i < jsonText.length; i++) {
+                innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
+            }
+
+            innertext += "</table></div>"
+            document.getElementById("validationtable").innerHTML = innertext;
+
+        },
+        error: function () {
+            alert('AJAX FAILED');
+        }
+    })
+    
 }
 function displayValidation(text) {
    
