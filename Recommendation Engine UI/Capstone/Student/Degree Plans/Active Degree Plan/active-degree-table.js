@@ -67,8 +67,9 @@ function savePlan() {
 
 
         var course = listElements[i].innerHTML;
-        console.log(listElements[i].parentNode.parentNode.parentNode.querySelector('.placeholder').innerText)
-        var qtrYr = listElements[i].parentNode.parentNode.parentNode.querySelector('.placeholder').innerText;
+        console.log(course)
+        console.log(listElements[i].parentNode.parentNode.parentNode.querySelector('#qtr').innerText)
+        var qtrYr = listElements[i].parentNode.parentNode.parentNode.querySelector('#qtr').innerText;
 
         var qyA = qtrYr.split(" ");
         var quarter = qyA[1];
@@ -92,20 +93,20 @@ function savePlan() {
     apiURL = 'http://localhost:5000/api/Vsa/savePlan';
     apiURL = buildUrl(apiURL, [studentId, planId,planName])
     //alert(apiURL)
-    $.ajax({
-        url: apiURL,
-        type: 'POST',
-        contentType:"application/json",
+    //$.ajax({
+     //   url: apiURL,
+    //    type: 'POST',
+    //    contentType:"application/json",
 
-        data: JSON.stringify(result),
-        success: function (p) {
-            localStorage.setItem("newPlanId", p)
-           setValidation(p);
-        },
-        error: function () {
-            alert('AJAX FAILED');
-        }
-    })
+     //   data: JSON.stringify(result),
+     //   success: function (p) {
+     //       localStorage.setItem("newPlanId", p)
+      //     setValidation(p);
+     //   },
+       // error: function () {
+       //     alert('AJAX FAILED');
+      //  }
+    //})
 
    
 
@@ -284,9 +285,10 @@ function displayTable(text, numOfColumn, numOfRow) {
               //      setClassText = ' class="last"';
               //  }
 	            //console.log(currentColumn[i].course.courseNumber)
-				text+= '<li class="' + 'item"' + setClassText + '>';
+                text += '<li class="' + 'item"' + setClassText + '>';
+
 				text += '<div class="cell">';
-				
+
 
 				text += '<p class="tabletext">' + currentColumn[i].course.courseNumber + '</p>';
 				tagIndex = 0;
@@ -299,7 +301,7 @@ function displayTable(text, numOfColumn, numOfRow) {
 				text += '</li>';
 
             }
-            text += "<li class='item placeholder' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</li>"
+            text += '<li class="placeholder"> <i class="append fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div></li>"
 	     //   text += "<p id = 'qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</p>"
 
 	        text += '</ul>';
@@ -338,7 +340,13 @@ function displayTable(text, numOfColumn, numOfRow) {
 	return text;
 }
 
-
+// source https://stackoverflow.com/a/35385518
+function htmlToElements(html) {
+    var template = document.createElement('li');
+    template.innerHTML = html;
+    template.classList = ["item"]
+    return template;
+}
 var dragToNewList = false;
 
 function dragAndDrop() {
@@ -357,30 +365,81 @@ function dragAndDrop() {
 
                },
 
-               draggable: ".item",
-              
+               dragClass: ".item",
+
+               filter:  ".placeholder, .append, .remove" ,
                
            //    //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
-               onEnd: function (/**Event*/evt) {
-                   if (evt.to.children.length == 2) {
+               onEnd: function(/**Event*/evt) {
+
+                   console.log(evt.newIndex)
+                   if (evt.newIndex == evt.to.children.length - 1) {
                        var placeholder = evt.to.children[evt.newIndex - 1];
                        console.log(placeholder)
                        placeholder.parentNode.removeChild(placeholder);
 
                        evt.to.appendChild(placeholder);
+
+
                    }
-          
+               },
+               onFilter: function(evt) {
+                   var item = evt.item
+                   var ctrl = evt.target;
+                   if (Sortable.utils.is(ctrl, ".append")) {
 
+                            console.log(evt)
+                            var placeholder = evt.to.lastChild
+                            var val = placeholder.querySelector("#appendCourse").value
+                        
+                          
 
-               
-           },
+                       
+                       console.log("Append button pressed")
+                       var courseSelector = htmlToElements("<div class='cell'><p class='tabletext'>" + val + "</p><span id='tagM'>M</span></div>")
+                       placeholder.parentNode.removeChild(placeholder);
+                       evt.to.appendChild(courseSelector);
+
+                       evt.to.appendChild(placeholder);
+                       val = "";
+
+                   }
+
+                   if (Sortable.utils.is(ctrl, ".remove")) {
+                       
+                   }
+
+                   if (Sortable.utils.is(ctrl, ".placeholder")) {
+                      
+
+                       console.log(evt)
+                       var placeholder = evt.to.lastChild
+                       //var val = placeholder.querySelector("#appendCourse").value
+
+                       var val = prompt("Enter Course")
+                       if (val != null && val != undefined && val != "") {
+
+                           console.log("Append button pressed")
+                           var courseSelector = htmlToElements("<div class='cell'><p class='tabletext'>" +
+                               val +
+                               "</p><span id='tagM'>M</span></div>")
+                           placeholder.parentNode.removeChild(placeholder);
+                           evt.to.appendChild(courseSelector);
+
+                           evt.to.appendChild(placeholder);
+                           val = "";
+                       }
+                   }
+
+               },
                animation: 150,
              
            });
    }
+
 }
 
-//*[@id="10"]/li[1]/div/p
+
 
 function printElem(item, index) {
    // console.log(item.value)
