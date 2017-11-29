@@ -300,12 +300,12 @@ function displayTable(text, numOfColumn, numOfRow) {
 				text += '</li>';
 
             }
-            text += '<li class="placeholder"> <i class="append fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div></li>"
+            text += '<li class="placeholder"><i class="fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div></li>"
 
 	        text += '</ul>';
 
 	    }
-
+ 
 		text += '</div>';
 		
 		text+= '<table class="tableborder">';
@@ -338,7 +338,7 @@ function displayTable(text, numOfColumn, numOfRow) {
 	return text;
 }
 
-// source https://stackoverflow.com/a/35385518
+// source: https://stackoverflow.com/a/35385518
 function htmlToElements(html) {
     var template = document.createElement('li');
     template.innerHTML = html;
@@ -357,60 +357,50 @@ function dragAndDrop() {
 
        Sortable.create(elem,
            {
+               // indicates all the groups that items can be dragged between
                group: {
                    name: groupArray[i],
                    put: groupArray,
 
                },
 
+               // on all draggable list elements
                dragClass: ".item",
 
-               filter:  ".placeholder, .append, .delete" ,
-               
-           //    //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
+               // css attributes added to list elements used by onFilter event
+               filter:  ".placeholder,  .delete" ,
+                 
+               // occurs when an item is dropped in a list
                onEnd: function(/**Event*/evt) {
 
                    console.log(evt.newIndex)
+
+                   // if the element was dropped at the end of the list
                    if (evt.newIndex == evt.to.children.length - 1) {
+
+                       // the placeholder is now the second to last item
                        var placeholder = evt.to.children[evt.newIndex - 1];
                        console.log(placeholder)
+
+                       // remove the placeholder and append to the back of the list
                        placeholder.parentNode.removeChild(placeholder);
-
                        evt.to.appendChild(placeholder);
-
-
                    }
                },
+
+               // called when items with classes placeholder append or delete are dragged
                onFilter: function(evt) {
                    var item = evt.item
                    var ctrl = evt.target;
-                   if (Sortable.utils.is(ctrl, ".append")) {
+                  
 
-                            console.log(evt)
-                            var placeholder = evt.to.lastChild
-                            var val = placeholder.querySelector("#appendCourse").value
-                        
-                          
-
-                       
-                       console.log("Append button pressed")
-                       var courseSelector = htmlToElements("<div class='cell'> <i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" + val + "</p><span id='tagM'>M</span></div>")
-                       placeholder.parentNode.removeChild(placeholder);
-                       evt.to.appendChild(courseSelector);
-
-                       evt.to.appendChild(placeholder);
-                       val = "";
-
-                   }
-
+                   // x button is clicked so remove clicked item
                    if (Sortable.utils.is(ctrl, ".delete")) {
-                       console.log("Remove node")
+                       console.log("Remove node")                       
                        item.parentNode.removeChild(item)
                    }
 
-                   if (Sortable.utils.is(ctrl, ".placeholder")) {
-                      
-
+                   if (Sortable.utils.is(ctrl, ".placeholder")) {                     
                        console.log(evt)
                        var placeholder = evt.to.lastChild
                        //var val = placeholder.querySelector("#appendCourse").value
@@ -419,7 +409,7 @@ function dragAndDrop() {
                        if (val != null && val != undefined && val != "") {
 
                            console.log("Append button pressed")
-                           var courseSelector = htmlToElements("<div class='cell'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'><p class='tabletext'>" +
+                           var courseSelector = htmlToElements("<div class='cell'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" +
                                val +
                                "</p><span id='tagM'>M</span></div>")
                            placeholder.parentNode.removeChild(placeholder);
