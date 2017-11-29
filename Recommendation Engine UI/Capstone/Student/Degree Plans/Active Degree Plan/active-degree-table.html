@@ -13,8 +13,11 @@
 <link rel="stylesheet" href="../../styles.css" >
 <link rel="stylesheet" href="active-degree-table.css" >
 
-<script src="../../jquery-3.2.1.js"></script>
-<script src="active-degree-table.js"></script>
+    <script src="../../jquery-3.2.1.js"></script>
+    <script src="./node_modules/sortablejs/Sortable.js"></script>
+
+    <script src="active-degree-table.js"></script>
+
 <style>
 </style>
 </head>
@@ -49,7 +52,10 @@
       <div class="activestatus">
 	    <h4 id="activestatustext">Plan Status:</h4>
 		<button id='active'>Active</button>
-		<button id='inactive'>Inactive</button> 
+        <button id='inactive'>Inactive</button>
+        <button id="savePlan">Save Plan</button>
+          <label for="planName">Plan Name:</label>
+          <input id="planName"type="text"/>
       </div>
 	</div>  
     <p id='contentHolder'></p>
@@ -88,7 +94,8 @@ $(document).ready(function(){
     text = displayTable(text, 4, 5);
 
 
-	document.getElementById('contentHolder').innerHTML = text;	
+    document.getElementById('contentHolder').innerHTML = text;
+    dragAndDrop();
 	$('#active').click(function() {
 	    if ($('#active').css('color') == 'rgb(0, 0, 0)') {
 		    $('#active').css('color', 'white');
@@ -105,6 +112,13 @@ $(document).ready(function(){
 			$('#active').css('background-color', 'white');
 		}
 	});
+
+
+    $('#savePlan').click(function () {
+        savePlan();
+
+
+    });
 });
     
 	/*var text1 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  }, \

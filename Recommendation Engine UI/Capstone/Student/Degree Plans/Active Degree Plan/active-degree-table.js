@@ -58,7 +58,107 @@ function displayLegend(text) {
 	text += '</div>';
 	return text;
 }
+function savePlan() {
+    var listElements = document.getElementsByClassName("tabletext");
+    console.log(listElements)
+    var result = [];
 
+    for (var i = 0; i < listElements.length; i++) {
+
+
+        var course = listElements[i].innerHTML;
+        console.log(course)
+        console.log(listElements[i].parentNode.parentNode.parentNode.querySelector('#qtr').innerText)
+        var qtrYr = listElements[i].parentNode.parentNode.parentNode.querySelector('#qtr').innerText;
+
+        var qyA = qtrYr.split(" ");
+        var quarter = qyA[1];
+        var year = qyA[0];
+
+        console.log("Course: " + course);
+        console.log("Quarter: " + quarter);
+        console.log("Year: " + year);
+
+        result[result.length] = { "CourseNumber": course.replace("&amp;", "&"), "Quarter": quarter, "Year": parseInt(year) , "PlanId":-1}
+
+
+    }
+
+    var studentId = localStorage.getItem('studentId')
+    var planId = localStorage.getItem('jsonActivePlanID')
+    var planName = document.getElementById("planName").value
+    alert(planName)
+    console.log(result);
+
+    apiURL = 'http://localhost:5000/api/Vsa/savePlan';
+    apiURL = buildUrl(apiURL, [studentId, planId,planName])
+    alert(apiURL)
+    $.ajax({
+       url: apiURL,
+       type: 'POST',
+        contentType:"application/json",
+
+       data: JSON.stringify(result),
+        success: function (p) {
+            localStorage.setItem("newPlanId", p)
+           setValidation(p);
+       },
+        error: function () {
+            alert('AJAX FAILED');
+       }
+    })
+
+   
+
+    // alert(text);
+
+}
+
+
+// base is base url call as a string
+// arguments is an array of arguments to append to url
+function buildUrl(base, arguments) {
+    
+    if (base.charAt(base[base.length-1]) != "/") {
+        base += "/"
+    }
+
+    
+
+    for (var i = 0; i < arguments.length; i++) {
+        base += arguments[i] + "/";
+    }
+   
+    return base;
+}
+
+function setValidation(planId) {
+    // testPlan(int planId,int majorId, int schoolId)
+    apiURL = 'http://localhost:5000/api/test/testPlan';
+    apiURL += "/" + planId
+    //alert(apiURL)
+    $.ajax({
+        url: apiURL,
+        type: 'GET',
+
+
+        success: function (jsonText) {
+            //alert(jsonText)
+            innertext = "<table class='validation'>"
+            for (var i = 0; i < jsonText.length; i++) {
+                innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
+            }
+
+            innertext += "</table></div>"
+            document.getElementById("validationtable").innerHTML = innertext;
+
+        },
+        error: function () {
+            alert('AJAX FAILED');
+        }
+    })
+    
+}
 function displayValidation(text) {
    
    
@@ -69,14 +169,14 @@ function displayValidation(text) {
     // testPlan(int planId,int majorId, int schoolId)
     apiURL = 'http://localhost:5000/api/test/testPlan';
     apiURL += "/" + planId
-    alert(apiURL)
+    //alert(apiURL)
             $.ajax({
                 url: apiURL,
                 type: 'GET',
               
 
                 success: function (jsonText) {
-                    alert(jsonText)
+                    //alert(jsonText)
                     innertext = "<table class='validation'>"
                     for (var i = 0; i < jsonText.length; i++) {
                         innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
@@ -91,7 +191,7 @@ function displayValidation(text) {
                 }
             })
 
-    alert(text);
+   // alert(text);
     return text;
 }
 	    /*<li style='color: rgb(0, 129, 228);'>M: Morning</li>
@@ -151,7 +251,7 @@ function displayTable(text, numOfColumn, numOfRow) {
 	var tagIndex;
 	var setClassText = '';
 	var indent = '';
-    
+    var quarters = ["Fall", "Winter", "Spring", "Summer" ];
 
     // each table
 	for (;columnIndex < activeDegreeTable.columnArray.length / 4; columnIndex++) {
@@ -166,19 +266,30 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text+= '<li>' + activeDegreeTable.columnArray[columnIndex*4+3].year + ' Summer</li>';
 		text+= '</ul>';
 		rowIndex = 0;
+	    cellIndex = 0
 
-	    // each row in table
-        // num of row is constant set to 5
-		for (;rowIndex < numOfRow; rowIndex++) {
-			text+= '<ul class="table1 ' +  + '">';
-			cellIndex = 0;
-			if (rowIndex + 1 == numOfRow) {  //if last row
-				setClassText = ' class="last"';
-			}
-			for (;cellIndex < numOfColumn; cellIndex++) {
-				text+= '<li' + setClassText + '>';
-				text+= '<div class="cell">';
-				text+= '<p class="tabletext">' + activeDegreeTable.columnArray[columnIndex*numOfColumn+cellIndex].cellArray[rowIndex].course.courseNumber + '</p>';
+	    // each column in table's set of columns
+	    for (var j = 0; j < 4; j++) {
+	        var currentColumn = activeDegreeTable.columnArray[columnIndex * 4 + j].cellArray
+            
+	        text += '<ul class="table1'  + ' item"' +'id="' + columnIndex + "" + j + '">'
+
+            //console.log(currentColumn)
+            // each row in column
+            for (var i = 0; i < currentColumn.length; i++) {
+
+                if (currentColumn[i].course.courseNumber === "") {
+                    break;
+                }
+              //  if (i == currentColumn.length -1 || currentColumn[i+1].course.courseNumber == "") {  //if last row
+              //      setClassText = ' class="last"';
+              //  }
+	            //console.log(currentColumn[i].course.courseNumber)
+                text += '<li class="' + 'item"' + setClassText + '>';
+
+                text += '<div class="cell">                 <i class="fa fa-window-close delete" aria-hidden="true"></i>';
+
+				text += '<p class="tabletext">' + currentColumn[i].course.courseNumber + '</p>';
 				tagIndex = 0;
 				for (;tagIndex < 1; tagIndex++) {
 					//objectname[].length
@@ -186,10 +297,15 @@ function displayTable(text, numOfColumn, numOfRow) {
 					text+= '<span id="' + 'tagM' + '">' + 'M' + '</span>';
 				}
 				text+= '</div>';
-				text+= '</li>';
-			}
-			text+= '</ul>';
-		}
+				text += '</li>';
+
+            }
+            text += '<li class="placeholder"> <i class="append fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div></li>"
+
+	        text += '</ul>';
+
+	    }
+
 		text += '</div>';
 		
 		text+= '<table class="tableborder">';
@@ -217,12 +333,135 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text += '</div>';
 	}
 
+    localStorage.setItem('numberOfTables', columnIndex);
+   
 	return text;
 }
 
-function dragAndDrop(text) {
-    
+// source https://stackoverflow.com/a/35385518
+function htmlToElements(html) {
+    var template = document.createElement('li');
+    template.innerHTML = html;
+    template.classList = ["item"]
+    return template;
 }
+var dragToNewList = false;
+
+function dragAndDrop() {
+   table = localStorage.getItem('numberOfTables');
+    var elem;
+    groupArray = createDragAndDropGroupArray(table, 4)
+   for (var i = 0; i < groupArray.length; i++) {
+       elem = document.getElementById(groupArray[i]);
+       //console.log(elem.children.length)
+
+       Sortable.create(elem,
+           {
+               group: {
+                   name: groupArray[i],
+                   put: groupArray,
+
+               },
+
+               dragClass: ".item",
+
+               filter:  ".placeholder, .append, .delete" ,
+               
+           //    //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
+               onEnd: function(/**Event*/evt) {
+
+                   console.log(evt.newIndex)
+                   if (evt.newIndex == evt.to.children.length - 1) {
+                       var placeholder = evt.to.children[evt.newIndex - 1];
+                       console.log(placeholder)
+                       placeholder.parentNode.removeChild(placeholder);
+
+                       evt.to.appendChild(placeholder);
+
+
+                   }
+               },
+               onFilter: function(evt) {
+                   var item = evt.item
+                   var ctrl = evt.target;
+                   if (Sortable.utils.is(ctrl, ".append")) {
+
+                            console.log(evt)
+                            var placeholder = evt.to.lastChild
+                            var val = placeholder.querySelector("#appendCourse").value
+                        
+                          
+
+                       
+                       console.log("Append button pressed")
+                       var courseSelector = htmlToElements("<div class='cell'> <i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" + val + "</p><span id='tagM'>M</span></div>")
+                       placeholder.parentNode.removeChild(placeholder);
+                       evt.to.appendChild(courseSelector);
+
+                       evt.to.appendChild(placeholder);
+                       val = "";
+
+                   }
+
+                   if (Sortable.utils.is(ctrl, ".delete")) {
+                       console.log("Remove node")
+                       item.parentNode.removeChild(item)
+                   }
+
+                   if (Sortable.utils.is(ctrl, ".placeholder")) {
+                      
+
+                       console.log(evt)
+                       var placeholder = evt.to.lastChild
+                       //var val = placeholder.querySelector("#appendCourse").value
+
+                       var val = prompt("Enter Course")
+                       if (val != null && val != undefined && val != "") {
+
+                           console.log("Append button pressed")
+                           var courseSelector = htmlToElements("<div class='cell'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'><p class='tabletext'>" +
+                               val +
+                               "</p><span id='tagM'>M</span></div>")
+                           placeholder.parentNode.removeChild(placeholder);
+                           evt.to.appendChild(courseSelector);
+
+                           evt.to.appendChild(placeholder);
+                           val = "";
+                       }
+                   }
+
+               },
+               animation: 150,
+             
+           });
+   }
+
+}
+
+
+
+function printElem(item, index) {
+   // console.log(item.value)
+}
+function canBeDragged(elem) {
+    return elem.length < 4
+}
+function createDragAndDropGroupArray(table, row) {
+    var test = [];
+    for (var i = 0; i < table; i++) {
+        for (var j = 0; j < row; j++) {
+            if (i == 0) {
+                test[test.length] = ("0" + j) + ""
+
+            }
+            else
+                test[test.length] = (i * 10 + j) + ""
+        }
+
+    }
+    return test;
+}
+
 function tableObject() {
     this.columnArray = [];
     this.pushColumnObject = function (columnObj) {

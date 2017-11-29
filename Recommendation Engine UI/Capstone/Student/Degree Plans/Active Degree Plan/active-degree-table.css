@@ -27,6 +27,10 @@
   outline: none;
 }
 
+.delete {
+    float:right
+}
+
 #active {
   color: white;
   background-color: rgb(141, 0, 0);
@@ -119,16 +123,22 @@
 
 .table1 {
   list-style-type: none;
-  display: table-row;
+  display: inline-grid;
+
+    width: 25%;
+    padding:10px
 }
   
 .table1 li {
-  float: left;
-  display: table-cell;
-  width: 25%;
+  float: right;
   border-top: 0.1em solid rgb(184, 0, 0);
-  border-left: 0.2em solid rgb(184, 0, 0);
-  border-right: none;
+  border-left: 0.1em solid rgb(184, 0, 0);
+  border-right:  0.1em solid rgb(184, 0, 0);
+    border-bottom: 0.1em solid rgb(184, 0, 0);
+    margin: .25em 0;
+
+
+
 }
 
 .table1 li:hover {
@@ -136,7 +146,7 @@
 }
 
 .table1 li:last-child {
-  border-right: 0.2em solid rgb(184, 0, 0);
+  border-right: 0.1em solid rgb(184, 0, 0);
 }
 
 .last {
@@ -351,19 +361,24 @@
 
 .cell {
   position: relative;
-  padding: 1em 1em;
+
+  padding: 0em 0em;
+
   height: 5em;
 }
 
 .tabletext {
-  margin: 0;
-  padding-bottom: 2em;
+ 
+    line-height: 75px;
+  text-align: center;
+
 }
 
 .table2 {
   list-style-type: none;
   display: table-row;
 }
+
 
 .table2 li {
   float: left;
