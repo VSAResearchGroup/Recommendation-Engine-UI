@@ -27,6 +27,10 @@
   outline: none;
 }
 
+.delete {
+    float:right
+}
+
 #active {
   color: white;
   background-color: rgb(141, 0, 0);

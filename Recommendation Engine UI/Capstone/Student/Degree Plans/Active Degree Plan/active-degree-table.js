@@ -287,8 +287,7 @@ function displayTable(text, numOfColumn, numOfRow) {
 	            //console.log(currentColumn[i].course.courseNumber)
                 text += '<li class="' + 'item"' + setClassText + '>';
 
-				text += '<div class="cell">';
-
+                text += '<div class="cell">                 <i class="fa fa-window-close delete" aria-hidden="true"></i>';
 
 				text += '<p class="tabletext">' + currentColumn[i].course.courseNumber + '</p>';
 				tagIndex = 0;
@@ -302,7 +301,6 @@ function displayTable(text, numOfColumn, numOfRow) {
 
             }
             text += '<li class="placeholder"> <i class="append fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div></li>"
-	     //   text += "<p id = 'qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</p>"
 
 	        text += '</ul>';
 
@@ -367,7 +365,7 @@ function dragAndDrop() {
 
                dragClass: ".item",
 
-               filter:  ".placeholder, .append, .remove" ,
+               filter:  ".placeholder, .append, .delete" ,
                
            //    //ref: http://jsbin.com/fikecunuqo/edit?css,js,output
                onEnd: function(/**Event*/evt) {
@@ -396,7 +394,7 @@ function dragAndDrop() {
 
                        
                        console.log("Append button pressed")
-                       var courseSelector = htmlToElements("<div class='cell'><p class='tabletext'>" + val + "</p><span id='tagM'>M</span></div>")
+                       var courseSelector = htmlToElements("<div class='cell'> <i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" + val + "</p><span id='tagM'>M</span></div>")
                        placeholder.parentNode.removeChild(placeholder);
                        evt.to.appendChild(courseSelector);
 
@@ -405,8 +403,9 @@ function dragAndDrop() {
 
                    }
 
-                   if (Sortable.utils.is(ctrl, ".remove")) {
-                       
+                   if (Sortable.utils.is(ctrl, ".delete")) {
+                       console.log("Remove node")
+                       item.parentNode.removeChild(item)
                    }
 
                    if (Sortable.utils.is(ctrl, ".placeholder")) {
@@ -420,7 +419,7 @@ function dragAndDrop() {
                        if (val != null && val != undefined && val != "") {
 
                            console.log("Append button pressed")
-                           var courseSelector = htmlToElements("<div class='cell'><p class='tabletext'>" +
+                           var courseSelector = htmlToElements("<div class='cell'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'><p class='tabletext'>" +
                                val +
                                "</p><span id='tagM'>M</span></div>")
                            placeholder.parentNode.removeChild(placeholder);
