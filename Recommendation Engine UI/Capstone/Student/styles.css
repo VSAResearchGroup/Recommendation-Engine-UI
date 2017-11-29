@@ -1,3 +1,25 @@
+/* READ THIS BEFORE ADDING/CHANGING/DELETING ANYTHING:
+   Any css class used by multple webpages goes here.
+   Naming style for classes are as follow to keep codes maintainable,
+   and to keep it from conflicting with other js libraries:
+   .vaa[your css name] such as .vaacontainer
+   for css classes that apply to a specific web page in their respective folder, please 
+   name it the following way:
+   .vaa[abbrev page title][your css name] such as .vaadash???
+   List of page titles:
+   student dashboard - dash
+   degree plans - degs
+   active degree - deg
+   inactive degree - deg
+   explore plans - exps
+   
+   Something to note:
+   - when naming your css name, please choose the most sensible naming for maintainability
+   - when deciding between id selector(pound sign) or class selector (dot sign), use class
+   only when it will be apply to multiple html elements on a single page
+
+*/
+
 * {
   box-sizing: border-box;
 }
@@ -106,6 +128,7 @@ body {
 .nav li {
   float: left;
   border-right: 1px solid black;
+  width: 14em;
 }
 
 .nav li:last-child {
@@ -117,7 +140,7 @@ body {
   text-decoration: none;
   color: white;
   text-align: center;
-  padding: 1em 2.5em;
+  padding: 1em 2em;
 }
 
 .nav li a:hover:not(.navactive) {
@@ -151,4 +174,45 @@ body {
   margin-left: 13.5em;
   margin-top: 0;
   margin-bottom: 5em;
+}
+
+.degreeplanblock {
+  display: inline-block;
+  margin-left: 13.5em;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb(150, 150, 150);
+  border-radius: 10px;
+  padding: 1em 1em;
+  max-width: 80%;
+}
+
+#major {
+  font-size: 2em;
+  margin-top: 0;
+  display: inline;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-color: rgb(200, 200, 200);
+}
+
+#activedegreelink {
+  text-decoration: none;
+  color: rgb(184, 0, 0);
+}
+
+#activedegreelink:hover {
+  color: rgb(140, 0, 0);
+}
+
+#transferringcollege {
+  font-size: 1em;
+}
+
+#intendedmajor {
+  font-size: 1em;
+}
+
+#degree {
+  font-size: 1em;
 }
