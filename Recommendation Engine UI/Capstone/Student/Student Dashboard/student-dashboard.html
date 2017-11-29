@@ -21,7 +21,7 @@
   display: inline-block;
   font-size: 1em;
   margin-left: 13.5em;
-  margin-bottom: 10em;
+  margin-bottom: 1em;
   border-style: solid;
   border-width: 5px;
   border-color: rgb(150, 150, 150);
@@ -108,6 +108,59 @@
   transform: translateY(0.2em);
   box-shadow: 0 0.1em 1em 0 rgba(0,0,0,0.21),0 0.3em 3em 0 rgba(0,0,0,0.19);
 }
+
+#progressbar {
+  width: 50%;
+  background-color: rgb(180, 180, 180);
+  display: inline-block;
+  
+}
+
+#fill {
+  width: 5%;
+  text-align: center;
+  background-color: rgb(184, 0, 0);
+  color: white;
+  height: 2em;
+  line-height: 2em;
+}
+
+#progress-title {
+  font-size: 1.2em;
+  margin: 0 0 1em 0;
+}
+
+.progress-button {
+  font-size: 1em;
+  padding: 0.5em 1em;
+  text-align: center;
+  float: right;
+  display: inline-block;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  outline: none;
+  margin: 0;
+  border-style: outset solid;
+  border-color: rgb(184, 0, 0);
+  border-width: 0.2em;
+  border-radius: 0.5em;
+  background-color: white;
+  box-shadow: 0 0.5em 1em 0 rgba(0,0,0,0.21),0 0.7em 3em 0 rgba(0,0,0,0.19);
+}
+
+.progress-button:hover {
+  background-color: rgb(184, 0, 0);
+  color: white;
+}
+
+.progress-button:active {
+  transform: translateY(0.2em);
+  box-shadow: 0 0.1em 1em 0 rgba(0,0,0,0.21),0 0.3em 3em 0 rgba(0,0,0,0.19);
+}
+
+.dash-line {
+  
+}
 </style>
 </head>
 <body>
@@ -152,7 +205,7 @@
 	  </ul>
 	</div>
 	<div id='dropdownbox'>
-	  <label class='label'><b>Degree plans:</b></label>
+	  <label><b>Degree plans:</b></label>
 	  <button class='dropdownbutton' name='degree-plans'>Select a degree plan</button>
       <div class='dropdown-content'>
 	    <ul id='degree-plans-item'>
@@ -163,6 +216,16 @@
 		</ul>
       </div>
 	  <button class='audit-button'>Audit</button>
+	</div>
+	<div class='degreeplanblock'>
+	  <button id='edit-progress' class='progress-button'>Edit Progress</button>
+	  <h2 id='progress-title'>University of Washington (Associate of Science - Pre-Engineering: Aeronautics & Astronautics Engineering)</h2>
+	  
+	  <label><b>Progress:</b></label>
+	  <div id='progressbar'>
+	    <div id='fill'>10%</div>
+      </div>
+      <div id='dash-line'></div>	  
 	</div>
   </div>
 
@@ -187,6 +250,8 @@ $(document).ready(function() {
 		    $('.dropdown-content').css('display', 'none');
 		}
 	});
+	
+	fillProgressBar(80);
 });
 
 $('#activedegreelink').click(function(eventObject) {
