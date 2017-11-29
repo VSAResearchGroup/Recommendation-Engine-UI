@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<title>Virtual Academic Advisor Active Degree Page</title>
+<title>Virtual Academic Advisor Login Page</title>
 <meta charset="UTF-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -51,6 +51,11 @@ body {
 </div>
 
 <script>
+//set initial value for all status on whether to call an ajax
+//UPDATE!!
+localStorage.setItem('activePlanRetrieved', '0');
+localStorage.getItem('inactivePlansNameRetrieved', '0');
+
 $(document).ready(function() {
     $('#loginbutton').click(function() {
 	    apiURL = 'http://localhost:5000/api/Vsa/getPlanInfo/';
@@ -60,18 +65,32 @@ $(document).ready(function() {
 		    type: 'GET',
 		    dataType: 'json',
 		    success: function(jsonText) {
-			    alert(jsonText);
+			    console.log('This is the active plan info: ' + jsonText);
+				//this section will check if student has an active plan or not
+				//if (jsonText[0] == 0/-1) {
+				//    localStorage.setItem('jsonActivePlanID', jsonText[0]);
+				//}
 				localStorage.setItem('jsonMajor', jsonText[0]);
 				localStorage.setItem('jsonCollege', jsonText[1]);
 				localStorage.setItem('jsonActivePlanID', jsonText[2]);
+				//localStorage.setItem('jsonDegree', jsonText[3]);
+				//localStorage.setItem('jsonTimePref', jsonText[4]);
+				//localStorage.setItem('jsonTypeOfEnroll', jsonText[5]);
+				//localStorage.setItem('jsonSummerOption', jsonText[6]);
+				//localStorage.setItem('jsonQuarter', jsonText[7]);
+				//localStorage.setItem('jsonJobType', jsonText[8]);
+				//localStorage.setItem('jsonActivePlanCreatedDate', jsonText[9]);
+				//localStorage.setItem('jsonActivePlanModifiedDate', jsonText[10]);
 				location.href = 'Student%20Dashboard/student-dashboard.html';
 		    },
 		    error: function() {
-		        alert('AJAX FAILED');
+		        console.log('AJAX failed');
 		    }
 		})
 	    
 	});
+	
+	
 });
 </script>
 </body>

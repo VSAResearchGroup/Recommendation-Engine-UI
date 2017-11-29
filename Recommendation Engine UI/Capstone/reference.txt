@@ -1,0 +1,136 @@
+	  /*<h2 id="major"><a id='activedegreelink' href='../active-degree.html'>University of Washington Bothell - Computer Science</a></h2>
+	  <h4 id='transferringcollege'>Transferring College: <span id='transcollegelink'>University of Washington Bothell</span></h4>
+	  <h4 id='intendedmajor'>Intended Major: <span id='intendmajorlink' href='https://www.uwb.edu/bscsse'>Computer Science</span></h4>
+	  <h4 id='degree'>Degree: <span>Associate in Arts and Sciences</span></h4>*/
+	  
+	  /*<h2>No Active Plan yet?</h2>
+	  <p><b>You can start by doing one of the following:</b></p>
+	  <ul>
+	    <li>Go to 'Degree Plans' tab on the top then click on 'Create a new degree plan'. From there, you can create your degree plans that suit to your needs according to major, school that you intend on transferring to, and other options. Once a plan is created, you can submit it for your advisor's approval and if needed, you can meet with the advisor to discuss your newly created plan.</li>
+		<li>If you are unsure how to create a proper degree plans or would like to meet with the advisor first, you can always make an appointment with the advisor and create a smart degree plan that will facilitate your academic career. The help section on the top left shows where and how you can start making an appointment with your advisor!</li>
+	  </ul>*/
+	  
+	  
+function displayActivePlan(text) {
+	var status = 0;
+	//This is to check if student has an active plan or not
+	//if (localStorage.getItem('jsonActivePlanID') == 0/-1) {
+	//    status = 0;	
+	//}
+	if (status == 1) {
+		text+= '<div id="degreeplanblock">';
+		
+	    text+= '<h2 id="major">';
+	    text+= '<a id="activedegreelink" href="../active-degree-table.html">';
+	    text+= localStorage.getItem('jsonCollege') + ' - ' + localStorage.getItem('jsonMajor');
+	    text+= '</h2>';
+		
+		text+= '<h4 id="transferringcollege">Transferring College: ';
+		text+= localStorage.getItem('jsonCollege');
+		text+= '</h4>';
+		
+		text+= '<h4 id="intendedmajor">Intended Major: ';
+		text+= localStorage.getItem('jsonMajor');
+		text+= '</h4>';
+		
+		text+= '<h4 id="degree">';
+		text+= localStorage.getItem('jsonDegree');
+		text+= '</h4>'
+		
+		text+= '</div>';
+	} else if (status == 0) {
+	    //display no plan text
+		text+= '<div id="degreeplanblock">';
+		text+= '<h2>No Active Degree Plan yet?</h2>'
+	    text+= '<p><b>You can start by doing one of the following:</b></p>'
+	    text+= '<ul>'
+	    text+= "<li>Go to 'Degree Plans' tab on the top then click on 'Create a new degree plan'. From there, you can create your degree plans that suit to your needs according to major, school that you intend on transferring to, and other options. Once a plan is created, you can submit it for your advisor's approval and if needed, you can meet with the advisor to discuss your newly created plan.</li>"
+		text+= "<li>If you are unsure how to create a proper degree plans or would like to meet with the advisor first, you can always make an appointment with the advisor and create a smart degree plan that will facilitate your academic career. The help section on the top left shows where and how you can start making an appointment with your advisor!</li>"
+	    text+= '</ul>'
+		text+= '</div>';
+	}
+	
+	return text;
+}
+
+	<!-- Method 1
+	<p id='activeplanHolder'></p>-->
+	<!-- Method 2-->
+	
+	/* Method 1
+var text = '';
+text = displayActivePlan(text);
+document.getElementById('activeplanHolder').innerHTML = text;*/
+
+
+
+$(document).ready(function() {
+    $('#loginbutton').click(function() {
+	    apiURL = 'http://localhost:5000/api/Vsa/getPlanInfo/';
+		apiURL += $('#studentID').val();
+		$.ajax({
+		    url: apiURL,
+		    type: 'GET',
+		    dataType: 'json',
+		    success: function(jsonText) {
+			    alert(jsonText);
+				//this section will check if student has an active plan or not
+				//if (jsonText[0] == 0/-1) {
+				//    localStorage.setItem('jsonActivePlanID', jsonText[0]);
+				//}
+				localStorage.setItem('jsonMajor', jsonText[0]);
+				localStorage.setItem('jsonCollege', jsonText[1]);
+				localStorage.setItem('jsonActivePlanID', jsonText[2]);
+				location.href = 'Student%20Dashboard/student-dashboard.html';
+		    },
+		    error: function() {
+		        alert('AJAX FAILED');
+		    }
+		})
+	    
+	});
+});
+
+$('#activedegreelink').click(function(eventObject) {
+    eventObject.preventDefault();
+	apiURL = 'http://localhost:5000/api/Vsa/';
+	apiURL += localStorage.getItem('jsonActivePlanID');
+	$.ajax({
+	    url: apiURL,
+	    type: 'GET',
+	    dataType: 'json',
+	    success: function(jsonText) {
+		    alert(jsonText);
+			localStorage.setItem('activePlanArray', JSON.stringify(jsonText));
+			location.href = '../Degree%20Plans/Active%20Degree%20Plan/active-degree-table.html';
+	    },
+	    error: function() {
+	        alert('AJAX FAILED');
+	    }
+	})
+});
+
+		<li>
+	      <div>
+	        <a class='inactiveplanname' href='#'>University of Washington Bothell - Business Administration</a>
+		    <button class='button properties' style='margin-right: 1em;'>Delete</button>
+		    <button class='button properties' style='margin-right: 1em;'>Clone</button>
+		    <button class='button properties'>Properties</button>
+	      </div>
+	    </li>
+		<li>
+	      <div>
+	        <a class='inactiveplanname' href='#'>University of Washington Bothell - Interactive Media Design</a>
+		    <button class='button properties' style='margin-right: 1em;'>Delete</button>
+		    <button class='button properties' style='margin-right: 1em;'>Clone</button>
+		    <button class='button properties'>Properties</button>
+	      </div>
+		</li>
+		<li>
+	      <div>
+	        <a class='inactiveplanname' href='#'>University of Washington Bothell - Computer Science 2</a>
+		    <button class='button properties' style='margin-right: 1em;'>Delete</button>
+		    <button class='button properties' style='margin-right: 1em;'>Clone</button>
+		    <button class='button properties'>Properties</button>
+          </div>
+		</li>*/
