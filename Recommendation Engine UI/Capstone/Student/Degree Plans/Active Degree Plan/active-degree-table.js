@@ -92,21 +92,21 @@ function savePlan() {
 
     apiURL = 'http://localhost:5000/api/Vsa/savePlan';
     apiURL = buildUrl(apiURL, [studentId, planId,planName])
-    //alert(apiURL)
-    //$.ajax({
-     //   url: apiURL,
-    //    type: 'POST',
-    //    contentType:"application/json",
+    alert(apiURL)
+    $.ajax({
+       url: apiURL,
+       type: 'POST',
+        contentType:"application/json",
 
-     //   data: JSON.stringify(result),
-     //   success: function (p) {
-     //       localStorage.setItem("newPlanId", p)
-      //     setValidation(p);
-     //   },
-       // error: function () {
-       //     alert('AJAX FAILED');
-      //  }
-    //})
+       data: JSON.stringify(result),
+        success: function (p) {
+            localStorage.setItem("newPlanId", p)
+           setValidation(p);
+       },
+        error: function () {
+            alert('AJAX FAILED');
+       }
+    })
 
    
 
