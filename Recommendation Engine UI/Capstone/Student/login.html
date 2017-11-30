@@ -54,7 +54,6 @@ body {
 //set initial value for all status on whether to call an ajax
 //UPDATE!!
 localStorage.setItem('activePlanRetrieved', '0');
-localStorage.getItem('inactivePlansNameRetrieved', '0');
 var retrieveActivePlanInfoReady = false;
 var retrieveInactivePlanInfoReady = false;
 $(document).ready(function() {
@@ -89,28 +88,27 @@ $(document).ready(function() {
 		        console.log('AJAX failed');
 		    }
 		})
-		/*apiURL = 'http://localhost:5000/api/Vsa/';
-		apiURL += localStorage.getItem('jsonActivePlanID');
+		apiURL = 'http://localhost:5000/api/Vsa/getInactivePlanInfo/';
+		apiURL += $('#studentID').val();
 	    $.ajax({
 	        url: apiURL,
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function(jsonText) {
-		        console.log('These are the inactive plan names: ' + jsonText);
+		        console.log('These are the inactive plan names: ' + jsonText + '.');
 				//this section will check if student has any inactive plan or not
-				//if (jsonText[0].noinactiveplan == 1) {
-				//    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
-				//} else {
+				if (jsonText.length == 0) {
+				    console.log('array is empty');
 				    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
-			    localStorage.setItem('inactivePlansNameRetrieved', '1'); //set it so ajax call will not be called again.
+				} else {
+				    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
 				}
-			    
 			    retrieveInactivePlanInfoReady = true;
 	        },
 			error: function() {
 			    console.log('AJAX failed');
 			}
-		})*/
+		})
 		
 		apiURL = 'http://localhost:5000/api/Vsa/getCourses';
 	    $.ajax({

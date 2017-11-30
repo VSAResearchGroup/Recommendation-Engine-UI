@@ -9,21 +9,21 @@ function vaaDegsSetActivePlanInfo() {
 }
 
 function vaaDegsSetInactivePlanInfo() {
-	//var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
+	var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 	var status = 1;
-	//if (inactivePlans[0].noinactiveplan == 1) {
+	if (inactivePlans.length == 0) {
+		status = 0;
+    }
 	if (status == 0) {
 		$('#inactiveplanheading').html('<b>There are currently no inactive plan created.</b>');
 	} else if (status == 1) {
-	//} else if (inactivePlans[0].noinactiveplan == 0) {
 		$('#inactiveplanheading').html('<b>Plan Details:</b>');
 		var index = 0;
 		var inactivePlanLink, removeIcon, cloneIcon, properties;
 		var divElement, liElement;
-		//;index < inactivePlans.length; index++
-		for (;index < 3; index++) {
-			//inactivePlanLink = $('<a></a>').text(inactivePlans[index].inactivePlanCollege + ' - ' + inactivePlans[index].inactivePlanMajor);
-			inactivePlanLink = $('<a></a>').text('null - null');
+		for (;index < inactivePlans.length; index++) {
+			inactivePlanLink = $('<a></a>').text(inactivePlans[index].inactivePlanCollege + ' - ' + inactivePlans[index].inactivePlanMajor);
+			//inactivePlanLink = $('<a></a>').text('null - null');
 			inactivePlanLink.attr('href', './Active%20Degree%20Plan/active-degree-table.html');
 			inactivePlanLink.addClass('inactiveplanname');
 		
@@ -42,8 +42,8 @@ function vaaDegsSetInactivePlanInfo() {
 			liElement = $('<li></li>').append(divElement);
 			$('#inactiveplanlist').append(liElement);
 		}	
-		//localStorage.setItem('numOfInactivePlan', '' + inactivePlans.length);
-		localStorage.setItem('numOfInactivePlan', '3');
+		localStorage.setItem('numOfInactivePlan', '' + inactivePlans.length);
+		//localStorage.setItem('numOfInactivePlan', '3');
 		$('.degreeplanblock').css('margin-bottom', '2em');
 		$('.degreeplanblock').css('position', 'relative');
 	}
@@ -53,10 +53,9 @@ function setInactivePlanStatusString() {
 	var statusString = localStorage.getItem('inactivePlanRetrieved');
 	if (statusString == undefined ) {
 		var count = 0;
-		//var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
-		//;count < inactivePlans; count++
+		var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 		statusString = '';
-		for (;count < 3; count++) {
+		for (;count < inactivePlans.length; count++) {
 			statusString += '0';
 		}
 		localStorage.setItem('inactivePlanRetrieved', statusString);

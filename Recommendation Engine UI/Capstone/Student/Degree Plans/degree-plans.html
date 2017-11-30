@@ -259,12 +259,13 @@ $('#activedegreelink').click(function(eventObject) {
 	console.log('activeplan has been retrieved before');
 });
 
-$('.inactiveplanname').click(function(eventObject) {
+/*$('.inactiveplanname').click(function(eventObject) {
     console.log('inactive plan name has been clicked');
 	console.log()
 	var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 	var index = 0;
-	//while (inactivePlans[index].inactiveplanname != $(this).text()) { index++;}
+	var inactivePlanName 
+	while (inactivePlans[index].school + ' - ' + inactivePlans[index].major != $(this).text()) { index++;}
 	var statusString = localStorage.getItem('inactivePlanRetrieved');
 	
 	if (Number(statusString.substring(index, index+1)) == 0) {
@@ -287,10 +288,10 @@ $('.inactiveplanname').click(function(eventObject) {
 	        error: function() {
 	            console.log('AJAX failed');
 	        }
-	    }) */
+	    }) 
 	}
 	console.log('inactive plan names has been retrieved before');
-});
+});*/
 
 $('#studentdashboard').click(function(eventObject) {
     //update???
