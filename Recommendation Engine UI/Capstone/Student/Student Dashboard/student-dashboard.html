@@ -21,7 +21,7 @@
   display: inline-block;
   font-size: 1em;
   margin-left: 13.5em;
-  margin-bottom: 10em;
+  margin-bottom: 1em;
   border-style: solid;
   border-width: 5px;
   border-color: rgb(150, 150, 150);
@@ -108,6 +108,73 @@
   transform: translateY(0.2em);
   box-shadow: 0 0.1em 1em 0 rgba(0,0,0,0.21),0 0.3em 3em 0 rgba(0,0,0,0.19);
 }
+
+#progressbar {
+  width: 50%;
+  background-color: rgb(180, 180, 180);
+  display: inline-block;
+  
+}
+
+#fill {
+  width: 5%;
+  text-align: center;
+  background-color: rgb(184, 0, 0);
+  color: white;
+  height: 2em;
+  line-height: 2em;
+}
+
+#progress-title {
+  font-size: 1.2em;
+  margin: 0 0 1em 0;
+}
+
+.progress-button {
+  font-size: 1em;
+  padding: 0.5em 1em;
+  text-align: center;
+  float: right;
+  display: inline-block;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  outline: none;
+  margin: 0;
+  border-style: outset solid;
+  border-color: rgb(184, 0, 0);
+  border-width: 0.2em;
+  border-radius: 0.5em;
+  background-color: white;
+  box-shadow: 0 0.5em 1em 0 rgba(0,0,0,0.21),0 0.7em 3em 0 rgba(0,0,0,0.19);
+}
+
+.progress-button:hover {
+  background-color: rgb(184, 0, 0);
+  color: white;
+}
+
+.progress-button:active {
+  transform: translateY(0.2em);
+  box-shadow: 0 0.1em 1em 0 rgba(0,0,0,0.21),0 0.3em 3em 0 rgba(0,0,0,0.19);
+}
+
+#dash-line {
+  margin: 1em 0;
+  border-bottom: 0.1em dashed rgb(150, 150, 150);
+}
+
+.courselist-heading {
+  list-style-type: none;
+  height: 1.5em;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0.1em solid rgb(150, 150, 150);
+}
+
+.courselist-heading li {
+  float: left;
+  width: 9em;
+}
 </style>
 </head>
 <body>
@@ -152,7 +219,7 @@
 	  </ul>
 	</div>
 	<div id='dropdownbox'>
-	  <label class='label'><b>Degree plans:</b></label>
+	  <label><b>Degree plans:</b></label>
 	  <button class='dropdownbutton' name='degree-plans'>Select a degree plan</button>
       <div class='dropdown-content'>
 	    <ul id='degree-plans-item'>
@@ -163,6 +230,27 @@
 		</ul>
       </div>
 	  <button class='audit-button'>Audit</button>
+	</div>
+	<div class='degreeplanblock'>
+	  <button id='edit-progress' class='progress-button'>Edit Progress</button>
+	  <h2 id='progress-title'>University of Washington (Associate of Science - Pre-Engineering: Aeronautics & Astronautics Engineering)</h2>
+	  <label><b>Progress:</b></label>
+	  <div id='progressbar'>
+	    <div id='fill'>10%</div>
+      </div>
+      <div id='dash-line'></div>	
+      <ul class='courselist-heading'>
+	    <li>Course Name</li>
+		<li>Course Number</li>
+		<li>Credits</li>
+		<li>Types</li>
+		<li>Grade</li>
+		<li>Quarter</li>
+		<li>Year</li>
+		<li>Status</li>
+      </ul>
+      <ul class='courselist'>
+      </ul>	  
 	</div>
   </div>
 
@@ -187,6 +275,8 @@ $(document).ready(function() {
 		    $('.dropdown-content').css('display', 'none');
 		}
 	});
+	
+	fillProgressBar(80);
 });
 
 $('#activedegreelink').click(function(eventObject) {
@@ -212,36 +302,6 @@ $('#activedegreelink').click(function(eventObject) {
 	    }) 
 	}
 	console.log('activeplan has been retrieved before');
-});
-
-$('#degreeplans').click(function(eventObject) {
-    console.log('degree plans has been clicked');
-	if (Number(localStorage.getItem('inactivePlansNameRetrieved')) == 0) {
-	    console.log('inactive plan names has not been retrieved before');
-		eventObject.preventDefault();
-		//What would be the url here???
-		//apiURL = 'http://localhost:5000/api/Vsa/';
-		//apiURL += localStorage.getItem('jsonActivePlanID');
-	    /*$.ajax({
-	        url: apiURL,
-	        type: 'GET',
-	        dataType: 'json',
-	        success: function(jsonText) {
-		        console.log('These are the inactive plan names: ' + jsonText);
-				//this section will check if student has any inactive plan or not
-				//if (jsonText[0].noinactiveplan == 1) {
-				//    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
-				//}
-			    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
-			    localStorage.setItem('inactivePlansNameRetrieved', '1'); //set it so ajax call will not be called again.
-			    location.href = '../Degree%20Plans/degree-plans.html';
-	        },
-	        error: function() {
-	            console.log('AJAX failed');
-	        }
-	    }) */
-	}
-	console.log('inactive plan names has been retrieved before');
 });
 
 $('#exploreplans').click(function(eventObject) {
