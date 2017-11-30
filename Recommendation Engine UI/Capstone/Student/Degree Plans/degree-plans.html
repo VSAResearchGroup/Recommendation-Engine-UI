@@ -76,7 +76,8 @@
   font-weight: bold;
   color: rgb(184, 0, 0);
   margin-right: 1em;
-  width: 25em;
+  width: 50%;
+  display: inline-block;
 }
 
 .inactiveplanname:hover {
@@ -340,7 +341,7 @@ $(document).ready(function() {
 		    divElement = $('<div></div>').append(inactivePlanLink, removeIcon, cloneIcon, properties);
 		    liElement = $('<li></li>').append(divElement);
 		    liElement.css('margin-top', '1em');
-		    $(this).parent().after(liElement);
+		    $(this).parents('li').after(liElement);
 			//var newObject = inactivePlans[index];
 			//console.log("old element's name: " + newObject.inactiveplanname);
 			//newObject.inactiveplanname = newInactivePlanName;
@@ -407,7 +408,7 @@ $(document).ready(function() {
         //alert('properties');
 		var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 		$('.modal, .modalcontent').addClass('fadeIn');
-		ar properties, timePref, propertiesValue, liElement;
+		var properties, timePref, propertiesValue, liElement;
 		var index = 0;
 		var inactivePlanName = $(this).siblings('a').text();
 		while (inactivePlans[index].school + ' - ' + inactivePlans[index].major != inactivePlanName) { index++;}//

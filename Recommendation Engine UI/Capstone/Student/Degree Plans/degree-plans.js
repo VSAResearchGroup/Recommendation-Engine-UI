@@ -9,11 +9,11 @@ function vaaDegsSetActivePlanInfo() {
 }
 
 function vaaDegsSetInactivePlanInfo() {
-	var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
+	//var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 	var status = 1;
-	if (inactivePlans.length == 0) {
-		status = 0;
-    }
+	//if (inactivePlans.length == 0) {
+	//	status = 0;
+    //}
 	if (status == 0) {
 		$('#inactiveplanheading').html('<b>There are currently no inactive plan created.</b>');
 	} else if (status == 1) {
@@ -21,11 +21,13 @@ function vaaDegsSetInactivePlanInfo() {
 		var index = 0;
 		var inactivePlanLink, removeIcon, cloneIcon, properties;
 		var divElement, liElement;
-		for (;index < inactivePlans.length; index++) {
+		//;index < inactivePlans.length; index++
+		for (;index < 3; index++) {
 			if (index == 12) {  // number of inactive plans should be <= 12 (business logic)
 				break;
 			}
-			inactivePlanLink = $('<a></a>').text(inactivePlans[index].school + ' - ' + inactivePlans[index].major);
+			//inactivePlanLink = $('<a></a>').text(inactivePlans[index].school + ' - ' + inactivePlans[index].major);
+			inactivePlanLink = $('<a></a>').text('null' + ' - ' + 'null');
 			inactivePlanLink.attr('href', './Active%20Degree%20Plan/active-degree-table.html');
 			inactivePlanLink.addClass('inactiveplanname');
 		
@@ -40,11 +42,12 @@ function vaaDegsSetInactivePlanInfo() {
 			properties = $('<button></button>').text('Properties');
 			properties.addClass('button properties propertiesButton');
 		
-			divElement = $('<div></div>').append(inactivePlanLink, removeIcon, cloneIcon, properties);
+			divElement = $('<div style="width:100%"></div>').append(inactivePlanLink, removeIcon, cloneIcon, properties);
 			liElement = $('<li></li>').append(divElement);
 			$('#inactiveplanlist').append(liElement);
 		}	
-		localStorage.setItem('numOfInactivePlan', '' + inactivePlans.length);
+		//localStorage.setItem('numOfInactivePlan', '' + inactivePlans.length);
+		localStorage.setItem('numOfInactivePlan', '' + 3);
 		$('.degreeplanblock').css('margin-bottom', '2em');
 		$('.degreeplanblock').css('position', 'relative');
 	}
