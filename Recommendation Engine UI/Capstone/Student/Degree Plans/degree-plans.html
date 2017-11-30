@@ -409,7 +409,7 @@ $(document).ready(function() {
 	
 	$('#inactiveplanlist').on('click', 'button.propertiesButton', function() {
         //alert('properties');
-		//var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
+		var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 		$('.modal, .modalcontent').addClass('fadeIn');
 		/*var properties, timePref, propertiesValue, liElement;
 		var index = 0;

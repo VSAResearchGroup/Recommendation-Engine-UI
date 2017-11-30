@@ -22,7 +22,10 @@ function vaaDegsSetInactivePlanInfo() {
 		var inactivePlanLink, removeIcon, cloneIcon, properties;
 		var divElement, liElement;
 		for (;index < inactivePlans.length; index++) {
-			inactivePlanLink = $('<a></a>').text(inactivePlans[index].inactivePlanCollege + ' - ' + inactivePlans[index].inactivePlanMajor);
+			if (index == 12) {  // number of inactive plans should be <= 12 (business logic)
+				break;
+			}
+			inactivePlanLink = $('<a></a>').text(inactivePlans[index].school + ' - ' + inactivePlans[index].major);
 			//inactivePlanLink = $('<a></a>').text('null - null');
 			inactivePlanLink.attr('href', './Active%20Degree%20Plan/active-degree-table.html');
 			inactivePlanLink.addClass('inactiveplanname');
