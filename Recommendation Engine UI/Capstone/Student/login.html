@@ -55,7 +55,8 @@ body {
 //UPDATE!!
 localStorage.setItem('activePlanRetrieved', '0');
 localStorage.getItem('inactivePlansNameRetrieved', '0');
-
+var retrieveActivePlanInfoReady = false;
+var retrieveInactivePlanInfoReady = false;
 $(document).ready(function() {
     $('#loginbutton').click(function() {
 	    apiURL = 'http://localhost:5000/api/Vsa/getPlanInfo/';
@@ -67,30 +68,67 @@ $(document).ready(function() {
 		    success: function(jsonText) {
 			    console.log('This is the active plan info: ' + jsonText);
 				//this section will check if student has an active plan or not
-				//if (jsonText[0] == 0/-1) {
-				//    localStorage.setItem('jsonActivePlanID', jsonText[0]);
-				//}
-				localStorage.setItem('jsonMajor', jsonText[0]);
-				localStorage.setItem('jsonCollege', jsonText[1]);
-				localStorage.setItem('jsonActivePlanID', jsonText[2]);
-				//localStorage.setItem('jsonDegree', jsonText[3]);
-				//localStorage.setItem('jsonTimePref', jsonText[4]);
-				//localStorage.setItem('jsonTypeOfEnroll', jsonText[5]);
-				//localStorage.setItem('jsonSummerOption', jsonText[6]);
-				//localStorage.setItem('jsonQuarter', jsonText[7]);
-				//localStorage.setItem('jsonJobType', jsonText[8]);
-				//localStorage.setItem('jsonActivePlanCreatedDate', jsonText[9]);
-				//localStorage.setItem('jsonActivePlanModifiedDate', jsonText[10]);
-				location.href = 'Student%20Dashboard/student-dashboard.html';
+				if (jsonText.planID == -1) {
+				    localStorage.setItem('jsonActivePlanID', jsonText.planID);
+				} else {
+				    localStorage.setItem('jsonMajor', jsonText.major);
+					localStorage.setItem('jsonCollege', jsonText.school);
+					localStorage.setItem('jsonActivePlanID', jsonText.planID);
+					//localStorage.setItem('jsonDegree', jsonText.);
+					localStorage.setItem('jsonTimePref', jsonText.timePreference);
+					//localStorage.setItem('jsonTypeOfEnroll', jsonText[5]);
+					//localStorage.setItem('jsonSummerOption', jsonText[6]);
+					localStorage.setItem('jsonQuarter', jsonText.quarterPreference);
+					localStorage.setItem('jsonJobType', jsonText.jobType);
+					localStorage.setItem('jsonActivePlanCreatedDate', jsonText.dataAdded);
+					localStorage.setItem('jsonActivePlanModifiedDate', jsonText.lastDateModified);
+				}
+				retrieveActivePlanInfoReady = true;
 		    },
 		    error: function() {
 		        console.log('AJAX failed');
 		    }
 		})
-	    
+		/*apiURL = 'http://localhost:5000/api/Vsa/';
+		apiURL += localStorage.getItem('jsonActivePlanID');
+	    $.ajax({
+	        url: apiURL,
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function(jsonText) {
+		        console.log('These are the inactive plan names: ' + jsonText);
+				//this section will check if student has any inactive plan or not
+				//if (jsonText[0].noinactiveplan == 1) {
+				//    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
+				//} else {
+				    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
+			    localStorage.setItem('inactivePlansNameRetrieved', '1'); //set it so ajax call will not be called again.
+				}
+			    
+			    retrieveInactivePlanInfoReady = true;
+	        },
+			error: function() {
+			    console.log('AJAX failed');
+			}
+		})*/
+		
+		apiURL = 'http://localhost:5000/api/Vsa/getCourses';
+	    $.ajax({
+	        url: apiURL,
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function(jsonText) {
+		        console.log('These are the courses offered at EVCC: ' + jsonText);
+			    localStorage.setItem('courseArray', JSON.stringify(jsonText));
+				//while(!(retrieveActivePlanInfoReady && retrieveInactivePlanInfoReady)) {};
+				while(!(retrieveActivePlanInfoReady));
+			    location.href = 'Student%20Dashboard/student-dashboard.html';
+	        },
+			error: function() {
+			    console.log('AJAX failed');
+			}
+		})
 	});
-	
-	
 });
 </script>
 </body>

@@ -134,3 +134,31 @@ $('#activedegreelink').click(function(eventObject) {
 		    <button class='button properties'>Properties</button>
           </div>
 		</li>*/
+		
+		
+		$('#degreeplans').click(function(eventObject) {
+    console.log('degree plans has been clicked');
+	if (Number(localStorage.getItem('inactivePlansNameRetrieved')) == 0) {
+	    console.log('inactive plan names has not been retrieved before');
+		eventObject.preventDefault();
+		//What would be the url here???
+		//apiURL = 'http://localhost:5000/api/Vsa/';
+		//apiURL += localStorage.getItem('jsonActivePlanID');
+	    /*$.ajax({
+	        url: apiURL,
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function(jsonText) {
+		        console.log('These are the inactive plan names: ' + jsonText);
+				//this section will check if student has any inactive plan or not
+				//if (jsonText[0].noinactiveplan == 1) {
+				//    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
+				//}
+			    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
+			    localStorage.setItem('inactivePlansNameRetrieved', '1'); //set it so ajax call will not be called again.
+			    location.href = '../Degree%20Plans/degree-plans.html';
+	        },
+	        error: function() {
+	            console.log('AJAX failed');
+	        }
+	    }) */

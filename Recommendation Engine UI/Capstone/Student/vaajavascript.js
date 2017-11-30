@@ -18,11 +18,11 @@
 */
 
 function vaaSetActivePlanInfo() {
-	var status = 0;
+	var status = 1;
 	//This is to check if student has an active plan or not
-	//if (localStorage.getItem('jsonActivePlanID') == 0/-1) {
-	//    status = 0;	
-	//}
+	if (localStorage.getItem('jsonActivePlanID') == -1) {
+	    status = 0;	
+	}
 	if (status == 1) {
 		$('.degreeplanblock').children('#major').text(localStorage.getItem('jsonCollege') + ' - ' + localStorage.getItem('jsonMajor'));
 		$('.degreeplanblock').children('#transferringcollege').text('Transferring College: ' + localStorage.getItem('jsonCollege'));
