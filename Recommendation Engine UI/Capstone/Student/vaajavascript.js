@@ -25,7 +25,7 @@ function vaaSetActivePlanInfo() {
 	}
 	if (status == 1) {
 		activePlanLink = $('<a id="activedegreelink"></a>').text(localStorage.getItem('jsonCollege') + ' - ' + localStorage.getItem('jsonMajor'));
-		activePlanLink.attr('href', './Degree%20Plans/Active%20Degree%20Plan/active-degree-table.html');
+		activePlanLink.attr('href', '../Degree%20Plans/Active%20Degree%20Plan/active-degree-table.html');
 		$('.degreeplanblock').children('#major').html(activePlanLink);
 		$('.degreeplanblock').children('#transferringcollege').text('Transferring College: ' + localStorage.getItem('jsonCollege'));
 		$('.degreeplanblock').children('#intendedmajor').text('Intended Major: ' + localStorage.getItem('jsonMajor'));
