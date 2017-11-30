@@ -26,7 +26,6 @@ function vaaDegsSetInactivePlanInfo() {
 				break;
 			}
 			inactivePlanLink = $('<a></a>').text(inactivePlans[index].school + ' - ' + inactivePlans[index].major);
-			//inactivePlanLink = $('<a></a>').text('null - null');
 			inactivePlanLink.attr('href', './Active%20Degree%20Plan/active-degree-table.html');
 			inactivePlanLink.addClass('inactiveplanname');
 		
@@ -46,7 +45,6 @@ function vaaDegsSetInactivePlanInfo() {
 			$('#inactiveplanlist').append(liElement);
 		}	
 		localStorage.setItem('numOfInactivePlan', '' + inactivePlans.length);
-		//localStorage.setItem('numOfInactivePlan', '3');
 		$('.degreeplanblock').css('margin-bottom', '2em');
 		$('.degreeplanblock').css('position', 'relative');
 	}

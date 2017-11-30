@@ -173,7 +173,52 @@
 
 .courselist-heading li {
   float: left;
-  width: 9em;
+  width: 11%;
+  padding: 0 1em;
+  text-align: center;
+}
+
+.courselist-heading li:first-child {
+  width: 20%;
+  text-align: left;
+}
+
+.courselist-heading li:nth-child(2) {
+  width: 13%;
+}
+
+.courserow {
+  list-style-type: none;
+  height: 3em;
+  line-height: 1em;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1em;
+  border: 0.1em solid rgb(150, 150, 150);
+  background-color: rgb(200, 200, 200);
+  overflow: hidden;
+}
+
+.courserow li {
+  float: left;
+  width: 11%;
+  padding: 1em 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.courserow li:first-child {
+  width: 20%;
+  text-align: left;
+}
+
+.courserow li:nth-child(2) {
+  width: 13%;
+}
+
+.courseCompleted {
+  
 }
 </style>
 </head>
@@ -197,6 +242,7 @@
       <li><a id='studentdashboard' href='student-dashboard.html'>Student Dashboard</a></li>
 	  <li><a id='degreeplans' href='../Degree%20Plans/degree-plans.html'>Degree Plans</a></li>
 	  <li><a id='exploreplans' href='../Degree%20Plans/New%20Plans/new-plans.html'>Explore Plans</a></li>
+	  <li><a id='editprogress' href='#'>Edit Progress</a></li>
     </ul>
   </div>
   
@@ -229,7 +275,7 @@
       </div>
 	  <button class='audit-button'>Audit</button>
 	</div>
-	<div class='degreeplanblock'>
+	<div class='degreeplanblock' style='width:100%;'>
 	  <button id='edit-progress' class='progress-button'>Edit Progress</button>
 	  <h2 id='progress-title'>University of Washington (Associate of Science - Pre-Engineering: Aeronautics & Astronautics Engineering)</h2>
 	  <label><b>Progress:</b></label>
@@ -247,16 +293,60 @@
 		<li>Year</li>
 		<li>Status</li>
       </ul>
-      <ul class='courselist'>
-	    <li>Technical Writing</li>
-		<li>ENGL& 230</li>
-		<li>3.0</li>
-		<li>C</li>
-		<li>3.7</li>
-		<li>Winter</li>
-		<li>2017</li>
-		<li><i></i></li>
-      </ul>	  
+	  <div id='courselist'>
+	    <ul class='courserow'>
+	     <li>Technical Writing</li>
+		  <li>ENGL& 230</li>
+		  <li>3.0</li>
+		  <li>C</li>
+		  <li>3.7</li>
+		  <li>Winter</li>
+		  <li>2017</li>
+		  <li><i class="courseCompleted fa fa-check" style='color: green;'></i></li>
+        </ul>	
+		<ul class='courserow'>
+	     <li>Introduction to Engineering 2: Computing and Design</li>
+		  <li>ENGR 121</li>
+		  <li>5.0</li>
+		  <li>TE</li>
+		  <li>3.6</li>
+		  <li>Winter</li>
+		  <li>2017</li>
+		  <li><i class="courseCompleted fa fa-check" style='color: green;'></i></li>
+        </ul>	
+		<ul class='courserow'>
+	     <li>Thermodynamics</li>
+		  <li>ENGR& 224</li>
+		  <li>5.0</li>
+		  <li>NS</li>
+		  <li>-</li>
+		  <li>-</li>
+		  <li>-</li>
+		  <li><i class="courseCompleted fa fa-check" style='color: green;'></i></li>
+        </ul>	
+		<ul class='courserow'>
+	     <li>Applied Numerical Methods</li>
+		  <li>ENGR 240</li>
+		  <li>5.0</li>
+		  <li>NS</li>
+		  <li>-</li>
+		  <li>-</li>
+		  <li>-</li>
+		  <li><i class="courseCompleted fa fa-check" style='color: green;'></i></li>
+        </ul>	
+		<ul class='courserow'>
+	     <li>Calculus 4</li>
+		  <li>MATH& 264</li>
+		  <li>5.0</li>
+		  <li>Q, NS</li>
+		  <li>-</li>
+		  <li>-</li>
+		  <li>-</li>
+		  <li><i class="courseCompleted fa fa-check" style='color: red;'></i></li>
+        </ul>	
+        		
+	  </div>
+      
 	</div>
   </div>
 
