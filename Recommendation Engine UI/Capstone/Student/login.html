@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-US">
 <head>
 <title>Virtual Academic Advisor Login Page</title>
@@ -59,7 +59,7 @@ var retrieveActivePlanInfoReady = false;
 var retrieveInactivePlanInfoReady = false;
 $(document).ready(function() {
     $('#loginbutton').click(function() {
-	    apiURL = 'http://localhost:5000/api/Vsa/getPlanInfo/';
+	    apiURL = 'http://localhost:5000/api/Vsa/getActivePlanInfo/';
 		apiURL += $('#studentID').val();
 		$.ajax({
 		    url: apiURL,
