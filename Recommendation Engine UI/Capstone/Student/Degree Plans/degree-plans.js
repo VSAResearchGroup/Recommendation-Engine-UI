@@ -25,7 +25,7 @@ function vaaDegsSetInactivePlanInfo() {
 			if (index == 12) {  // number of inactive plans should be <= 12 (business logic)
 				break;
 			}
-			inactivePlanLink = $('<a></a>').text(inactivePlans[index].school + ' - ' + inactivePlans[index].major);
+			inactivePlanLink = $('<a></a>').text(inactivePlans[index].parameterSet.school + ' - ' + inactivePlans[index].parameterSet.major);
 			//inactivePlanLink = $('<a></a>').text('null - null');
 			inactivePlanLink.attr('href', './Active%20Degree%20Plan/active-degree-table.html');
 			inactivePlanLink.addClass('inactiveplanname');

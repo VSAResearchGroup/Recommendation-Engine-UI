@@ -300,7 +300,8 @@ function displayTable(text, numOfColumn, numOfRow) {
 				text += '</li>';
 
             }
-            text += '<li class="placeholder"><i class="fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div></li>"
+            var modal = '<div class="modal"><div class="modalcontent"></div></div>'
+            text += '<li class="placeholder"><i class="fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div>'" + modal + "</li>"
 
 	        text += '</ul>';
 
@@ -404,8 +405,7 @@ function dragAndDrop() {
                        console.log(evt)
                        var placeholder = evt.to.lastChild
                        //var val = placeholder.querySelector("#appendCourse").value
-
-                       var val = prompt("Enter Course")
+                       var val = null//prompt("Enter Course")
                        if (val != null && val != undefined && val != "") {
 
                            console.log("Append button pressed")
