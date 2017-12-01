@@ -76,7 +76,8 @@
   font-weight: bold;
   color: rgb(184, 0, 0);
   margin-right: 1em;
-  width: 25em;
+  width: 50%;
+  display: inline-block;
 }
 
 .inactiveplanname:hover {
@@ -179,9 +180,7 @@
 	
 	<h2 class='headings'>Active Degree Plan</h2>
 	<div class='degreeplanblock'>
-	  <h2 id='major'>
-	    <a id='activedegreelink' href='./Active%20Degree%20Plan/active-degree.html'></a>
-	  </h2>
+	  <h2 id='major'></h2>
 	  <h4 id='currentcollege'>Current College: Everett Community College</h4>
 	  <h4 id='transferringcollege'></h4>
 	  <h4 id='intendedmajor'></h4>
@@ -207,7 +206,7 @@
 	<div class='modal'>
 	  <div class='modalcontent'>
 	    <ul id='propertieslist'>
-		  <li><b>Title:</b> <input id='activeplantitle' spellcheck='false' type='text' value='University of Washington Bothell - Computer Science'></input></li>
+		  <li><b>Title:</b> <input id='activeplantitle' spellcheck='false' type='text'></input></li>
 		  <li><b>Major:</b> Computer Science</li>
 		  <li><b>Transferring College:</b> University of Washington Bothell</li>
 		  <li><b>Summer Options:</b> Yes</li>
@@ -259,28 +258,26 @@ $('#activedegreelink').click(function(eventObject) {
 	console.log('activeplan has been retrieved before');
 });
 
-/*$('.inactiveplanname').click(function(eventObject) {
-    console.log('inactive plan name has been clicked');
-	console.log()
+$('.inactiveplanname').click(function(eventObject) {
 	var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 	var index = 0;
-	var inactivePlanName 
+	var inactivePlanName; 
 	while (inactivePlans[index].school + ' - ' + inactivePlans[index].major != $(this).text()) { index++;}
 	var statusString = localStorage.getItem('inactivePlanRetrieved');
-	
+	console.log('got passed the while loop');
 	if (Number(statusString.substring(index, index+1)) == 0) {
 	    console.log('inactive plan has not been retrieved before');
 		eventObject.preventDefault();
 		//What would be the url here???
-		//apiURL = 'http://localhost:5000/api/Vsa/';
-		//apiURL += inactivePlans[index].inactiveplanID;
-	    /*$.ajax({
+		apiURL = 'http://localhost:5000/api/Vsa/';
+		apiURL += inactivePlans[index].planID;
+	    $.ajax({
 	        url: apiURL,
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function(jsonText) {
 		        console.log('These are the inactive plan: ' + jsonText);
-			    localStorage.setItem(inactivePlans[index].inactiveplanname, JSON.stringify(jsonText));
+			    localStorage.setItem(inactivePlans[index].school + ' - ' + inactivePlans[index].major, JSON.stringify(jsonText));
 				statusString = statusString.substring(0, index) + '1' + statusString.substring(index+1);
 			    localStorage.setItem('inactivePlanRetrieved', statusString); //set it so ajax call will not be called again.
 			    location.href = './Active%20Degree%20Plan/active-degree-table.html';
@@ -291,7 +288,7 @@ $('#activedegreelink').click(function(eventObject) {
 	    }) 
 	}
 	console.log('inactive plan names has been retrieved before');
-});*/
+});
 
 $('#studentdashboard').click(function(eventObject) {
     //update???
@@ -344,7 +341,7 @@ $(document).ready(function() {
 		    divElement = $('<div></div>').append(inactivePlanLink, removeIcon, cloneIcon, properties);
 		    liElement = $('<li></li>').append(divElement);
 		    liElement.css('margin-top', '1em');
-		    $(this).parent().after(liElement);
+		    $(this).parents('li').after(liElement);
 			//var newObject = inactivePlans[index];
 			//console.log("old element's name: " + newObject.inactiveplanname);
 			//newObject.inactiveplanname = newInactivePlanName;
@@ -411,11 +408,11 @@ $(document).ready(function() {
         //alert('properties');
 		var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 		$('.modal, .modalcontent').addClass('fadeIn');
-		/*var properties, timePref, propertiesValue, liElement;
+		var properties, timePref, propertiesValue, liElement;
 		var index = 0;
 		var inactivePlanName = $(this).siblings('a').text();
-		//while (inactivePlans[index].inactiveplanname != inactivePlanName) { index++;}
-		$('activeplantitle').val(inactivePlans[index].inactiveplanname);
+		while (inactivePlans[index].school + ' - ' + inactivePlans[index].major != inactivePlanName) { index++;}//
+		$('activeplantitle').val(inactivePlanName);
 		$('propertieslist').append(liElement);
         for (properties in inactivePlans[index]) {
 		    propertiesValue = inactivePlans[index][properties];
@@ -428,22 +425,23 @@ $(document).ready(function() {
 			
 		    liElement = $('<li></li>').text('<b>' + properties + ':</b> ' + propertiesValue);
 			$('propertieslist').append(liElement);
-		}*/		
+		}
     });
 	
+	var prevInactivePlanName = '';
 	$('#activeplantitle').focus(function() {
 	    $(this).css('border', '0.1em solid rgb(184, 0, 0)');
 		$(this).css('cursor', 'text');
+		prevInactivePlanName = $(this).val();
 	});
 	
 	$('#activeplantitle').blur(function() {
 	    $(this).css('border', 'none');
 		$(this).css('cursor', 'pointer');
-		//var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
-		//var index = 0;
-		//var inactivePlanName = $(this).siblings('a').text();
-		//while (inactivePlans[index].inactiveplanname != inactivePlanName) { index++;}
-		//inactivePlans[index].inactiveplanname = $(this).val();
+		var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
+		var index = 0;
+		while (inactivePlans[index].school + ' - ' + inactivePlans[index].major != prevInactivePlanName) { index++;}
+		inactivePlans[index].inactiveplanname = $(this).val();
 	});
     
     $('.modal').on('click', function(event) {

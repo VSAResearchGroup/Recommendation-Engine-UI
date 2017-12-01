@@ -9,16 +9,15 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 
 <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-
 <link rel="stylesheet" href="../../styles.css" >
 <link rel="stylesheet" href="active-degree-table.css" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-    <script src="../../jquery-3.2.1.js"></script>
-    <script src="./node_modules/sortablejs/Sortable.js"></script>
+<script src="../../jquery-3.2.1.js"></script>
+<script src="./node_modules/sortablejs/Sortable.js"></script>
+<script src="active-degree-table.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
-    <script src="active-degree-table.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <style>
 </style>
 </head>
@@ -112,10 +111,7 @@ $(document).ready(function(){
 	text = displayLegend(text);
 	text = displayCreditMets(text);
     text = displayValidation(text);
-
     text = displayTable(text, 4, 5);
-
-
     document.getElementById('contentHolder').innerHTML = text;
     dragAndDrop();
 	$('#active').click(function() {
@@ -136,11 +132,8 @@ $(document).ready(function(){
 	});
 
 
-
     $('#savePlan').click(function () {
         savePlan();
-
-
     });
 });
     

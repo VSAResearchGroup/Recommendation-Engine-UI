@@ -177,14 +177,14 @@ body {
 }
 
 .degreeplanblock {
-  display: inline-block;
+  display: block;
   margin-left: 13.5em;
   border-style: solid;
   border-width: 5px;
   border-color: rgb(150, 150, 150);
   border-radius: 10px;
   padding: 1em 1em;
-  max-width: 80%;
+  width: 80%;
 }
 
 #major {

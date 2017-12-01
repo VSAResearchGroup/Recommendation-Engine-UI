@@ -5,7 +5,7 @@ function vaaDashSetActivePlanInfo() {
 
 function fillProgressBar(progress) {
 	var width = 10;
-	var id = setInterval(frame, 20);
+	var id = setInterval(frame, 30);
 	function frame() {
 		if (width >= progress) {
 			clearInterval(id);
