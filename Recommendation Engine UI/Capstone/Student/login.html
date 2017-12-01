@@ -68,11 +68,11 @@ $(document).ready(function() {
 			    console.log('This is the active plan info: ' + jsonText);
 				//this section will check if student has an active plan or not
 			    if (jsonText.parameterSet.planID == -1) {
-				    localStorage.setItem('jsonActivePlanID', jsonText.parameterSet.planID);
+				    localStorage.setItem('jsonActivePlanID', jsonText.planId);
 				} else {
 				    localStorage.setItem('jsonMajor', jsonText.parameterSet.major);
 				    localStorage.setItem('jsonCollege', jsonText.parameterSet.school);
-				    localStorage.setItem('jsonActivePlanID', jsonText.parameterSet.planID);
+				    localStorage.setItem('jsonActivePlanID', jsonText.planId);
 					//localStorage.setItem('jsonDegree', jsonText.);
 				    localStorage.setItem('jsonTimePref', jsonText.parameterSet.timePreference);
 					//localStorage.setItem('jsonTypeOfEnroll', jsonText[5]);
