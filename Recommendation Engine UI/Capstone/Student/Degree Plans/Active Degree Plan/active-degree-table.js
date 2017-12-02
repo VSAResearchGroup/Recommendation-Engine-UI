@@ -50,16 +50,19 @@ function displayLegend(text) {
 	var objectIndex;
 	var firstLetter = '';
 	for (objectIndex in requirementTypesColor) {
+		
 		firstLetter = objectIndex.substring(0,1);
 		text+= '<li style="color: ' + requirementTypesColor[objectIndex] + ';">' + requirementTypesAbbrev[objectIndex] +
 		': ' + firstLetter.toUpperCase() + objectIndex.substring(1) + '</li>';
+		
 	}
 	text += '</ul>';
 	text += '</div>';
 	return text;
 }
+
 function savePlan() {
-    console.log(window.changed)
+    console.log(window.changed);
     if (!window.changed) {
         return;
     }
@@ -68,7 +71,6 @@ function savePlan() {
     var result = [];
 
     for (var i = 0; i < listElements.length; i++) {
-
 
         var course = listElements[i].innerHTML;
         console.log(course)
@@ -85,7 +87,6 @@ function savePlan() {
 
         result[result.length] = { "CourseNumber": course.replace("&amp;", "&"), "Quarter": quarter, "Year": parseInt(year) , "PlanId":-1}
 
-
     }
 
     var studentId = localStorage.getItem('studentId')
@@ -98,26 +99,22 @@ function savePlan() {
     apiURL = buildUrl(apiURL, [studentId, planId,planName])
     alert(apiURL)
     $.ajax({
-       url: apiURL,
-       type: 'POST',
+        url: apiURL,
+        type: 'POST',
         contentType:"application/json",
 
-       data: JSON.stringify(result),
+        data: JSON.stringify(result),
         success: function (p) {
-            localStorage.setItem("newPlanId", p)
+           localStorage.setItem("newPlanId", p)
            setValidation(p);
-       },
+        },
         error: function () {
             alert('AJAX FAILED');
-       }
+        }
     })
-
-
+	
     window.changed = false;
-
-
     // alert(text);
-
 }
 
 
@@ -128,8 +125,6 @@ function buildUrl(base, arguments) {
     if (base.charAt(base[base.length-1]) != "/") {
         base += "/"
     }
-
-    
 
     for (var i = 0; i < arguments.length; i++) {
         base += arguments[i] + "/";
@@ -146,8 +141,7 @@ function setValidation(planId) {
     $.ajax({
         url: apiURL,
         type: 'GET',
-
-
+		
         success: function (jsonText) {
             //alert(jsonText)
             innertext = "<table class='validation'>"
@@ -159,6 +153,7 @@ function setValidation(planId) {
             document.getElementById("validationtable").innerHTML = innertext;
 
         },
+		
         error: function () {
             alert('AJAX FAILED');
         }
@@ -167,36 +162,34 @@ function setValidation(planId) {
 }
 function displayValidation(text) {
    
-   
     text += '<div  id="validationtable"><h4 >Validation:</h4></div>'
     planId = localStorage.getItem('jsonActivePlanID')
-   
 
     // testPlan(int planId,int majorId, int schoolId)
     apiURL = 'http://localhost:5000/api/test/testPlan';
     apiURL += "/" + planId
     //alert(apiURL)
-            $.ajax({
-                url: apiURL,
-                type: 'GET',
-              
+    $.ajax({
+        url: apiURL,
+        type: 'GET',
 
-                success: function (jsonText) {
-                    //alert(jsonText)
-                    innertext = "<table class='validation'>"
-                    for (var i = 0; i < jsonText.length; i++) {
-                        innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
-                    }
+        success: function (jsonText) {
+        //alert(jsonText)
+        innertext = "<table class='validation'>"
+        for (var i = 0; i < jsonText.length; i++) {
+            innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
+        }
 
-                    innertext += "</table></div>"
-                    document.getElementById("validationtable").innerHTML += innertext ;
+        innertext += "</table></div>"
+        document.getElementById("validationtable").innerHTML += innertext ;
 
-                },
-                error: function () {
-                    alert('AJAX FAILED');
-                }
-            })
-
+        },
+				
+        error: function () {
+            alert('AJAX FAILED');
+        }
+    })
+	
    // alert(text);
     return text;
 }
@@ -222,9 +215,9 @@ function displayValidation(text) {
 	    <li style='color: rgb(99, 99, 99);'>TE: Transfer Electives: <span>0/30</span> Credits</li>
 	    <li style='color: rgb(101, 151, 29);'>NS-L: Natural Science Lab: <span>0/5</span> Credits</li>
 	    <li style='color: rgb(213, 5, 92);'>D: Diversity Course: <span>0/5</span> Credits</li>*/
-    
 	
 function displayCreditMets(text) {
+	
 	text += '<div class="creditsmet">';
 	text += '<h4>Credit Requirement Met Status</h4>';
 	text += '<i class="refresh fa fa-refresh fa-spin"></i>';

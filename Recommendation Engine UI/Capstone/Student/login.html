@@ -119,7 +119,11 @@ $(document).ready(function() {
 		        console.log('These are the courses offered at EVCC: ' + jsonText);
 			    localStorage.setItem('courseArray', JSON.stringify(jsonText));
 				//while(!(retrieveActivePlanInfoReady && retrieveInactivePlanInfoReady)) {};
-				while(!(retrieveActivePlanInfoReady));
+				var count = 0;
+				while(!(retrieveActivePlanInfoReady)) {
+				    count++;
+					console.log(count);
+				};
 			    location.href = 'Student%20Dashboard/student-dashboard.html';
 	        },
 			error: function() {
