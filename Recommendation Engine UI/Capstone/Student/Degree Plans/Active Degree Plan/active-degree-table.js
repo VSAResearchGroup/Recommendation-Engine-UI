@@ -306,8 +306,9 @@ function displayTable(text, numOfColumn, numOfRow) {
 				text += '</li>';
 
             }
+
             var modal = '<div class="modal"><div class="modalcontent"></div></div>'
-            text += '<li class="placeholder"><i class="fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div>'" + modal + "</li>"
+            text += '<li class="placeholder" > <i class="fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div>" + modal + "</li>"
 
 	        text += '</ul>';
 
@@ -417,13 +418,10 @@ function dragAndDrop() {
                    }
 
                    if (Sortable.utils.is(ctrl, ".placeholder")) {                     
-                       console.log(evt)
+                       console.log("Clicked append")
                        var placeholder = evt.to.lastChild
-                       //var val = placeholder.querySelector("#appendCourse").value
 
-                       
-                           $('.modal, .modalcontent').addClass('fadeIn');
-                       var val = null//prompt("Enter Course")
+                       var val = prompt("Enter Course")
                        if (val != null && val != undefined && val != "") {
                            // plan is in the changed state
                            changed = true;
