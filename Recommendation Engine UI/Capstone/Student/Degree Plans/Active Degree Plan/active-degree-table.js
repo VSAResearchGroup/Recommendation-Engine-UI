@@ -59,6 +59,10 @@ function displayLegend(text) {
 	return text;
 }
 function savePlan() {
+    console.log(window.changed)
+    if (!window.changed) {
+        return;
+    }
     var listElements = document.getElementsByClassName("tabletext");
     console.log(listElements)
     var result = [];
@@ -108,7 +112,9 @@ function savePlan() {
        }
     })
 
-   
+
+    window.changed = false;
+
 
     // alert(text);
 
@@ -300,7 +306,9 @@ function displayTable(text, numOfColumn, numOfRow) {
 				text += '</li>';
 
             }
-            text += '<li class="placeholder"><i class="fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div></li>"
+
+            var modal = '<div class="modal"><div class="modalcontent"></div></div>'
+            text += '<li class="placeholder" > <i class="fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div>" + modal + "</li>"
 
 	        text += '</ul>';
 
@@ -347,6 +355,8 @@ function htmlToElements(html) {
 }
 var dragToNewList = false;
 
+var changed = false;
+
 function dragAndDrop() {
    table = localStorage.getItem('numberOfTables');
     var elem;
@@ -388,6 +398,10 @@ function dragAndDrop() {
                    }
                },
 
+               // mark changed to be true when an item is moved from one list to another
+               onAdd: function(evt) {
+                   changed = true;
+               },
                // called when items with classes placeholder append or delete are dragged
                onFilter: function(evt) {
                    var item = evt.item
@@ -395,18 +409,22 @@ function dragAndDrop() {
                   
 
                    // x button is clicked so remove clicked item
+                   // plan is in the changed state
                    if (Sortable.utils.is(ctrl, ".delete")) {
                        console.log("Remove node")                       
                        item.parentNode.removeChild(item)
+                       changed = true;
+
                    }
 
                    if (Sortable.utils.is(ctrl, ".placeholder")) {                     
-                       console.log(evt)
+                       console.log("Clicked append")
                        var placeholder = evt.to.lastChild
-                       //var val = placeholder.querySelector("#appendCourse").value
 
                        var val = prompt("Enter Course")
                        if (val != null && val != undefined && val != "") {
+                           // plan is in the changed state
+                           changed = true;
 
                            console.log("Append button pressed")
                            var courseSelector = htmlToElements("<div class='cell'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" +

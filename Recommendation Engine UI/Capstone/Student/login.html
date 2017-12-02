@@ -47,7 +47,7 @@ body {
   <input id='studentID' type='text' placeholder='enter student id'>
   <label style='display: block;'>PIN:</label>
   <input id='pin' type='text' placeholder='enter pin'><br>
-  <button id='loginbutton'>Log In</a></button>
+    <button id='loginbutton'>Log In</button>
 </div>
 
 <script>
@@ -67,20 +67,20 @@ $(document).ready(function() {
 		    success: function(jsonText) {
 			    console.log('This is the active plan info: ' + jsonText);
 				//this section will check if student has an active plan or not
-				if (jsonText.planID == -1) {
-				    localStorage.setItem('jsonActivePlanID', jsonText.planID);
+			    if (jsonText.parameterSet.planID == -1) {
+				    localStorage.setItem('jsonActivePlanID', jsonText.planId);
 				} else {
-				    localStorage.setItem('jsonMajor', jsonText.major);
-					localStorage.setItem('jsonCollege', jsonText.school);
-					localStorage.setItem('jsonActivePlanID', jsonText.planID);
+				    localStorage.setItem('jsonMajor', jsonText.parameterSet.major);
+				    localStorage.setItem('jsonCollege', jsonText.parameterSet.school);
+				    localStorage.setItem('jsonActivePlanID', jsonText.planId);
 					//localStorage.setItem('jsonDegree', jsonText.);
-					localStorage.setItem('jsonTimePref', jsonText.timePreference);
+				    localStorage.setItem('jsonTimePref', jsonText.parameterSet.timePreference);
 					//localStorage.setItem('jsonTypeOfEnroll', jsonText[5]);
 					//localStorage.setItem('jsonSummerOption', jsonText[6]);
-					localStorage.setItem('jsonQuarter', jsonText.quarterPreference);
-					localStorage.setItem('jsonJobType', jsonText.jobType);
-					localStorage.setItem('jsonActivePlanCreatedDate', jsonText.dataAdded);
-					localStorage.setItem('jsonActivePlanModifiedDate', jsonText.lastDateModified);
+				    localStorage.setItem('jsonQuarter', jsonText.parameterSet.quarterPreference);
+				    localStorage.setItem('jsonJobType', jsonText.parameterSet.jobType);
+				    localStorage.setItem('jsonActivePlanCreatedDate', jsonText.parameterSet.dataAdded);
+				    localStorage.setItem('jsonActivePlanModifiedDate', jsonText.parameterSet.lastDateModified);
 				}
 				retrieveActivePlanInfoReady = true;
 		    },
