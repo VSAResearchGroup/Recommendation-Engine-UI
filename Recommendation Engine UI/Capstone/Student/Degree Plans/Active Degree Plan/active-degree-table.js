@@ -300,8 +300,7 @@ function displayTable(text, numOfColumn, numOfRow) {
 
             }
 
-            var modal = '<div class="modal"><div class="modalcontent"></div></div>'
-            text += '<li class="placeholder" > <i class="fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div>" + modal + "</li>"
+            text += '<input class = "ui-autocomplete-input" type="text" ></input><li  class="placeholder"> <i class="placeholder fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div>" + "</li>"
 
 	        text += '</ul>';
 
@@ -371,24 +370,53 @@ function dragAndDrop() {
                dragClass: ".item",
 
                // css attributes added to list elements used by onFilter event
-               filter:  ".placeholder,  .delete" ,
+               filter:  ".placeholder, .append,  .delete" ,
                  
                // occurs when an item is dropped in a list
                onEnd: function(/**Event*/evt) {
 
                    console.log(evt.newIndex)
-
-                   // if the element was dropped at the end of the list
-                   if (evt.newIndex == evt.to.children.length - 1) {
+                   if (evt.to == evt.from) {
+                       console.log("equal")
+                       //return 
+                   }
+                   // the element was dropped between the new course input field and the new course button
+                   if (evt.newIndex == evt.to.children.length -3 && evt.to.children[evt.newIndex +1].localName != "input" ) {
 
                        // the placeholder is now the second to last item
-                       var placeholder = evt.to.children[evt.newIndex - 1];
+                       var placeholder = evt.to.children[evt.to.children.length - 1];
+                       var courseInput = evt.to.children[evt.to.children.length - 3];
+
+
                        console.log(placeholder)
+
+                       placeholder.parentNode.removeChild(courseInput);
 
                        // remove the placeholder and append to the back of the list
                        placeholder.parentNode.removeChild(placeholder);
+                       evt.to.appendChild(courseInput);
                        evt.to.appendChild(placeholder);
+
                    }
+                   // the element was dropped at the end of the list
+                   if (evt.newIndex == evt.to.children.length - 2 ) {
+                       // the placeholder is the last child
+                       var placeholder = evt.to.children[evt.to.children.length - 2]
+
+                       // courseInput is 3rd from last
+                       var courseInput = evt.to.children[evt.to.children.length - 3]
+
+                       console.log(placeholder)
+
+                       placeholder.parentNode.removeChild(courseInput);
+
+                       // remove the placeholder and append to the back of the list
+                       placeholder.parentNode.removeChild(placeholder);
+                       evt.to.appendChild(courseInput);
+
+                       evt.to.appendChild(placeholder);
+                       }
+
                },
 
                // mark changed to be true when an item is moved from one list to another
@@ -410,25 +438,34 @@ function dragAndDrop() {
 
                    }
 
+                   if (Sortable.utils.is(ctrl, ".append")) {
+                       console.log("append node")
+                       
+
+                   }
+
                    if (Sortable.utils.is(ctrl, ".placeholder")) {                     
                        console.log("Clicked append")
                        var placeholder = evt.to.lastChild
+                       var courseInput = placeholder.parentNode.children[placeholder.parentNode.children.length -2]
 
-                       var val = prompt("Enter Course")
-                       if (val != null && val != undefined && val != "") {
+                       var val = courseInput.value //prompt("Enter Course")
+
                            // plan is in the changed state
                            changed = true;
 
                            console.log("Append button pressed")
-                           var courseSelector = htmlToElements("<div class='cell'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" +
+                           var newCourseNode = htmlToElements("<div class='cell'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" +
                                val +
                                "</p><span id='tagM'>M</span></div>")
-                           placeholder.parentNode.removeChild(placeholder);
-                           evt.to.appendChild(courseSelector);
+                       placeholder.parentNode.removeChild(courseInput);
 
+                           placeholder.parentNode.removeChild(placeholder);
+                           evt.to.appendChild(newCourseNode);
+                            evt.to.appendChild(courseInput)
                            evt.to.appendChild(placeholder);
                            val = "";
-                       }
+                     //  }
                    }
 
                },
