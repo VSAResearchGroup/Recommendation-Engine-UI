@@ -176,8 +176,10 @@ function displayValidation(text) {
         success: function (jsonText) {
         //alert(jsonText)
         innertext = "<table class='validation'>"
-        for (var i = 0; i < jsonText.length; i++) {
-            innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
+        for (var i in jsonText) {
+            for (var j in jsonText[i]) {
+                innertext += "<tr><td>" + jsonText[i][j] + "</td></tr>"
+            }
         }
 
         innertext += "</table></div>"
