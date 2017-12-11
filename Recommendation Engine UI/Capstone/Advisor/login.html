@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Virtual Academic Advisor Login Page</title>
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+
+<link rel="stylesheet" href="styles.css" >
+
+<script src="jquery-3.2.1.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+}
+
+.loginbox {
+  border: 1px solid rgb(150, 150, 150);
+  position: relative;
+  width: 25%;
+  top: 40%;
+  left: 35%;
+  padding: 1em 1em;
+}
+</style>
+</head>
+<body>
+
+<div class='loginbox'>
+  <label style='display: block;'>Advisor ID:</label>
+  <input id='advisorID' type='text' placeholder='enter advisor id'>
+  <label style='display: block;'>PIN:</label>
+  <input id='pin' type='text' placeholder='enter pin'><br>
+    <button id='loginbutton'>Log In</button>
+</div>
+
+<script>
+var productionURL = 'http://localhost:5000/';
+
+$(document).ready(function() {
+    $('#loginbutton').click(function() {
+		/*
+		Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+		Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+		
+		//keep status on what info already retrieved from DB
+		var ajaxStatusObject = { retrieveStudentListInfoReady: '0'}; 
+		sessionStorage.setItem('recentAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		
+		sessionStorage.setItem('sessionAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		
+		sessionStorage.setItem('nextWebPage', 'Advisor%20Dashboard/advisor-dashboard.html');
+		//change the last section(getStudentListInfo) as according to actual function call name
+	    apiURL = productionURL + 'api/Vsa/getStudentListInfo/';
+		apiURL += $('#advisorID').val();
+		$.ajax({
+		    url: apiURL,
+		    type: 'GET',
+		    dataType: 'json',
+		    success: function(jsonText) {
+			    //only checking if array of objects (JSON) was passed successfully
+			    console.log('This is the student list info: ' + jsonText);
+				sessionStorage.setItem('studentListArray', JSON.stringify(jsonText));
+				ajaxStatusObject['retrieveStudentListInfoReady'] = '1';  //1 means successfully retrieved
+				//saving it locally
+				sessionStorage.setItem('recentAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		    },
+		    error: function() {
+		        console.log('AJAX failed');
+		    }
+		})*/
+		location.href = 'loading.html';  // redirect to loading page
+	});
+});
+</script>
+</body>
+</html>

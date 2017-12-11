@@ -2,10 +2,10 @@
    Any javascript function used by multple webpages goes here.
    Naming style for function names are as follow to keep codes maintainable,
    and to keep it from conflicting with other js libraries:
-   .vaa[your function name] such as vaaSetActivePlanInfo
+   vaa[your function name] such as vaaSetActivePlanInfo
    for java function that apply to a specific web page in their respective folder, please 
    name it the following way:
-   .vaa[page title][your css name] such as .vaaDashSet???
+   vaa[page title][your css name] such as vaaDashSet???
    List of page titles:
    student dashboard - dash
    degree plans - degs
@@ -20,16 +20,19 @@
 function vaaSetActivePlanInfo() {
 	var status = 1;
 	//This is to check if student has an active plan or not
-	if (localStorage.getItem('jsonActivePlanID') == -1) {
+	if (sessionStorage.getItem('jsonActivePlanID') == -1) {
 	    status = 0;	
 	}
 	if (status == 1) {
-		activePlanLink = $('<a id="activedegreelink"></a>').text(localStorage.getItem('jsonCollege') + ' - ' + localStorage.getItem('jsonMajor'));
+		sessionStorage.setItem('studentActivePlanInfo', JSON.stringify(jsonText));
+		var activePlanInfo = JSON.parse(sessionStorage.getItem('studentActivePlanInfo'));
+		//should be replace by active plan name
+		var activePlanLink = $('<a id="activedegreelink"></a>').text(activePlanInfo.school + ' - ' + activePlanInfo.major);
 		activePlanLink.attr('href', '../Degree%20Plans/Active%20Degree%20Plan/active-degree-table.html');
 		$('.degreeplanblock').children('#major').html(activePlanLink);
-		$('.degreeplanblock').children('#transferringcollege').text('Transferring College: ' + localStorage.getItem('jsonCollege'));
-		$('.degreeplanblock').children('#intendedmajor').text('Intended Major: ' + localStorage.getItem('jsonMajor'));
-		$('.degreeplanblock').children('#degree').text('Degree: ' + localStorage.getItem('jsonDegree'));
+		$('.degreeplanblock').children('#transferringcollege').text('Transferring College: ' + activePlanInfo.school);
+		$('.degreeplanblock').children('#intendedmajor').text('Intended Major: ' + activePlanInfo.major);
+		$('.degreeplanblock').children('#degree').text('Degree: ' + activePlanInfo.degree);
 	} else if (status == 0) {
 		$('.degreeplanblock').children('#planTitle').text('No Active Plan yet?');
 		$('.degreeplanblock').children('#direction').text('You can start by doing one of the following:');

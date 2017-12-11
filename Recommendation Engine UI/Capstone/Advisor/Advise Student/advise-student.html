@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel='stylesheet' href='../styles.css'>
-<link rel='stylesheet' href='advisor-dashboard.css'>
+<link rel='stylesheet' href='advise-student.css'>
 
 <script src='../jquery-3.2.1.js'></script>
-<script src='advisor-dashboard.js'></script>
+<script src='advise-student.js'></script>
 
 <style>
 #headings { 
@@ -128,6 +128,10 @@
 		<li></li>
       </ul>
 	  <div id='studentlist'>
+	    <!--
+	    Uncomment all the <ul class='studentrow'> if testing locally without connected to the backend (i.e. not making AJAX calls)
+	    Comment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	    -->
 	    <ul class='studentrow'>
 		  <li>0035689</li>
 		  <li>Jaime Lannister</li>
@@ -180,6 +184,60 @@
 
 </div>
 <script>
+var productionURL = 'http://localhost:5000/';
+var studentList = [];
+
+$(document).ready(function() {
+    //comment this line when testing while connected to backend
+    vaaASBuildArray();
+    /*
+	Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+	vaaDashBuildStudentList();
+	
+	$('.advise-button').click(function() {
+	    var ajaxStatusObject = JSON.parse(sessionStorage.getItem('recentAjaxStatusProperties'));
+	    var sessionAjaxStatusObject = JSON.parse(sessionStorage.getItem('sessionAjaxStatusProperties'));
+		var studentID = $(this).siblings().eq(0);
+		var studentProperties = 'retrieveSID' + studentID + 'ActivePlanInfoReady';
+		
+	    if (sessionAjaxStatusObject[studentProperties] == undefined ) {
+		    ajaxStatusObject[studentProperties] = '0';
+		    sessionAjaxStatusObject[studentProperties] = '0';
+			sessionStorage.setItem('recentAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		    sessionStorage.setItem('sessionAjaxStatusProperties', JSON.stringify(sessionAjaxStatusObject));
+			
+			sessionStorage.setItem('nextWebPage', 'Advisor%20Student%20View/advisor-student-view.html');
+			apiURL = productionURL + 'api/Vsa/';
+		    apiURL += studentID;
+		    console.log(apiURL);
+		    $.ajax({
+		        url: apiURL,
+		        type: 'GET',
+		        dataType: 'json',
+		        success: function(jsonText) {
+			        //only checking if array of objects (JSON) was passed successfully
+			        console.log('This is student's active plan info: ' + jsonText);
+				    sessionStorage.setItem('sid' + studentID + 'ActivePlanInfo', JSON.stringify(jsonText));
+				    ajaxStatusObject[studentProperties] = '1';  //1 means successfully retrieved
+				    //saving it locally
+				    sessionStorage.setItem('recentAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		        },
+		        error: function() {
+		            console.log('AJAX failed');
+		        }
+		    })
+			location.href = 'loading.html';  // redirect to loading page
+	    } else if (sessionAjaxStatusObject[studentID] == '0') {
+		    console.log('this should not be triggered');
+		} else if (sessionAjaxStatusObject[studentID] == '1') {
+		    location.href = 'Advisor%20Student%20View/advisor-student-view.html';  // redirect to loading page
+		}
+	});*/
+	$('#studentlist').empty();
+	vaaASSortArray();
+	vaaASBuildStudentList();
+});
 </script>
 </body>
 </html>

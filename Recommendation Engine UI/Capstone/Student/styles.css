@@ -179,6 +179,7 @@ body {
 .degreeplanblock {
   display: block;
   margin-left: 13.5em;
+  margin-bottom: 1em;
   border-style: solid;
   border-width: 5px;
   border-color: rgb(150, 150, 150);

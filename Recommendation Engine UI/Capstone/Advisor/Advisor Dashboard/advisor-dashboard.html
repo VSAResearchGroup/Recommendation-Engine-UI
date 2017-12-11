@@ -156,7 +156,7 @@
   color: rgb(184, 0, 0);
 }
 
-.courselist-heading {
+.studentlist-heading {
   list-style-type: none;
   height: 1.5em;
   margin: 0 0 1em 0;
@@ -164,27 +164,27 @@
   border-bottom: 0.1em solid rgb(150, 150, 150);
 }
 
-.courselist-heading li {
+.studentlist-heading li {
   float: left;
   width: 12%;
   padding: 0 1em;
   text-align: left;
 }
 
-.courselist-heading li:nth-child(3) {
+.studentlist-heading li:nth-child(3) {
   width: 20%;
   text-align: left;
 }
 
-.courselist-heading li:nth-child(4) {
+.studentlist-heading li:nth-child(4) {
   width: 37%;
 }
 
-.courselist-heading li:last-child {
+.studentlist-heading li:last-child {
   width: 18%;
 }
 
-.courserow {
+.studentrow {
   list-style-type: none;
   height: 3em;
   line-height: 1em;
@@ -196,11 +196,11 @@
   overflow: hidden;
 }
 
-.courserow:hover {
+.studentrow:hover {
   background-color: rgb(170, 170, 170);
 }
 
-.courserow li {
+.studentrow li {
   float: left;
   width: 12%;
   padding: 1em 1em;
@@ -209,20 +209,20 @@
   text-align: left;
 }
 
-.courserow li:nth-child(3) {
+.studentrow li:nth-child(3) {
   width: 20%;
   text-align: left;
 }
 
-.courserow li:nth-child(4) {
+.studentrow li:nth-child(4) {
   width: 37%;
 }
 
-.courserow li a {
+.studentrow li a {
   color: rgb(184, 0, 0);
 }
 
-.courserow li:last-child {
+.studentrow li:last-child {
   width: 18%;
   text-align: center;
 }
@@ -260,13 +260,12 @@
 	<h2 id='headings'>Current & Recent Approval Requests</h2>
 	<div id='dropdownbox'>
 	  <label><b>Sort by:</b></label>
-	  
 	  <button id='request-drop-down' class='dropdownbutton' name='request-type'>Select a request type</button>
 	  <div id='request-dropdown-content' class='dropdown-content' style='top:3.2em;left:4.65em;'>
 	    <ul id='request-type-item'>
-		  <li><a href='#'>Pending Request</a></li>
-		  <li><a href='#'>In Progress Request</a></li>
-		  <li><a href='#'>Completed Request</a></li>
+		  <li><a id='pending-request' href='#'>Pending Request</a></li>
+		  <li><a id='ip-request' href='#'>In Progress Request</a></li>
+		  <li><a id='completed-request' href='#'>Completed Request</a></li>
 		</ul>
       </div>
 	  
@@ -276,69 +275,80 @@
 	  <button id='sort-drop-down' class='dropdownbutton' name='sort-type'>Select a sort type</button>
 	  <div id='sort-dropdown-content' class='dropdown-content' style='top:6.3em;left:4.65em;'>
 	    <ul id='sort-type-item'>
-		  <li><a href='#'>Student ID</a></li>
-		  <li><a href='#'>Student Name (Alphabetically)</a></li>
-		  <li><a href='#'>Approved Date</a></li>
+		  <li><a id='sort-student-id' href='#'>Student ID</a></li>
+		  <li><a id='sort-student-name' href='#'>Student Name</a></li>
+		  <li><a id='sort-approved-date' href='#'>Approved Date</a></li>
 		</ul>
       </div>
 	</div>
 	<div class='degreeplanblock' style='position:relative; margin-bottom: 1em;'>
 	  <i class="refresh fa fa-refresh fa-spin"></i>
-	  <ul class='courselist-heading'>
+	  <ul class='studentlist-heading'>
 	    <li>Status</li>
 		<li>Student ID</li>
 		<li>Student Name</li>
 		<li>Active Plan Name</li>
 		<li>Last Approved Date</li>
       </ul>
-	  <div id='courselist'>
-	    <ul class='courserow'>
+	  <div id='studentlist'>
+	    <!--
+	    Uncomment all the <ul class='studentrow'> if testing locally without connected to the backend (i.e. not making AJAX calls)
+	    Comment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	    -->
+	    <ul class='studentrow'>
 	      <li style='color: orange;'>In Progress</li>
 		  <li>0035689</li>
 		  <li>Jaime Lannister</li>
-		  <li><a href='#'>University of Washington Bothell - Computer Science</a></li>
+		  <li><a class='advise-degree-plan' href='Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html'>
+		  University of Washington Bothell - Computer Science</a></li>
 		  <li>-</li>
         </ul>	
-		<ul class='courserow'>
+		<ul class='studentrow'>
 	      <li style='color: red;'>Pending</li>
 		  <li>0058964</li>
 		  <li>Cersei Lannister</li>
-		  <li><a href='#'>University of Washington Bothell - Interactive Media Design</a></li>
+		  <li><a class='advise-degree-plan' href='Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html'>
+		  University of Washington Bothell - Interactive Media Design</a></li>
 		  <li>-</li>
         </ul>	
-		<ul class='courserow'>
+		<ul class='studentrow'>
 	      <li style='color: red;'>Pending</li>
 		  <li>0047562</li>
 		  <li>Jon Snow</li>
-		  <li><a href='#'>University of Washington Bothell - Business Administration</a></li>
+		  <li><a class='advise-degree-plan' href='Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html'>
+		  University of Washington Bothell - Business Administration</a></li>
 		  <li>-</li>
         </ul>	
-		<ul class='courserow'>
+		<ul class='studentrow'>
 	      <li style='color: red;'>Pending</li>
 		  <li>0097621</li>
 		  <li>Daenerys Targaryen</li>
-		  <li><a href='#'>University of Washington Seattle - Astronomy</a></li>
+		  <li><a class='advise-degree-plan' href='Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html'>
+		  University of Washington Seattle - Astronomy</a></li>
 		  <li>-</li>
         </ul>	
-		<ul class='courserow'>
+		<ul class='studentrow'>
 	      <li style='color: green;'>Completed</li>
 		  <li>0014689</li>
 		  <li>Sansa Stark</li>
-		  <li><a href='#'>University of Washington Seattle - Dance</a></li>
+		  <li><a class='advise-degree-plan' href='Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html'>
+		  University of Washington Seattle - Dance</a></li>
 		  <li>11/07/2017 5:23PM</li>
         </ul>	
-		<ul class='courserow'>
+		<ul class='studentrow'>
 	      <li style='color: green;'>Completed</li>
 		  <li>0065498</li>
 		  <li>Bran Stark</li>
-		  <li><a href='#'>Washington State University - Education</a></li>
+		  <li><a class='advise-degree-plan' href='Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html'>
+		  Washington State University - Education</a></li>
 		  <li>11/06/2017 3:45PM</li>
         </ul>	
-		<ul class='courserow'>
+		<ul class='studentrow'>
 	      <li style='color: green;'>Completed</li>
 		  <li>0097654</li>
 		  <li>Tyrion Lannister</li>
-		  <li><a href='#'>Washington State University - Physical and Mathematical Sciences</a></li>
+		  <li><a class='advise-degree-plan' href='Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html'>
+		  Washington State University - Physical and Mathematical Sciences</a></li>
 		  <li>11/04/2017 2:12PM</li>
         </ul>
       </div>		
@@ -351,7 +361,68 @@
 
 </div>
 <script>
+var productionURL = 'http://localhost:5000/';
+var studentList = [];
 $(document).ready(function() {
+    //comment this line when testing while connected to backend
+    vaaDashBuildArray();
+    /*
+	Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+	vaaDashBuildStudentList();
+	
+	$('.advise-degree-plan').click(function() {
+	    var ajaxStatusObject = JSON.parse(sessionStorage.getItem('recentAjaxStatusProperties'));
+	    var sessionAjaxStatusObject = JSON.parse(sessionStorage.getItem('sessionAjaxStatusProperties'));
+		var studentID = $(this).siblings().eq(1);
+		var studentProperties = 'retrieveSID' + studentID + 'ActivePlanReady';
+		
+		if (sessionAjaxStatusObject[studentProperties] == undefined ) {
+		    ajaxStatusObject[studentProperties] = '0';
+		    sessionAjaxStatusObject[studentProperties] = '0';
+		    sessionStorage.setItem('recentAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		    sessionStorage.setItem('sessionAjaxStatusProperties', JSON.stringify(sessionAjaxStatusObject));
+		
+		    sessionStorage.setItem('nextWebPage', 'Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html');
+	        apiURL = productionURL + 'api/Vsa/';
+		    apiURL += studentID;
+		    //apiURL += $(this).parent('.studentrow').children().eq(1).text();
+		    console.log(apiURL);
+		    $.ajax({
+		        url: apiURL,
+		        type: 'GET',
+		        dataType: 'json',
+		        success: function(jsonText) {
+			        //only checking if array of objects (JSON) was passed successfully
+			        console.log('This is student's active plan info: ' + jsonText);
+				    sessionStorage.setItem('sid' + studentID + 'ActivePlan', JSON.stringify(jsonText));
+				    ajaxStatusObject[studentProperties] = '1';  //1 means successfully retrieved
+				    //saving it locally
+				    sessionStorage.setItem('recentAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		        },
+		        error: function() {
+		            console.log('AJAX failed');
+		        }
+		    })
+		    location.href = 'loading.html';  // redirect to loading page
+		} else if (sessionAjaxStatusObject[studentID] == '0') {
+		    console.log('this should not be triggered');
+		} else if (sessionAjaxStatusObject[studentID] == '1') {
+		    location.href = 'Advise%20Student%20Active%20Degree%20Plan/advise-degree-plans.html';  // redirect to loading page
+		}
+	});
+	$('#account').click(function() {});
+	$('#help').click(function() {});
+	$('#logout').click(function() {});
+	$('#advisordashboard').click(function() {
+	    sessionStorage.setItem('studentListArray', JSON.stringify(studentList));
+	}); //for update information on this page only
+	$('#advisestudent').click(function() {
+	    
+	});
+	$('#exploreplans').click(function() {});
+	$('#sitesetting').click(function() {});
+	*/
     $('#dropdownbox').on('click', '#request-drop-down', function() {
 	    $(this).siblings('#request-dropdown-content').css('display', 'block');
 	});
@@ -363,11 +434,17 @@ $(document).ready(function() {
 	    eventObject.preventDefault();
 	    $(this).parents('#request-dropdown-content').css('display', 'none');
 		$(this).parents('#request-dropdown-content').prev('#request-drop-down').text($(this).text());
+	    $('#studentlist').empty();
+		vaaDashSortArray('Status', $(this).text());
+	    vaaDashBuildStudentList();
 	});
 	$('#dropdownbox').on('click', '#sort-dropdown-content a', function(eventObject) {
 	    eventObject.preventDefault();
 	    $(this).parents('#sort-dropdown-content').css('display', 'none');
 		$(this).parents('#sort-dropdown-content').prev('#sort-drop-down').text($(this).text());
+		$('#studentlist').empty();
+		vaaDashSortArray($(this).text(), 0);
+		vaaDashBuildStudentList();
 	});
 	
 	$(document).on('click', function(event) {
@@ -385,8 +462,6 @@ $(document).ready(function() {
 			$(this).text('Advance Sorting');
 			$(this).siblings('#sort-drop-down').text('Select a sort type');
 		}
-	    
-		
 	});
 });
 </script>

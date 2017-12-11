@@ -10,17 +10,68 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel='stylesheet' href='../../styles.css'>
-<link rel='stylesheet' href='advisor-dashboard.css'>
+<link rel='stylesheet' href='advisor-student-view.css'>
 
-<script src='../jquery-3.2.1.js'></script>
-<script src='advisor-dashboard.js'></script>
+<script src='../../jquery-3.2.1.js'></script>
+<script src='advisor-student-view.js'></script>
 
 <style>
 #headings { 
   font-size: 2em;
   font-weight: bold;
-  margin-left: 6.75em; 
-  margin-top: 3em;
+  margin: 0;
+}
+
+.containerbox {
+  background-color: rgb(150, 150, 150);
+}
+
+.degreeplanbox {
+  display: inline-block;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1em 1em;
+  width: 70%;
+}
+
+.plan-option {
+  display: inline-block;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1em 1em;
+  width: 25%;
+  float: right;
+}
+
+#major {
+  font-size: 1.5em;
+}
+
+.option-button {
+  font-size: 1em;
+  padding: 0.5em 1em;
+  text-align: center;
+  display: inline-block;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  outline: none;
+  margin: 1em 1em;
+  border-style: outset solid;
+  border-color: rgb(184, 0, 0);
+  border-width: 0.2em;
+  border-radius: 0.5em;
+  background-color: white;
+  box-shadow: 0 0.5em 1em 0 rgba(0,0,0,0.21),0 0.7em 3em 0 rgba(0,0,0,0.19);
+}
+
+.option-button:hover {
+  background-color: rgb(184, 0, 0);
+  color: white;
+}
+
+.option-button:active {
+  transform: translateY(0.2em);
+  box-shadow: 0 0.1em 1em 0 rgba(0,0,0,0.21),0 0.3em 3em 0 rgba(0,0,0,0.19);
 }
 </style>
 </head>
@@ -53,9 +104,41 @@
       <h1 id='mainheader'>Jaime Lannister</h1>
       <h5 id='path'>Advisor's student view</h5>
 	</div>
-	<h2 id='headings'>Jaime Lannister's Degree Plan</h2>
-	<div class='degreeplanblock' style='position:relative; margin-bottom: 1em;'>
-	  
+	
+	<div class='containerbox degreeplanblock'>
+	  <div class='degreeplanbox' style='position: relative;'>
+	    <!--Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	    Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+		<h2 id='headings'></h2>
+		<h2 id='major'></h2>
+	    <h4 id='currentcollege'>Current College: Everett Community College</h4>
+	    <h4 id='transferringcollege'></h4>
+	    <h4 id='intendedmajor'></h4>
+	    <h4 id='degree'></h4>
+	    <h2 id='planTitle'></h2>
+	    <p id='direction'><b></b></p>
+	    <ul id='directionlist'>
+	    </ul>
+		-->
+	    <!--Uncomment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+	    Comment these codes if testing locally and connected to the backend (i.e. making AJAX calls)-->
+	    <h2 id='headings'>Jaime Lannister's Degree Plan</h2>
+		<h2 id='major'><a id="activedegreelink" href='#'>University of Washington Bothell - Computer Science</a></h2>
+	    <h4 id='currentcollege'>Current College: Everett Community College</h4>
+	    <h4 id='transferringcollege'>Transferring College: University of Washington Bothell</h4>
+	    <h4 id='intendedmajor'>Intended Major: Computer Science</h4>
+	    <h4 id='degree'>Degree: Associate in Arts and Sciences - Direct Transfer</h4>
+	    <h2 id='planTitle'></h2>
+	    <p id='direction'><b></b></p>
+	    <ul id='directionlist'>
+	    </ul>
+		<!--till here-->
+	    <button class='option-button' style='position: absolute; bottom: 1em; right: 1em;'>Properties</button>
+	  </div>
+	  <div class='plan-option'>
+	    <button class='option-button' >Inactive Plans</button>
+		<button class='option-button' >Create New Plan</button>
+	  </div>
     </div>	  
   </div>
 

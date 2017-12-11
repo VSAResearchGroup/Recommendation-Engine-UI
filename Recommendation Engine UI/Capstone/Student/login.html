@@ -51,85 +51,97 @@ body {
 </div>
 
 <script>
-//set initial value for all status on whether to call an ajax
-//UPDATE!!
-localStorage.setItem('activePlanRetrieved', '0');
-var retrieveActivePlanInfoReady = false;
-var retrieveInactivePlanInfoReady = false;
+var productionURL = 'http://localhost:5000/';
 $(document).ready(function() {
     $('#loginbutton').click(function() {
-	    apiURL = 'http://localhost:5000/api/Vsa/getActivePlanInfo/';
+	    /*
+		Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+		Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+		
+		//keep status on what info already retrieved from DB
+		var ajaxStatusObject = { retrieveActivePlanInfoReady: '0'}; 
+		sessionStorage.setItem('recentSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		sessionStorage.setItem('sessionSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		
+		sessionStorage.setItem('nextWebPage', 'Student%20Dashboard/student-dashboard.html');
+		//change the last section(getActivePlanInfo/) as according to actual function call name
+	    apiURL = productionURL + 'api/Vsa/getActivePlanInfo/';
 		apiURL += $('#studentID').val();
 		$.ajax({
 		    url: apiURL,
 		    type: 'GET',
 		    dataType: 'json',
 		    success: function(jsonText) {
+				//only checking if array of objects (JSON) was passed successfully
 			    console.log('This is the active plan info: ' + jsonText);
 				//this section will check if student has an active plan or not
 			    if (jsonText.parameterSet.planID == -1) {
-				    localStorage.setItem('jsonActivePlanID', jsonText.planId);
+				    sessionStorage.setItem('jsonActivePlanID', jsonText.planId);
 				} else {
-				    localStorage.setItem('jsonMajor', jsonText.parameterSet.major);
-				    localStorage.setItem('jsonCollege', jsonText.parameterSet.school);
-				    localStorage.setItem('jsonActivePlanID', jsonText.planId);
-					//localStorage.setItem('jsonDegree', jsonText.);
-				    localStorage.setItem('jsonTimePref', jsonText.parameterSet.timePreference);
-					//localStorage.setItem('jsonTypeOfEnroll', jsonText[5]);
-					//localStorage.setItem('jsonSummerOption', jsonText[6]);
-				    localStorage.setItem('jsonQuarter', jsonText.parameterSet.quarterPreference);
-				    localStorage.setItem('jsonJobType', jsonText.parameterSet.jobType);
-				    localStorage.setItem('jsonActivePlanCreatedDate', jsonText.parameterSet.dataAdded);
-				    localStorage.setItem('jsonActivePlanModifiedDate', jsonText.parameterSet.lastDateModified);
+				    sessionStorage.setItem('studentActivePlanInfo', JSON.stringify(jsonText));
+					ajaxStatusObject['retrieveActivePlanInfoReady'] = '1';  //1 means successfully retrieved
+					//saving it locally
+				    sessionStorage.setItem('recentSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
 				}
-				retrieveActivePlanInfoReady = true;
 		    },
 		    error: function() {
 		        console.log('AJAX failed');
 		    }
 		})
-		apiURL = 'http://localhost:5000/api/Vsa/getInactivePlanInfo/';
+		
+		//keep status on what info already retrieved from DB
+		ajaxStatusObject.retrieveInactivePlanInfoReady = '0'; 
+		sessionStorage.setItem('recentSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		sessionStorage.setItem('sessionSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		//change the last section(getInactivePlanInfo/) as according to actual function call name
+		apiURL = productionURL + 'api/Vsa/getInactivePlanInfo/';
 		apiURL += $('#studentID').val();
 	    $.ajax({
 	        url: apiURL,
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function(jsonText) {
+			    //only checking if array of objects (JSON) was passed successfully
 		        console.log('These are the inactive plan names: ' + jsonText + '.');
 				//this section will check if student has any inactive plan or not
 				if (jsonText.length == 0) {
 				    console.log('array is empty');
-				    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
+				    sessionStorage.setItem('inactivePlanInfoArray', JSON.stringify(jsonText));
 				} else {
-				    localStorage.setItem('inactivePlanArray', JSON.stringify(jsonText));
+				    sessionStorage.setItem('inactivePlanInfoArray', JSON.stringify(jsonText));
+					ajaxStatusObject['retrieveInactivePlanInfoReady'] = '1';  //1 means successfully retrieved
+					//saving it locally
+				    sessionStorage.setItem('recentSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
 				}
-			    retrieveInactivePlanInfoReady = true;
 	        },
 			error: function() {
 			    console.log('AJAX failed');
 			}
 		})
 		
-		apiURL = 'http://localhost:5000/api/Vsa/getCourses';
+		//keep status on what info already retrieved from DB
+        ajaxStatusObject.retrieveCourseListReady = '0'; 
+		sessionStorage.setItem('recentSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		sessionStorage.setItem('sessionSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
+		//change the last section(getCourses/) as according to actual function call name
+		apiURL = productionURL + 'api/Vsa/getCourses';
 	    $.ajax({
 	        url: apiURL,
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function(jsonText) {
+			    //only checking if array of objects (JSON) was passed successfully
 		        console.log('These are the courses offered at EVCC: ' + jsonText);
-			    localStorage.setItem('courseArray', JSON.stringify(jsonText));
-				//while(!(retrieveActivePlanInfoReady && retrieveInactivePlanInfoReady)) {};
-				var count = 0;
-				while(!(retrieveActivePlanInfoReady)) {
-				    count++;
-					console.log(count);
-				};
-			    location.href = 'Student%20Dashboard/student-dashboard.html';
+			    sessionStorage.setItem('courseListArray', JSON.stringify(jsonText));
+				ajaxStatusObject['retrieveCourseListReady'] = '1';  //1 means successfully retrieved
+				//saving it locally
+				sessionStorage.setItem('recentSAjaxStatusProperties', JSON.stringify(ajaxStatusObject));
 	        },
 			error: function() {
 			    console.log('AJAX failed');
 			}
-		})
+		})*/
+		location.href = 'loading.html';  // redirect to loading page
 	});
 });
 </script>
