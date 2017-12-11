@@ -8,19 +8,19 @@
 
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
   <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="active-degree-table.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
   <script src="./node_modules/sortablejs/Sortable.js"></script>
   <script src="active-degree-table.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
-  <style>
+  <style>  
   </style>
 </head>
 <body>
@@ -63,17 +63,12 @@
 
 
       <p id='contentHolder'></p>
+    
     </div>
-
     <div class='footer'>
       <p>&#169;Everett Community College</p>
     </div>
-
   </div>
-
-
-
-
 
   <script>
     var text = '';
@@ -101,6 +96,7 @@
       text = displayTable(text, 4, 5);
       document.getElementById('contentHolder').innerHTML = text;
       dragAndDrop();
+     
       $('#active').click(function () {
         if ($('#active').css('color') == 'rgb(0, 0, 0)') {
           $('#active').css('color', 'white');
@@ -122,8 +118,24 @@
       $('#savePlan').click(function () {
         savePlan();
       });
-    });
 
+      $(function () {
+        var coursesArray = localStorage.getItem("courseArray");
+
+        var c = [];
+        $.each(JSON.parse(coursesArray), function (index, course) {
+          c.push(course.courseNumber.trim());
+        })
+        $(".ui-autocomplete-input").autocomplete({
+          source: c,
+          autoFocus: true,
+         
+          minLength: 6
+
+        });
+      });
+    
+    });
     /*var text1 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
     {\n    "planId": 2482,\n    "courseNumber": "ESL 097",\n    "courseID": 550,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
     {\n    "planId": 2482,\n    "courseNumber": "ACCT 110",\n    "courseID": 25,\n    "quarter": "Fall",\n    "year": 2017\n  }, \
