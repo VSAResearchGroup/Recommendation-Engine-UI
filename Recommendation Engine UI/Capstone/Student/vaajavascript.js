@@ -24,7 +24,6 @@ function vaaSetActivePlanInfo() {
 	    status = 0;	
 	}
 	if (status == 1) {
-		sessionStorage.setItem('studentActivePlanInfo', JSON.stringify(jsonText));
 		var activePlanInfo = JSON.parse(sessionStorage.getItem('studentActivePlanInfo'));
 		//should be replace by active plan name
 		var activePlanLink = $('<a id="activedegreelink"></a>').text(activePlanInfo.school + ' - ' + activePlanInfo.major);

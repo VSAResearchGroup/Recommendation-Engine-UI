@@ -179,24 +179,65 @@
 	</div>
 	
 	<h2 class='headings'>Active Degree Plan</h2>
-	<div class='degreeplanblock'>
-	  <h2 id='major'></h2>
+	<div class='degreeplanblock' style='position:relative;'>
+	  <!--
+	  Uncomment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+	  Comment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	  -->
+	  <h2 id='major'><a id='activedegreelink' href='./Active%20Degree%20Plan/active-degree-table.html'>University of Washington Bothell - Computer Science</a></h2>
+	  <h4 id='currentcollege'>Current College: Everett Community College</h4>
+	  <h4 id='transferringcollege'>Transferring College: University of Washington Bothell</h4>
+	  <h4 id='intendedmajor'>Intended Major: Computer Science</h4>
+	  <h4 id='degree'>Degree: Associate in Arts and Sciences - Direct Transfer</h4>
+	  <!--
+	  Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	  Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+	  <h2 id="major"></h2>
 	  <h4 id='currentcollege'>Current College: Everett Community College</h4>
 	  <h4 id='transferringcollege'></h4>
 	  <h4 id='intendedmajor'></h4>
 	  <h4 id='degree'></h4>
+	  -->
 	  <h2 id='planTitle'></h2>
 	  <p id='direction'><b></b></p>
 	  <ul id='directionlist'>
 	  </ul>
-	  <button class='button properties' style='position: absolute; bottom: 1em; right: 1em;'>Properties</button>
+	  <button class='button properties propertiesButton' style='position: absolute; bottom: 1em; right: 1em;'>Properties</button>
 	</div>
-	
+
 	<h2 class='headings'>Inactive Degree Plan</h2>
-	<div class='degreeplanblock'>
+	<div class='degreeplanblock' style='position: relative;'>
 	  <i class="undoIcon fa fa-undo"></i>
 	  <p id='inactiveplanheading'></p>
 	  <ul id='inactiveplanlist'>
+	    <!--
+	    Uncomment these codes (li tags) if testing locally without connected to the backend (i.e. not making AJAX calls)
+	    Comment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	    -->
+	    <li>
+		  <div style="width:100%">
+		    <a class='inactiveplanname' href='./Active%20Degree%20Plan/active-degree-table.html'>University of Washington Bothell - Business Administration</a>
+			<button class='button properties deleteButton' style='margin-right:1em;'>Delete</button>
+			<button class='button properties cloneButton' style='margin-right:1em;'>Clone</button>
+			<button class='button properties propertiesButton'>Properties</button>
+		  </div>
+		</li>
+		<li>
+		  <div style="width:100%">
+		    <a class='inactiveplanname' href='./Active%20Degree%20Plan/active-degree-table.html'>University of Washington Bothell - Interactive Media Design</a>
+			<button class='button properties deleteButton' style='margin-right:1em;'>Delete</button>
+			<button class='button properties cloneButton' style='margin-right:1em;'>Clone</button>
+			<button class='button properties propertiesButton'>Properties</button>
+		  </div>
+		</li>
+		<li>
+		  <div style="width:100%">
+		    <a class='inactiveplanname' href='./Active%20Degree%20Plan/active-degree-table.html'>University of Washington Bothell - Computer Science 2</a>
+			<button class='button properties deleteButton' style='margin-right:1em;'>Delete</button>
+			<button class='button properties cloneButton' style='margin-right:1em;'>Clone</button>
+			<button class='button properties propertiesButton'>Properties</button>
+		  </div>
+		</li>
 	  </ul>
 	</div>
 	
@@ -225,10 +266,12 @@
     <p>&#169;Everett Community College</p>
   </div>
 <script>
-var propertiesClicked = false;
 $(document).ready(function() {
+    /*
+	Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
     vaaDegsSetActivePlanInfo();
-	vaaDegsSetInactivePlanInfo();
+	vaaDegsSetInactivePlanInfo();*/
 	setInactivePlanStatusString();
 	setInactivePlanCopyCount();
 });
@@ -290,14 +333,6 @@ $('.inactiveplanname').click(function(eventObject) {
 	console.log('inactive plan names has been retrieved before');
 });
 
-$('#studentdashboard').click(function(eventObject) {
-    //update???
-});
-
-$('#degreeplans').click(function(eventObject) {
-    //update???
-});
-
 $(document).ready(function() {
     $('#inactiveplanlist').on('click', 'button.cloneButton', function() {
 	    var numOfPlan = localStorage.getItem('numOfInactivePlan');
@@ -307,14 +342,14 @@ $(document).ready(function() {
 		    var inactivePlanLink, removeIcon, cloneIcon, properties;
     	    var divElement, liElement;
 	    	var index = 0;
-		    var inactivePlanName = $(this).siblings('a').text();
+		    var inactivePlanName = $(this).siblings('a').text();  //get the inactive plan name align with this button
 			var newInactivePlanName = '';
 		    //var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 		    //while (inactivePlans[index].inactiveplanname != inactivePlanName) { index++;}
 		    //var countString = localStorage.getItem('inactivePlanCount');
 		    //var statusString = localStorage.getItem('inactivePlanRetrieved');
 		    //var count = countString.substring(index, index+1);
-		    var count = 0;
+		    var count = 0;  //comment this when testing while connected to backend
 		    //inactivePlanLink = $('<a></a>').text(inactivePlanName + '(' + count + ')');
 			newInactivePlanName = inactivePlanName + ' (' + count + ')';
 		    inactivePlanLink = $('<a></a>').text(newInactivePlanName);
@@ -357,7 +392,6 @@ $(document).ready(function() {
 	$('#inactiveplanlist').on('click', 'button.deleteButton', function() {
 		var numOfPlan = localStorage.getItem('numOfInactivePlan');
 		if (numOfPlan > 0) {
-		    alert('delete');
 	    	var index = 0;
 		    //var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 			//var inactivePlanName = $(this).siblings('a').text();
@@ -404,7 +438,7 @@ $(document).ready(function() {
 		$(this).hide();
 	});
 	
-	$('#inactiveplanlist').on('click', 'button.propertiesButton', function() {
+	$('.degreeplanblock').on('click', 'button.propertiesButton', function() {
         //alert('properties');
 		var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
 		$('.modal, .modalcontent').addClass('fadeIn');
@@ -422,7 +456,6 @@ $(document).ready(function() {
 				    propertiesValue+= inactivePlans[index][properties][timePref] + ', '
 				}
 			}
-			
 		    liElement = $('<li></li>').text('<b>' + properties + ':</b> ' + propertiesValue);
 			$('propertieslist').append(liElement);
 		}

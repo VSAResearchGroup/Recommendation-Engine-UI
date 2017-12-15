@@ -1,27 +1,33 @@
 ﻿<!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>Virtual Academic Advisor Active Degree Page</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../../jquery-3.2.1.js"></script>
+<title>Virtual Academic Advisor Active Degree Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../../jquery-3.2.1.js"></script>
 
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-  <link rel="stylesheet" href="../../styles.css">
-  <link rel="stylesheet" href="active-degree-table.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="active-degree-table.css">
 
-  <script src="./node_modules/sortablejs/Sortable.js"></script>
-  <script src="active-degree-table.js"></script>
+<script src="./node_modules/sortablejs/Sortable.js"></script>
+<script src="active-degree-table.js"></script>
 
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-  <style>  
-  </style>
+<style>
+#major {
+  border: none;
+  margin-bottom: 1em;
+}
+
+
+</style>
 </head>
 <body>
   <div class='container'>
@@ -60,8 +66,7 @@
           <input id="planName" type="text" />
         </div>
       </div>
-
-
+	  
       <p id='contentHolder'></p>
     
     </div>
@@ -70,56 +75,58 @@
     </div>
   </div>
 
-  <script>
-    var text = '';
-    var maxYear = 0;
-    var minYear = 0;
-    var numOfYear = 0;
-    var activeDegreeTable = new tableObject();  //check table object has indeed been created;
-    var statusArray = [];
-    var statusObject = {
-      empty: 0,
-      unmodified: 1,
-      dragged: 2,
-      dropped: 3,
-      removed: 4
-    };
-    var activeplanObj, courseListObjects;
-    var apiURL = '';
-    $(document).ready(function () {
-      text = '';
-      var activePlanObj = JSON.parse(localStorage.getItem('activePlanArray'));
-      constructTable(activePlanObj, activePlanObj, 5);
-      text = displayLegend(text);
-      text = displayCreditMets(text);
-      text = displayValidation(text);
-      text = displayTable(text, 4, 5);
-      document.getElementById('contentHolder').innerHTML = text;
-      dragAndDrop();
+<script>
+var text = '';
+var maxYear = 0;
+var minYear = 0;
+var numOfYear = 0;
+var activeDegreeTable = new tableObject();  //check table object has indeed been created;
+var statusArray = [];
+var statusObject = {
+    empty: 0,
+    unmodified: 1,
+    dragged: 2,
+    dropped: 3,
+    removed: 4
+};
+var activeplanObj, courseListObjects;
+var apiURL = '';
+$(document).ready(function () {
+    text = '';
+	/*
+	Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+    var activePlanObj = JSON.parse(localStorage.getItem('activePlanArray'));
+    constructTable(activePlanObj, activePlanObj, 5);
+    text = displayLegend(text);
+    text = displayCreditMets(text);
+    text = displayValidation(text);
+    text = displayTable(text, 4, 5);
+    document.getElementById('contentHolder').innerHTML = text;*/
+    dragAndDrop();
      
-      $('#active').click(function () {
+    $('#active').click(function () {
         if ($('#active').css('color') == 'rgb(0, 0, 0)') {
-          $('#active').css('color', 'white');
-          $('#active').css('background-color', 'rgb(141, 0, 0)');
-          $('#inactive').css('color', 'black');
-          $('#inactive').css('background-color', 'white');
+            $('#active').css('color', 'white');
+            $('#active').css('background-color', 'rgb(141, 0, 0)');
+            $('#inactive').css('color', 'black');
+            $('#inactive').css('background-color', 'white');
         }
-      });
-      $('#inactive').click(function () {
+    });
+    $('#inactive').click(function () {
         if ($('#inactive').css('color') == 'rgb(0, 0, 0)') {
-          $('#inactive').css('color', 'white');
-          $('#inactive').css('background-color', 'rgb(141, 0, 0)');
-          $('#active').css('color', 'black');
-          $('#active').css('background-color', 'white');
+            $('#inactive').css('color', 'white');
+            $('#inactive').css('background-color', 'rgb(141, 0, 0)');
+            $('#active').css('color', 'black');
+            $('#active').css('background-color', 'white');
         }
-      });
+    });
 
-
-      $('#savePlan').click(function () {
+    $('#savePlan').click(function () {
         savePlan();
-      });
+    });
 
-      $(function () {
+    $(function () {
         var coursesArray = localStorage.getItem("courseArray");
 
         var c = [];
@@ -133,10 +140,10 @@
           minLength: 6
 
         });
-      });
+    });
     
     });
-    /*var text1 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
+    var text1 = '[\n  {\n    "planId": 2482,\n    "courseNumber": "BUS& 101",\n    "courseID": 253,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
     {\n    "planId": 2482,\n    "courseNumber": "ESL 097",\n    "courseID": 550,\n    "quarter": "Fall",\n    "year": 2016\n  }, \
     {\n    "planId": 2482,\n    "courseNumber": "ACCT 110",\n    "courseID": 25,\n    "quarter": "Fall",\n    "year": 2017\n  }, \
     {\n    "planId": 2482,\n    "courseNumber": "ENGL& 101",\n    "courseID": 490,\n    "quarter": "Fall",\n    "year": 2017\n  }, \
@@ -155,15 +162,15 @@
     {\n    "planId": 2482,\n    "courseNumber": "ACCT& 202",\n    "courseID": 32,\n    "quarter": "Spring",\n    "year": 2019\n  }, \
     {\n    "planId": 2482,\n    "courseNumber": "MATH 091",\n    "courseID": 901,\n    "quarter": "Spring",\n    "year": 2019\n  }, \
     {\n    "planId": 2482,\n    "courseNumber": "MATH 092",\n    "courseID": 902,\n    "quarter": "Summer",\n    "year": 2019\n  }, \
-    {\n    "planId": 2482,\n    "courseNumber": "MATH& 146",\n    "courseID": 919,\n    "quarter": "Summer",\n    "year": 2020\n  }\n]'*/
+    {\n    "planId": 2482,\n    "courseNumber": "MATH& 146",\n    "courseID": 919,\n    "quarter": "Summer",\n    "year": 2020\n  }\n]'
 
-    /*activePlanObj = JSON.parse(text1);
+    activePlanObj = JSON.parse(text1);
     courseListObjects = JSON.parse(text1);
     constructTable(activePlanObj, courseListObjects, 5);
     text = displayLegend(text);
     text = displayCreditMets(text);
     text = displayTable(text, 4, 5);
-    document.getElementById('contentHolder').innerHTML = text;*/
+    document.getElementById('contentHolder').innerHTML = text;
   </script>
 </body>
 </html>

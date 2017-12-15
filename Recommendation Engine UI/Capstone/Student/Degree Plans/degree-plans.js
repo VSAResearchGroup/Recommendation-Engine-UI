@@ -4,16 +4,16 @@ function vaaDegsSetActivePlanInfo() {
 		$('.degreeplanblock button').remove();
 		$('#currentcollege').remove();
 	} else if (status == 1) {
-		$('.degreeplanblock').css('position', 'relative');
+		//$('.degreeplanblock').css('position', 'relative');
 	}
 }
 
 function vaaDegsSetInactivePlanInfo() {
-	//var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanArray'));
+	var inactivePlans = JSON.parse(localStorage.getItem('inactivePlanInfoArray'));
 	var status = 1;
-	//if (inactivePlans.length == 0) {
-	//	status = 0;
-    //}
+	if (inactivePlans.length == 0) {
+		status = 0;
+    }
 	if (status == 0) {
 		$('#inactiveplanheading').html('<b>There are currently no inactive plan created.</b>');
 	} else if (status == 1) {
@@ -21,13 +21,11 @@ function vaaDegsSetInactivePlanInfo() {
 		var index = 0;
 		var inactivePlanLink, removeIcon, cloneIcon, properties;
 		var divElement, liElement;
-		//;index < inactivePlans.length; index++
-		for (;index < 3; index++) {
+		for (;index < inactivePlans.length; index++) {
 			if (index == 12) {  // number of inactive plans should be <= 12 (business logic)
 				break;
 			}
 			inactivePlanLink = $('<a></a>').text(inactivePlans[index].parameterSet.school + ' - ' + inactivePlans[index].parameterSet.major);
-			//inactivePlanLink = $('<a></a>').text('null - null');
 
 			inactivePlanLink.attr('href', './Active%20Degree%20Plan/active-degree-table.html');
 			inactivePlanLink.addClass('inactiveplanname');
@@ -47,8 +45,7 @@ function vaaDegsSetInactivePlanInfo() {
 			liElement = $('<li></li>').append(divElement);
 			$('#inactiveplanlist').append(liElement);
 		}	
-		//localStorage.setItem('numOfInactivePlan', '' + inactivePlans.length);
-		localStorage.setItem('numOfInactivePlan', '' + 3);
+		localStorage.setItem('numOfInactivePlan', '' + inactivePlans.length);
 		$('.degreeplanblock').css('margin-bottom', '2em');
 		$('.degreeplanblock').css('position', 'relative');
 	}
