@@ -92,12 +92,14 @@ function savePlan() {
     var studentId = localStorage.getItem('studentId')
     var planId = localStorage.getItem('jsonActivePlanID')
     var planName = document.getElementById("planName").value
-    alert(planName)
+    //alert(planName)
+    console.log(planName)
     console.log(result);
 
     apiURL = 'http://localhost:5000/api/Vsa/savePlan';
-    apiURL = buildUrl(apiURL, [studentId, planId,planName])
-    alert(apiURL)
+    apiURL = buildUrl(apiURL, [studentId, planId, planName])
+    console.log(apiURL)
+    //alert(apiURL)
     $.ajax({
         url: apiURL,
         type: 'POST',
@@ -109,7 +111,8 @@ function savePlan() {
            setValidation(p);
         },
         error: function () {
-            alert('AJAX FAILED');
+            console.log("AJAX Failed")
+            //alert('AJAX FAILED');
         }
     })
 	
@@ -145,23 +148,30 @@ function setValidation(planId) {
         success: function (jsonText) {
             //alert(jsonText)
             innertext = "<table class='validation'>"
-            for (var i = 0; i < jsonText.length; i++) {
-                innertext += "<tr><td>" + jsonText[i] + "</td></tr>"
+            for (var i = 0; i < jsonText.unfulfilledDegreeCourses.length; i++) {
+                innertext += "<tr><td>" + jsonText.unfulfilledDegreeCourses[i] + "</td></tr>"
+            }
+            for (var i = 0; i < jsonText.unfulfilledPrereqs.length; i++) {
+                innertext += "<tr><td>" + jsonText.unfulfilledPrereqs[i] + "</td></tr>"
+            }
+            for (var i = 0; i < jsonText.incorrectScheduling.length; i++) {
+                innertext += "<tr><td>" + jsonText.incorrectScheduling[i] + "</td></tr>"
             }
 
             innertext += "</table></div>"
-            document.getElementById("validationtable").innerHTML = innertext;
+            document.querySelector(".validation").innerHTML = innertext;
 
         },
 		
         error: function () {
-            alert('AJAX FAILED');
+            console.log("AJAX Failed")
+            //alert('AJAX FAILED');
         }
     })
     
 }
 function displayValidation(text) {
-   
+  
     text += '<div  id="validationtable"><h4 >Validation:</h4></div>'
     planId = localStorage.getItem('jsonActivePlanID')
 
@@ -188,7 +198,8 @@ function displayValidation(text) {
         },
 				
         error: function () {
-            alert('AJAX FAILED');
+            //alert('AJAX FAILED');
+           console.log("AJAX failed")
         }
     })
 	
@@ -254,6 +265,7 @@ function displayTable(text, numOfColumn, numOfRow) {
 	var indent = '';
     var quarters = ["Fall", "Winter", "Spring", "Summer" ];
 
+     text += "<div>";
     // each table
 	for (;columnIndex < activeDegreeTable.columnArray.length / 4; columnIndex++) {
 		if (columnIndex != 0) {
@@ -286,11 +298,12 @@ function displayTable(text, numOfColumn, numOfRow) {
               //      setClassText = ' class="last"';
               //  }
 	            //console.log(currentColumn[i].course.courseNumber)
-                text += '<li class="' + 'item"' + setClassText + '>';
+                text += '<li class="' + 'item handle"' + setClassText + '>';
 
-                text += '<div class="cell">                 <i class="fa fa-window-close delete" aria-hidden="true"></i>';
+                text += '<div class="cell"> <i class="fa fa-window-close delete" aria-hidden="true"></i>';
 
-				text += '<p class="tabletext">' + currentColumn[i].course.courseNumber + '</p>';
+                 text += '<p class="tabletext">' + currentColumn[i].course.courseNumber + '</p>';
+               
 				tagIndex = 0;
 				for (;tagIndex < 1; tagIndex++) {
 					//objectname[].length
@@ -302,9 +315,10 @@ function displayTable(text, numOfColumn, numOfRow) {
 
             }
 
-            text += '<input class = "ui-autocomplete-input" type="text" ></input><li  class="placeholder"> <i class="placeholder fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div>" + "</li>"
+            text += '<li id="placeholder"   ><input type="text" class="ui-autocomplete-input"> </input><i class="placeholder fa fa-plus-square" aria-hidden="true"></i>' + "<div id='qtr' hidden>" + activeDegreeTable.columnArray[columnIndex * 4].year + " " + quarters[j] + "</div>" + "</li>"
 
 	        text += '</ul>';
+
 
 	    }
  
@@ -334,6 +348,8 @@ function displayTable(text, numOfColumn, numOfRow) {
 		text += '</ul>';
 		text += '</div>';
 	}
+
+    text += "</div>";
 
     localStorage.setItem('numberOfTables', columnIndex);
    
@@ -370,10 +386,10 @@ function dragAndDrop() {
 
                // on all draggable list elements
                dragClass: ".item",
-
+               handle: ".handle",
                // css attributes added to list elements used by onFilter event
                filter:  ".placeholder, .append,  .delete" ,
-                 
+               
                // occurs when an item is dropped in a list
                onEnd: function(/**Event*/evt) {
 
@@ -382,39 +398,21 @@ function dragAndDrop() {
                        console.log("equal")
                        //return 
                    }
-                   // the element was dropped between the new course input field and the new course button
-                   if (evt.newIndex == evt.to.children.length -3 && evt.to.children[evt.newIndex +1].localName != "input" ) {
-
-                       // the placeholder is now the second to last item
-                       var placeholder = evt.to.children[evt.to.children.length - 1];
-                       var courseInput = evt.to.children[evt.to.children.length - 3];
-
-
-                       console.log(placeholder)
-
-                       placeholder.parentNode.removeChild(courseInput);
-
-                       // remove the placeholder and append to the back of the list
-                       placeholder.parentNode.removeChild(placeholder);
-                       evt.to.appendChild(courseInput);
-                       evt.to.appendChild(placeholder);
-
-                   }
+                   
                    // the element was dropped at the end of the list
-                   if (evt.newIndex == evt.to.children.length - 2 ) {
+                   if (evt.newIndex == evt.to.children.length -1) {
                        // the placeholder is the last child
-                       var placeholder = evt.to.children[evt.to.children.length - 2]
+                       var placeholder = evt.to.children[evt.to.children.length -2]
 
-                       // courseInput is 3rd from last
-                       var courseInput = evt.to.children[evt.to.children.length - 3]
+                     
 
                        console.log(placeholder)
 
-                       placeholder.parentNode.removeChild(courseInput);
+                       
 
                        // remove the placeholder and append to the back of the list
                        placeholder.parentNode.removeChild(placeholder);
-                       evt.to.appendChild(courseInput);
+                    
 
                        evt.to.appendChild(placeholder);
                        }
@@ -446,28 +444,29 @@ function dragAndDrop() {
 
                    }
 
-                   if (Sortable.utils.is(ctrl, ".placeholder")) {                     
+                   if (Sortable.utils.is(ctrl, ".placeholder")) {
+                       var coursesArray = localStorage.getItem("courseArray");
+
                        console.log("Clicked append")
                        var placeholder = evt.to.lastChild
-                       var courseInput = placeholder.parentNode.children[placeholder.parentNode.children.length -2]
+                       console.log(placeholder)
+                       var val = placeholder.querySelector(".ui-autocomplete-input").value //prompt("Enter Course")
 
-                       var val = courseInput.value //prompt("Enter Course")
-
+                       // textTyped will be false when a menu item is selected
+                       if(val != "" && val != undefined && val != null && window.selectedValidCourse && !window.textTyped){
                            // plan is in the changed state
                            changed = true;
 
                            console.log("Append button pressed")
-                           var newCourseNode = htmlToElements("<div class='cell'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" +
+                           var newCourseNode = htmlToElements("<div class='cell handle'><i class='fa fa-window-close delete' aria-hidden='true'></i><p class='tabletext'>" +
                                val +
                                "</p><span id='tagM'>M</span></div>")
-                       placeholder.parentNode.removeChild(courseInput);
 
                            placeholder.parentNode.removeChild(placeholder);
                            evt.to.appendChild(newCourseNode);
-                            evt.to.appendChild(courseInput)
                            evt.to.appendChild(placeholder);
                            val = "";
-                     //  }
+                      }
                    }
 
                },

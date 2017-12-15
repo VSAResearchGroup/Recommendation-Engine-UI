@@ -54,9 +54,9 @@ body {
 var productionURL = 'http://localhost:5000/';
 $(document).ready(function() {
     $('#loginbutton').click(function() {
-	    /*
-		Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
-		Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+	   
+		//Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+		//Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
 		
 		//keep status on what info already retrieved from DB
 		var ajaxStatusObject = { retrieveActivePlanInfoReady: '0'}; 
@@ -140,7 +140,7 @@ $(document).ready(function() {
 			error: function() {
 			    console.log('AJAX failed');
 			}
-		})*/
+		})
 		location.href = 'loading.html';  // redirect to loading page
 	});
 });

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-US">
 <head>
 <title>Virtual Academic Advisor Active Degree Page</title>
@@ -610,17 +610,17 @@ var activeplanObj, courseListObjects;
 var apiURL = '';
 $(document).ready(function () {
     text = '';
-	/*
-	Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
-	Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
+	
+	//Uncomment these codes if testing locally and connected to the backend (i.e. making AJAX calls)
+	//Comment these codes if testing locally without connected to the backend (i.e. not making AJAX calls)
     var activePlanObj = JSON.parse(localStorage.getItem('activePlanArray'));
     constructTable(activePlanObj, activePlanObj, 5);
     text = displayLegend(text);
     text = displayCreditMets(text);
     text = displayValidation(text);
     text = displayTable(text, 4, 5);
-    document.getElementById('contentHolder').innerHTML = text;*/
-    //dragAndDrop();
+    document.getElementById('contentHolder').innerHTML = text;
+    dragAndDrop();
      
     $('#active').click(function () {
         if ($('#active').css('color') == 'rgb(0, 0, 0)') {
@@ -643,7 +643,7 @@ $(document).ready(function () {
         savePlan();
     });
 
-    /*$(function () {
+    $(function () {
         var coursesArray = localStorage.getItem("courseArray");
 
         var c = [];
@@ -657,7 +657,7 @@ $(document).ready(function () {
           minLength: 6
 
         });
-    });*/
+    });
     
 });
 
@@ -1014,7 +1014,7 @@ var dragToNewList = false;
 
 var changed = false;
 
-/*function dragAndDrop() {
+function dragAndDrop() {
    table = localStorage.getItem('numberOfTables');
     var elem;
     groupArray = createDragAndDropGroupArray(table, 4)
@@ -1038,7 +1038,7 @@ var changed = false;
                filter:  ".placeholder, .append,  .delete" ,
                  
                // occurs when an item is dropped in a list
-               onEnd: function(/**Event*//*evt) {
+               onEnd: function(/**Event*/evt) {
 
                    console.log(evt.newIndex)
                    if (evt.to == evt.from) {
@@ -1139,7 +1139,7 @@ var changed = false;
            });
    }
 
-}*/
+}
 
 
 function printElem(item, index) {
