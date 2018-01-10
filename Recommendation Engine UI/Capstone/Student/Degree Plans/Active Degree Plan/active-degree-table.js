@@ -385,7 +385,6 @@ function dragAndDrop() {
                },
 
                // on all draggable list elements
-               dragClass: ".item",
                handle: ".handle",
                // css attributes added to list elements used by onFilter event
                filter:  ".placeholder, .append,  .delete" ,
@@ -438,11 +437,6 @@ function dragAndDrop() {
 
                    }
 
-                   if (Sortable.utils.is(ctrl, ".append")) {
-                       console.log("append node")
-                       
-
-                   }
 
                    if (Sortable.utils.is(ctrl, ".placeholder")) {
                        var coursesArray = localStorage.getItem("courseArray");
